@@ -1,0 +1,14 @@
+@import "../../index.scss";
+
+.preview-page {
+   &__heading {
+      padding: 0px 0px 0px 200px;
+      font-weight: 900;
+      font-size: 196px;
+		@include lh(240, 196);
+      text-align: left;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      color: $white;
+   }
+}
