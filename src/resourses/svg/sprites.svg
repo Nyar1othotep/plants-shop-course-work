@@ -62,8 +62,12 @@
 		<path d="M16.6667 9.99999L15.4917 8.82499L10.8334 13.475V3.33333H9.16671V13.475L4.51671 8.81666L3.33337 9.99999L10 16.6667L16.6667 9.99999Z" fill="black"/>
 	</symbol>
 
-	<symbol id="arrow-next" viewBox="0 0 24 48">
-		<path d="M23 30.5753L12 47L1 30.5753M12 1V46.54" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+	<symbol id="arrow-next" viewBox="0 0 16 43">
+		<path d="M16 35.1101L14.59 33.7195L9 39.2227V0H7V39.2227L1.42 33.7096L0 35.1101L8 43L16 35.1101Z" fill="white"/>
+	</symbol>
+
+	<symbol id="frame" viewBox="0 0 75 78">
+		<path d="M1.5 0L1.5 75M75 76.5H0" stroke="white" stroke-width="3"/>
 	</symbol>
 
 	<symbol id="" viewBox="0 0 24 24">

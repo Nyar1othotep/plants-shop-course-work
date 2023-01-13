@@ -1,14 +1,136 @@
 @import "../../index.scss";
 
 .preview-page {
-   &__heading {
-      padding: 0px 0px 0px 200px;
+	&__body {
+		display: flex;
+		align-items: center;
+		height: 100vh;
+	}
+   &__frame {
+      position: absolute; 
+   }
+   &__frame-icon {
+      &-left {
+			opacity: 0;
+         left: 0;
+         bottom: 0
+      }
+      &-right {
+			opacity: 0;
+         right: 0;
+         top: 0;
+         transform: rotate(180deg);
+      }
+      & svg {
+         width: 75px;
+         height: 76.5px;
+      }
+   }
+   &__logo {
+      display: flex;
+      align-items: center;
+      top: 10%;
+      left: 7%;
+      & svg {
+         width: 37px;
+         height: 45px;
+      }
+      & span {
+         padding: 7px 0px 0px 12px;
+         font-family: "Hammersmith One";
+         font-weight: 400;
+         font-size: 23px;
+         @include lh(29, 23);
+         text-transform: uppercase;
+         color: $white;
+      }
+   }
+   &__btn-next {
+      padding: 5px;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      right: 7%;
+      bottom: 10%;
+      cursor: pointer;
+      & svg {
+         width: 16px;
+         height: 43px;
+      }
+      & span {
+         margin: 0px 0px 19px 0px;
+         font-weight: 600;
+         font-size: 16px;
+         @include lh(20, 16);
+         text-transform: uppercase;
+         color: $white;
+      }
+   }
+   &__text {
+		display: flex;
       font-weight: 900;
       font-size: 196px;
-		@include lh(240, 196);
+      @include lh(240, 196);
       text-align: left;
       letter-spacing: 0.5px;
       text-transform: uppercase;
       color: $white;
+      & p {
+         opacity: 0;
+         transform: translate(-100%, 0);
+      }
    }
+}
+
+@media (max-width: 1440px) {
+	.preview-page {
+		&__text {
+			font-size: 150px;
+		}
+	}
+}
+
+@media (max-width: 1024px) {
+	.preview-page {
+		&__text {
+			font-size: 110px;
+		}
+		&__frame-icon {
+			& svg {
+				width: 45px;
+				height: 46.5px;
+			}
+		}
+		&__btn-next {
+			& svg {
+				width: 11px;
+				height: 30px;
+			}
+			& span {
+				font-size: 12px;
+			}
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.preview-page {
+		&__body {
+			justify-content: center;
+		}
+		&__text {
+			text-align: center;
+			& p {
+				margin-left: -15%;
+			}
+		}
+	}
+}
+
+@media (max-width: 600px) {
+	.preview-page {
+		&__text {
+			font-size: 65px;
+		}
+	}
 }
