@@ -1,0 +1,27 @@
+@import "../../index.scss";
+
+.description {
+   background-size: 50%;
+   height: 100vh;
+   overflow: auto;
+   &__container {
+      max-width: 1230px !important;
+		height: 100%;
+   }
+   &__body {
+      display: flex;
+      align-items: center;
+		height: 100%;
+   }
+   &__content {
+      max-width: 632px;
+   }
+   &__heading {
+      margin: 0px 0px 40px 0px;
+   }
+   &__text {
+      & > *:not(:last-child) {
+         margin: 0px 0px 20px 0px;
+      }
+   }
+}

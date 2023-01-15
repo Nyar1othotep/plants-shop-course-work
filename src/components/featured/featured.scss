@@ -1,0 +1,29 @@
+@import "../../index.scss";
+
+.featured {
+   height: 100vh;
+   overflow: auto;
+   &__heading {
+      padding: 200px 0px 100px 150px;
+   }
+   &__slider-container {
+      max-width: 1300px;
+      margin: 0 auto;
+   }
+}
+
+.slide-featured {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   &__content {
+      max-width: 612px;
+   }
+   &__title,
+   &__description {
+      margin: 0px 0px 40px 0px;
+   }
+   &__info {
+      margin: 0px 0px 80px 0px;
+   }
+}

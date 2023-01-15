@@ -1,24 +1,27 @@
 @import "../../index.scss";
 
 .preview-page {
-	&__body {
-		display: flex;
-		align-items: center;
-		height: 100vh;
-	}
+   height: 100vh;
+   overflow: auto;
+   &__container {
+      height: 100%;
+   }
+   &__body {
+      display: flex;
+      align-items: center;
+      height: 100%;
+   }
    &__frame {
-      position: absolute; 
+      position: absolute;
    }
    &__frame-icon {
       &-left {
-			opacity: 0;
-         left: 0;
-         bottom: 0
+         left: 7%;
+         bottom: 10%;
       }
       &-right {
-			opacity: 0;
-         right: 0;
-         top: 0;
+         right: 7%;
+         top: 10%;
          transform: rotate(180deg);
       }
       & svg {
@@ -67,7 +70,7 @@
       }
    }
    &__text {
-		display: flex;
+      display: flex;
       font-weight: 900;
       font-size: 196px;
       @include lh(240, 196);
@@ -75,62 +78,61 @@
       letter-spacing: 0.5px;
       text-transform: uppercase;
       color: $white;
-      & p {
-         opacity: 0;
-         transform: translate(-100%, 0);
+      & h1 {
+         transform: translate(15%, 0);
       }
    }
 }
 
 @media (max-width: 1440px) {
-	.preview-page {
-		&__text {
-			font-size: 150px;
-		}
-	}
+   .preview-page {
+      &__text {
+         font-size: 150px;
+      }
+   }
 }
 
 @media (max-width: 1024px) {
-	.preview-page {
-		&__text {
-			font-size: 110px;
-		}
-		&__frame-icon {
-			& svg {
-				width: 45px;
-				height: 46.5px;
-			}
-		}
-		&__btn-next {
-			& svg {
-				width: 11px;
-				height: 30px;
-			}
-			& span {
-				font-size: 12px;
-			}
-		}
-	}
+   .preview-page {
+      &__text {
+         font-size: 110px;
+      }
+      &__frame-icon {
+         & svg {
+            width: 45px;
+            height: 46.5px;
+         }
+      }
+      &__btn-next {
+         & svg {
+            width: 11px;
+            height: 30px;
+         }
+         & span {
+            font-size: 12px;
+         }
+      }
+   }
 }
 
 @media (max-width: 768px) {
-	.preview-page {
-		&__body {
-			justify-content: center;
-		}
-		&__text {
-			text-align: center;
-			& p {
-				margin-left: -15%;
-			}
-		}
-	}
+   .preview-page {
+      &__body {
+         justify-content: center;
+      }
+      &__text {
+         text-align: center;
+         & h1 {
+            margin-left: -15%;
+         }
+      }
+   }
 }
 
 @media (max-width: 600px) {
-	.preview-page {
-		&__text {
-			font-size: 65px;
-		}
-	}
+   .preview-page {
+      &__text {
+         font-size: 65px;
+      }
+   }
 }
