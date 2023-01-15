@@ -1,14 +1,13 @@
 .preview-page {
 	position: relative;
    height: 100vh;
-   overflow-y: auto;
-   &__container {
-      height: 100%;
-   }
+	&__container {
+		height: 100%;
+	}
    &__body {
       display: flex;
       align-items: center;
-      height: 100%;
+		height: 100%;
    }
    &__frame {
       position: absolute;

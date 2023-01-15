@@ -1,4 +1,3 @@
-// import "./reviews.scss";
 import svg from "../../resourses/svg/sprites.svg";
 
 const Reviews = () => {

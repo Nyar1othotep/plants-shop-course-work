@@ -10,8 +10,8 @@ const MainPage = () => {
          <Preview />
          <Description />
          <Featured />
-         {/* <Reviews /> */}
-			{/* <Footer /> */}
+         <Reviews />
+			<Footer />
       </>
    );
 };

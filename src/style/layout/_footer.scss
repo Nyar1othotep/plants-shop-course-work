@@ -1,18 +1,12 @@
-// @import "../../index.scss";
-
 .footer {
-   height: 100vh;
-   overflow: auto;
+   padding: 170px 0px 100px 0px;
    &__container {
-      height: 100%;
       max-width: 1666px;
    }
    &__body {
-      height: 100%;
       color: $white;
    }
    &__proverb {
-		padding-top: 200px;
       margin: 0px 0px 200px 0px;
       max-width: 1197px;
       font-weight: 700;
@@ -32,11 +26,9 @@
    }
    &__row {
       display: flex;
-      margin: 0px -50px;
-   }
-   &__column {
-      padding: 0px 50px;
-      flex: 0 1 25%;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 40px;
    }
 }
 
@@ -88,17 +80,107 @@
       background: $white;
       border-radius: 15px;
    }
-	&__block-copyright {
-		width: 570px;
-		& .item-socials-footer__title {
-			margin: 0px 0px 15px 0px;
-		}
-	}
-	&__copyright {
-		margin: 0px 0px 25px 0px;
-	}
+   &__block-copyright {
+      width: 570px;
+      & .item-socials-footer__title {
+         margin: 0px 0px 15px 0px;
+      }
+   }
+   &__copyright {
+      margin: 0px 0px 25px 0px;
+   }
    &__text {
-		text-transform: uppercase;
-		color: $disabled;
+      text-transform: uppercase;
+      color: $disabled;
+   }
+}
+
+@media (max-width: 1024px) {
+   .footer {
+      padding: 100px 0px 70px 0px;
+      &__proverb {
+         margin: 0px 0px 100px 0px;
+         font-size: 40px;
+      }
+   }
+   .socials-footer {
+      &__title {
+         margin: 0px 0px 30px 0px;
+         font-size: 36px;
+      }
+   }
+}
+
+@media (max-width: 992px) {
+   .footer {
+      &__proverb {
+         text-align: center;
+      }
+   }
+}
+
+@media (max-width: 768px) {
+   .footer {
+      padding: 70px 0px 50px 0px;
+      &__proverb {
+         margin: 0px 0px 70px 0px;
+         font-size: 36px;
+      }
+   }
+   .socials-footer {
+      &__title {
+         font-size: 32px;
+      }
+   }
+   .item-socials-footer {
+      &__btn {
+         padding: 20px 115px;
+         min-height: 70px;
+         font-size: 20px;
+      }
+      &__title {
+         margin: 0px 0px 25px 0px;
+         font-size: 22px;
+      }
+      &__link,
+      &__copyright {
+         font-size: 18px;
+      }
+		&__block-copyright {
+			width: 100%;
+			max-width: 570px;
+		}
+   }
+}
+
+@media (max-width: 500px) {
+	.item-socials-footer {
+      &__btn {
+         width: 100%;
+      }
+   }
+}
+
+@media (max-width: 400px) {
+	.item-socials-footer {
+      &__btn {
+			padding: 20px 60px;
+         width: 100%;
+      }
+   }
+}
+
+@media (max-width: 375px) {
+   .footer {
+      padding: 50px 0px 20px 0px;
+      &__proverb {
+         margin: 0px 0px 50px 0px;
+         font-size: 30px;
+      }
+   }
+   .socials-footer {
+      &__title {
+         font-size: 28px;
+      }
    }
 }

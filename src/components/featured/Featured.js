@@ -1,9 +1,11 @@
 import item from "../../resourses/img/item.png";
-import { Navigation, Pagination, A11y } from "swiper";
+import { Lazy, Navigation, Pagination, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
+import svg from "../../resourses/svg/sprites.svg";
 
 // Import Swiper styles
 import "swiper/css";
+import "swiper/css/lazy";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
@@ -17,10 +19,12 @@ const Featured = () => {
                </div>
                <div className="featured__slider-container">
                   <Swiper
-                     modules={[Navigation, Pagination, A11y]}
+                     modules={[Lazy, Navigation, Pagination, A11y]}
+                     lazy={true}
                      slidesPerView={1}
-							spaceBetween={100}
+                     spaceBetween={100}
                      navigation
+                     loop={true}
                      pagination={{ clickable: true }}
                      speed={1000}
                   >
@@ -40,38 +44,48 @@ const Featured = () => {
                                     regim.
                                  </div>
                                  <table className="slide-featured__characteristics">
-                                    <tr>
-                                       <td>Name:</td>
-                                       <td>Alocasia</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Plant type:</td>
-                                       <td>Decorative leafy Indoor</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Place:</td>
-                                       <td>Floor Standing</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Height:</td>
-                                       <td>65/90 cm</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Light:</td>
-                                       <td>Unpretentious</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Room temperature:</td>
-                                       <td>Moderate (21°C - 23°C)</td>
-                                    </tr>
+                                    <tbody>
+                                       <tr>
+                                          <td>Name:</td>
+                                          <td>Alocasia</td>
+                                       </tr>
+                                       <tr>
+                                          <td>Plant type:</td>
+                                          <td>Decorative leafy Indoor</td>
+                                       </tr>
+                                       <tr>
+                                          <td>Place:</td>
+                                          <td>Floor Standing</td>
+                                       </tr>
+                                       <tr>
+                                          <td>Height:</td>
+                                          <td>65/90 cm</td>
+                                       </tr>
+                                       <tr>
+                                          <td>Light:</td>
+                                          <td>Unpretentious</td>
+                                       </tr>
+                                       <tr>
+                                          <td>Room temperature:</td>
+                                          <td>Moderate (21°C - 23°C)</td>
+                                       </tr>
+                                    </tbody>
                                  </table>
                               </div>
                               <button className="slide-featured__btn btn">
-                                 Go to catalog
+                                 <p>Go to catalog</p>
+                                 <svg>
+                                    <use href={`${svg}#sharp-arrow-down`}></use>
+                                 </svg>
                               </button>
                            </div>
                            <div className="slide-featured__img">
-                              <img src={item} alt="Alocasia 'Zebrina'" />
+                              <img
+                                 className="swiper-lazy"
+                                 data-src={item}
+                                 alt="Alocasia 'Zebrina'"
+                              />
+										<div className="swiper-lazy-preloader swiper-lazy-preloader-black"></div>
                            </div>
                         </div>
                      </SwiperSlide>
@@ -91,38 +105,48 @@ const Featured = () => {
                                     regim.
                                  </div>
                                  <table className="slide-featured__characteristics">
-                                    <tr>
-                                       <td>Name:</td>
-                                       <td>Alocasia</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Plant type:</td>
-                                       <td>Decorative leafy Indoor</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Place:</td>
-                                       <td>Floor Standing</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Height:</td>
-                                       <td>65/90 cm</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Light:</td>
-                                       <td>Unpretentious</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Room temperature:</td>
-                                       <td>Moderate (21°C - 23°C)</td>
-                                    </tr>
+                                    <tbody>
+                                       <tr>
+                                          <td>Name:</td>
+                                          <td>Alocasia</td>
+                                       </tr>
+                                       <tr>
+                                          <td>Plant type:</td>
+                                          <td>Decorative leafy Indoor</td>
+                                       </tr>
+                                       <tr>
+                                          <td>Place:</td>
+                                          <td>Floor Standing</td>
+                                       </tr>
+                                       <tr>
+                                          <td>Height:</td>
+                                          <td>65/90 cm</td>
+                                       </tr>
+                                       <tr>
+                                          <td>Light:</td>
+                                          <td>Unpretentious</td>
+                                       </tr>
+                                       <tr>
+                                          <td>Room temperature:</td>
+                                          <td>Moderate (21°C - 23°C)</td>
+                                       </tr>
+                                    </tbody>
                                  </table>
                               </div>
                               <button className="slide-featured__btn btn">
-                                 Go to catalog
+                                 <p>Go to catalog</p>
+                                 <svg>
+                                    <use href={`${svg}#sharp-arrow-down`}></use>
+                                 </svg>
                               </button>
                            </div>
                            <div className="slide-featured__img">
-                              <img src={item} alt="Alocasia 'Zebrina'" />
+                              <img
+                                 className="swiper-lazy"
+                                 data-src={item}
+                                 alt="Alocasia 'Zebrina'"
+                              />
+										<div className="swiper-lazy-preloader swiper-lazy-preloader-black"></div>
                            </div>
                         </div>
                      </SwiperSlide>
@@ -142,38 +166,48 @@ const Featured = () => {
                                     regim.
                                  </div>
                                  <table className="slide-featured__characteristics">
-                                    <tr>
-                                       <td>Name:</td>
-                                       <td>Alocasia</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Plant type:</td>
-                                       <td>Decorative leafy Indoor</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Place:</td>
-                                       <td>Floor Standing</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Height:</td>
-                                       <td>65/90 cm</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Light:</td>
-                                       <td>Unpretentious</td>
-                                    </tr>
-                                    <tr>
-                                       <td>Room temperature:</td>
-                                       <td>Moderate (21°C - 23°C)</td>
-                                    </tr>
+                                    <tbody>
+                                       <tr>
+                                          <td>Name:</td>
+                                          <td>Alocasia</td>
+                                       </tr>
+                                       <tr>
+                                          <td>Plant type:</td>
+                                          <td>Decorative leafy Indoor</td>
+                                       </tr>
+                                       <tr>
+                                          <td>Place:</td>
+                                          <td>Floor Standing</td>
+                                       </tr>
+                                       <tr>
+                                          <td>Height:</td>
+                                          <td>65/90 cm</td>
+                                       </tr>
+                                       <tr>
+                                          <td>Light:</td>
+                                          <td>Unpretentious</td>
+                                       </tr>
+                                       <tr>
+                                          <td>Room temperature:</td>
+                                          <td>Moderate (21°C - 23°C)</td>
+                                       </tr>
+                                    </tbody>
                                  </table>
                               </div>
                               <button className="slide-featured__btn btn">
-                                 Go to catalog
+                                 <p>Go to catalog</p>
+                                 <svg>
+                                    <use href={`${svg}#sharp-arrow-down`}></use>
+                                 </svg>
                               </button>
                            </div>
                            <div className="slide-featured__img">
-                              <img src={item} alt="Alocasia 'Zebrina'" />
+                              <img
+                                 className="swiper-lazy"
+                                 data-src={item}
+                                 alt="Alocasia 'Zebrina'"
+                              />
+										<div className="swiper-lazy-preloader swiper-lazy-preloader-black"></div>
                            </div>
                         </div>
                      </SwiperSlide>
