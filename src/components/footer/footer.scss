@@ -1,0 +1,104 @@
+@import "../../index.scss";
+
+.footer {
+   height: 100vh;
+   overflow: auto;
+   &__container {
+      height: 100%;
+      max-width: 1666px;
+   }
+   &__body {
+      height: 100%;
+      color: $white;
+   }
+   &__proverb {
+		padding-top: 200px;
+      margin: 0px 0px 200px 0px;
+      max-width: 1197px;
+      font-weight: 700;
+      font-size: 64px;
+      @include lh(96, 64);
+      text-transform: uppercase;
+   }
+}
+
+.socials-footer {
+   &__title {
+      margin: 0px 0px 40px 0px;
+      font-weight: 500;
+      font-size: 40px;
+      @include lh(49, 40);
+      text-transform: uppercase;
+   }
+   &__row {
+      display: flex;
+      margin: 0px -50px;
+   }
+   &__column {
+      padding: 0px 50px;
+      flex: 0 1 25%;
+   }
+}
+
+.item-socials-footer {
+   &__title {
+      margin: 0px 0px 35px 0px;
+      font-weight: 600;
+      font-size: 26px;
+      @include lh(32, 26);
+   }
+   &__row {
+      & > *:not(:last-child) {
+         margin: 0px 0px 25px 0px;
+      }
+   }
+   &__link,
+   &__copyright {
+      font-weight: 500;
+      font-size: 20px;
+      @include lh(27, 22);
+   }
+   &__link {
+      &:hover {
+         padding: 5px 0;
+         text-decoration: underline;
+      }
+   }
+   &__icons-row {
+      max-width: 300px;
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0px -17.5px 40px -17.5px;
+   }
+   &__icons-item {
+      padding: 0px 17.5px;
+      flex: 0 1 25%;
+      & svg {
+         width: 40px;
+         height: 40px;
+      }
+   }
+   &__btn {
+      width: 400px;
+      padding: 30px 115px;
+      min-height: 90px;
+      font-weight: 700;
+      font-size: 24px;
+      @include lh(29, 24);
+      background: $white;
+      border-radius: 15px;
+   }
+	&__block-copyright {
+		width: 570px;
+		& .item-socials-footer__title {
+			margin: 0px 0px 15px 0px;
+		}
+	}
+	&__copyright {
+		margin: 0px 0px 25px 0px;
+	}
+   &__text {
+		text-transform: uppercase;
+		color: $disabled;
+   }
+}
