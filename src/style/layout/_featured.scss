@@ -1,10 +1,12 @@
-@import "../../index.scss";
-
 .featured {
    height: 100vh;
    overflow: auto;
+   &__body {
+      padding: 200px 0px 160px 0px;
+   }
    &__heading {
-      padding: 200px 0px 100px 150px;
+		max-width: 1400px;
+      margin: 0px auto 100px auto;
    }
    &__slider-container {
       max-width: 1300px;

@@ -1,4 +1,3 @@
-import "./featured.scss";
 import item from "../../resourses/img/item.png";
 import { Navigation, Pagination, A11y } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";

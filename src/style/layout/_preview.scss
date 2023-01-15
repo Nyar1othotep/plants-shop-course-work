@@ -1,8 +1,7 @@
-@import "../../index.scss";
-
 .preview-page {
+	position: relative;
    height: 100vh;
-   overflow: auto;
+   overflow-y: auto;
    &__container {
       height: 100%;
    }

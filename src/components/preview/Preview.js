@@ -1,4 +1,3 @@
-import "./preview.scss";
 import bg from "../../resourses/img/main-page-bg.jpg";
 import svg from "../../resourses/svg/sprites.svg";
 
@@ -13,6 +12,7 @@ const Preview = () => {
       >
          <div className="preview-page__container _container">
             <div className="preview-page__body">
+					{/* Router */}
                <div className="preview-page__frame preview-page__logo logo">
                   <svg>
                      <use href={`${svg}#logo`}></use>

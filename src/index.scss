@@ -1,6 +1,11 @@
 @import "./style/abstracts/variables";
 @import "./style/abstracts/fonts";
-@import "./style/base/normalize";
+// @import "./style/base/normalize";
 @import "./style/base/nullstyle";
 @import "./style/base/main-styles";
+@import "./style/layout/preview";
+@import "./style/layout/description";
+@import "./style/layout/featured";
+@import "./style/layout/reviews";
+@import "./style/layout/footer";
 @import "./style/components/buttons";

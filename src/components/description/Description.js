@@ -1,4 +1,3 @@
-import "./description.scss";
 import branch from "../../resourses/img/branch.png";
 
 const Description = () => {

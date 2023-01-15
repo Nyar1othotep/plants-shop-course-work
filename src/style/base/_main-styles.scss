@@ -17,3 +17,46 @@ h3 {
    font-size: 40px;
    @include lh(49, 40);
 }
+
+// Пока так, но лучше найти и использовать библиотеку для этого
+main {
+   height: 100vh;
+   overflow-y: auto;
+   scroll-snap-type: y mandatory;
+   -webkit-overflow-scrolling: touch;
+}
+
+section {
+   scroll-snap-align: start;
+}
+
+/* ----------------CONTAINER------------------------------------------------- */
+
+._container {
+   max-width: 1730px;
+   padding: 0 15px;
+   margin: 0 auto;
+}
+
+/* ----------------MEDIA------------------------------------------------- */
+
+@media (max-width: 1024px) {
+   h2 {
+      font-size: 44px;
+   }
+}
+
+@media (max-width: 768px) {
+   body {
+      font-size: 16px;
+   }
+   h2 {
+      font-size: 40px;
+   }
+}
+
+@media (max-width: 575px) {
+   h2 {
+      font-size: 36px;
+   }
+}

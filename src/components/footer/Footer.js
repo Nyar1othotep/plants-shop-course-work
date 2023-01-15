@@ -1,4 +1,4 @@
-import "./footer.scss";
+// import "./footer.scss";
 import bg from "../../resourses/img/main-page-footer-bg.jpg";
 import svg from "../../resourses/svg/sprites.svg";
 
