@@ -27,25 +27,6 @@
          height: 76.5px;
       }
    }
-   &__logo {
-      display: flex;
-      align-items: center;
-      top: 10%;
-      left: 7%;
-      & svg {
-         width: 37px;
-         height: 45px;
-      }
-      & span {
-         padding: 7px 0px 0px 12px;
-         font-family: "Hammersmith One";
-         font-weight: 400;
-         font-size: 23px;
-         @include lh(29, 23);
-         text-transform: uppercase;
-         color: $white;
-      }
-   }
    &__btn-next {
       padding: 5px;
       display: flex;

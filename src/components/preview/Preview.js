@@ -12,13 +12,6 @@ const Preview = () => {
       >
          <div className="preview-page__container _container">
             <div className="preview-page__body">
-					{/* Router */}
-               <div className="preview-page__frame preview-page__logo logo">
-                  <svg>
-                     <use href={`${svg}#logo`}></use>
-                  </svg>
-                  <span>Plants</span>
-               </div>
                <div className="preview-page__frame preview-page__frame-icon preview-page__frame-icon-left">
                   <svg>
                      <use href={`${svg}#frame`}></use>

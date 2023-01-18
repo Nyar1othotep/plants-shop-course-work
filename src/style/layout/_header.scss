@@ -1,0 +1,218 @@
+.header {
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100px;
+   background-color: $white;
+   z-index: 50;
+	transition: all 0.3s ease 0s;
+	overflow: hidden;
+   &.active {
+      height: 130px;
+   }
+   &__container {
+      height: 100%;
+   }
+   &__body {
+      display: flex;
+      align-items: center;
+      height: 100%;
+   }
+   &__logo {
+      display: flex;
+      align-items: center;
+      & svg {
+         width: 37px;
+         height: 45px;
+         fill: $black;
+      }
+      & span {
+         padding: 7px 0px 0px 12px;
+         font-family: "Hammersmith One";
+         font-weight: 400;
+         font-size: 23px;
+         @include lh(29, 23);
+         text-transform: uppercase;
+         color: $black;
+      }
+   }
+   &__burger {
+      display: none;
+		margin: 0px 0px 0px 35px;
+   }
+}
+
+.menu-header {
+   margin-left: auto;
+   &__list {
+      display: flex;
+      align-items: center;
+      & > *:not(:last-child) {
+         margin: 0px 56px 0px 0px;
+      }
+   }
+   &__item {
+      & a {
+         padding: 5px 0;
+         font-weight: 500;
+         font-size: 19px;
+         @include lh(16, 19);
+         letter-spacing: 0.5px;
+         text-transform: uppercase;
+         color: $black;
+      }
+      & a.active {
+         position: relative;
+         &::after {
+            content: "";
+            position: absolute;
+            bottom: -40%;
+            left: -9%;
+            width: 120%;
+            height: 2px;
+            background-color: $black;
+         }
+      }
+   }
+}
+
+.account-menu-header {
+   margin: 0px 0px 0px 100px;
+   &__list {
+      display: flex;
+      align-items: center;
+      & > *:not(:last-child) {
+         margin: 0px 50px 0px 0px;
+      }
+   }
+   &__item {
+      & a.active {
+         & svg {
+            fill: $green;
+         }
+      }
+      & a svg {
+         width: 24px;
+         height: 24px;
+      }
+   }
+}
+
+@media (max-width: 992px) {
+   .header {
+      height: 80px;
+      &__logo {
+         & svg {
+            width: 30px;
+            height: 36px;
+         }
+         & span {
+            padding: 7px 0px 0px 8px;
+            font-size: 19px;
+         }
+      }
+   }
+
+   .menu-header {
+      &__list {
+         & > *:not(:last-child) {
+            margin: 0px 35px 0px 0px;
+         }
+      }
+      &__item {
+         & a {
+            font-size: 16px;
+         }
+         & a.active {
+            &::after {
+               bottom: -30%;
+            }
+         }
+      }
+   }
+
+   .account-menu-header {
+      margin: 0px 0px 0px 50px;
+      &__list {
+         & > *:not(:last-child) {
+            margin: 0px 35px 0px 0px;
+         }
+      }
+   }
+}
+
+@media (max-width: 768px) {
+   body.lock {
+      overflow: hidden;
+   }
+   .header {
+      &__burger {
+         display: block;
+         position: relative;
+         width: 30px;
+         height: 20px;
+         z-index: 3;
+      }
+      &__burger span {
+         position: absolute;
+         background-color: #000;
+         left: 0;
+         width: 100%;
+         height: 2px;
+         top: 9px;
+         transition: all 0.3s ease 0s;
+      }
+      &__burger::before,
+      &__burger::after {
+         content: "";
+         background-color: #000;
+         position: absolute;
+         width: 100%;
+         height: 2px;
+         left: 0;
+         transition: all 0.3s ease 0s;
+      }
+      &__burger::before {
+         top: 0;
+      }
+      &__burger::after {
+         bottom: 0;
+      }
+      &__burger.active::before {
+         transform: rotate(45deg);
+         top: 9px;
+      }
+      &__burger.active::after {
+         transform: rotate(-45deg);
+         bottom: 9px;
+      }
+      &__burger.active span {
+         transform: scale(0);
+      }
+		&__logo {
+			position: absolute;
+			top: 20px;
+		}
+		&__right {
+			display: flex;
+			align-items: center;
+			position: absolute;
+			top: 26px;
+			right: 15px;
+		}
+      &__menu {
+         position: absolute;
+			right: -100%;
+			top: 80px;
+			transition: all 0.3s ease .35s;
+      }
+      &__menu.active {
+         right: 15px;
+      }
+   }
+
+   .account-menu-header {
+      margin-left: auto;
+   }
+}
