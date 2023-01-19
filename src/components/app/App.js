@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { MainPage } from "../pages";
+import { MainPage, CatalogPage } from "../pages";
 import Header from "../header/Header";
 
 const App = () => {
@@ -10,6 +10,7 @@ const App = () => {
             <main>
                <Routes>
                   <Route path="/" element={<MainPage />} />
+                  <Route path="/catalog" element={<CatalogPage />} />
                </Routes>
             </main>
          </div>

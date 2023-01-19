@@ -43,59 +43,70 @@ const Header = () => {
                   <span>Plants</span>
                </Link>
                <nav
-                  className={`header__menu menu-header ${
+                  className={`header__menu menu-header menu ${
                      isOpenBurger ? "active" : ""
                   }`}
                >
-                  <ul className="menu-header__list">
-                     <li className="menu-header__item">
-                        <NavLink to="/" className="menu-header__link">
+                  <ul className="menu-header__list menu__list">
+                     <li className="menu-header__item menu__item">
+                        <NavLink
+                           to="/"
+                           className="menu-header__link menu__link"
+                        >
                            Home
                         </NavLink>
                      </li>
-                     <li className="menu-header__item">
-                        <NavLink to="/catalog" className="menu-header__link">
+                     <li className="menu-header__item menu__item">
+                        <NavLink
+                           to="/catalog"
+                           className="menu-header__link menu__link"
+                        >
                            Catalog
                         </NavLink>
                      </li>
-                     <li className="menu-header__item">
-                        <NavLink to="/about" className="menu-header__link">
+                     <li className="menu-header__item menu__item">
+                        <NavLink
+                           to="/about"
+                           className="menu-header__link menu__link"
+                        >
                            About
                         </NavLink>
                      </li>
                   </ul>
                </nav>
                <div className="header__right">
-               	<nav className="header__account-menu account-menu-header">
-	                  <ul className="account-menu-header__list">
-	                     <li className="account-menu-header__item">
-	                        <NavLink
-	                           to="/cart"
-	                           className="account-menu-header__link"
-	                        >
-	                           <svg>
-	                              <use href={`${svg}#basket`}></use>
-	                           </svg>
-	                        </NavLink>
-	                     </li>
-	                     <li className="account-menu-header__item">
-	                        <NavLink
-	                           to="/account"
-	                           className="account-menu-header__link"
-	                        >
-	                           <svg>
-	                              <use href={`${svg}#account`}></use>
-	                           </svg>
-	                        </NavLink>
-	                     </li>
-	                  </ul>
-	               </nav>
-	               <div
-	                  className={`header__burger ${isOpenBurger ? "active" : ""}`}
-	                  onClick={onBurger}
-	               >
-	                  <span></span>
-	               </div>
+                  <nav className="header__account-menu account-menu-header">
+                     <ul className="account-menu-header__list">
+                        <li className="account-menu-header__item">
+                           <NavLink
+                              to="/cart"
+                              className="account-menu-header__link"
+                           >
+                              <svg>
+                                 <use href={`${svg}#basket`}></use>
+                              </svg>
+                           </NavLink>
+                        </li>
+                        <li className="account-menu-header__item">
+                           <NavLink
+                              to="/account"
+                              className="account-menu-header__link"
+                           >
+                              <svg>
+                                 <use href={`${svg}#account`}></use>
+                              </svg>
+                           </NavLink>
+                        </li>
+                     </ul>
+                  </nav>
+                  <div
+                     className={`header__burger ${
+                        isOpenBurger ? "active" : ""
+                     }`}
+                     onClick={onBurger}
+                  >
+                     <span></span>
+                  </div>
                </div>
             </div>
          </div>

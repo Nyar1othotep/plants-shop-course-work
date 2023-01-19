@@ -2,11 +2,9 @@
 @import "./style/abstracts/fonts";
 @import "./style/base/normalize";
 @import "./style/base/nullstyle";
-@import "./style/base/main-styles";
-@import "./style/layout/header";
-@import "./style/layout/preview";
-@import "./style/layout/description";
-@import "./style/layout/featured";
-@import "./style/layout/reviews";
-@import "./style/layout/footer";
+@import "./style/base/mainStyles";
+@import "./style/layout/mainPage";
+@import "./style/layout/catalogPage";
+@import "./style/components/header";
+@import "./style/components/footer";
 @import "./style/components/buttons";
