@@ -1,6 +1,24 @@
 .items-filter {
-	padding: 50px 0px 0px 0px;
-	&__link {
-		cursor: pointer;
+	margin: 0px 0px 0px 10px;
+   &__list {
+      height: 50px;
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+      &::-webkit-scrollbar {
+         width: 0;
+         height: 0;
+      }
+   }
+   &__link {
+      cursor: pointer;
+   }
+}
+
+@media (max-width: 425px) {
+	.items-filter {
+		margin: 0;
+		&__list {
+			overflow-x: scroll;
+		}
 	}
 }

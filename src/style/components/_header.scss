@@ -117,17 +117,20 @@
       }
    }
 
-   .menu-header {
+   .menu-header,
+   .menu {
       &__list {
          & > *:not(:last-child) {
             margin: 0px 35px 0px 0px;
          }
       }
       &__item {
-         & a {
+         & a,
+         div {
             font-size: 16px;
          }
-         & a.active {
+         & a.active,
+         & div.active {
             &::after {
                bottom: -30%;
             }

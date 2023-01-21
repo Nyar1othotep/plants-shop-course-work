@@ -43,7 +43,7 @@ const Footer = () => {
                               </li>
                            </ul>
                            <button className="item-socials-footer__btn btn">
-                              Get your card
+                              Get coupon
                            </button>
                         </div>
                      </li>

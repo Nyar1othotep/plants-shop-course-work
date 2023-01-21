@@ -1,5 +1,6 @@
 import ItemsFilter from "../itemsFilter/ItemsFilter";
 import ItemsList from "../itemsList/ItemsList";
+import PlantItem from "../plantItem/PlantItem";
 
 const CatalogPage = () => {
    return (
@@ -8,6 +9,7 @@ const CatalogPage = () => {
             <ItemsFilter />
             <div className="catalog__row">
                <ItemsList />
+               <PlantItem />
             </div>
          </div>
       </div>

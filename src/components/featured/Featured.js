@@ -29,13 +29,13 @@ const Featured = () => {
                      speed={1000}
                   >
                      <SwiperSlide>
-                        <div className="featured__slide slide-featured">
-                           <div className="slide-featured__content">
-                              <h3 className="slide-featured__title">
+                        <div className="featured__slide slide-featured plant-item">
+                           <div className="slide-featured__content plant-item__content">
+                              <h3 className="slide-featured__title plant-item__title">
                                  Alocasia 'Zebrina'
                               </h3>
-                              <div className="slide-featured__info">
-                                 <div className="slide-featured__description">
+                              <div className="slide-featured__info plant-item__info">
+                                 <div className="slide-featured__description plant-item__description">
                                     For our latitudes, sansevieria is a
                                     houseplant that does well in our apartments
                                     and offices. The plant tolerates a drop in
@@ -43,7 +43,7 @@ const Featured = () => {
                                     feel comfortable. The optimum temperature
                                     regim.
                                  </div>
-                                 <table className="slide-featured__characteristics">
+                                 <table className="slide-featured__characteristics plant-item__characteristics">
                                     <tbody>
                                        <tr>
                                           <td>Name:</td>
@@ -72,31 +72,31 @@ const Featured = () => {
                                     </tbody>
                                  </table>
                               </div>
-                              <button className="slide-featured__btn btn">
+                              <button className="slide-featured__btn plant-item__btn btn">
                                  <p>Go to catalog</p>
                                  <svg>
                                     <use href={`${svg}#sharp-arrow-down`}></use>
                                  </svg>
                               </button>
                            </div>
-                           <div className="slide-featured__img">
+                           <div className="slide-featured__img plant-item__img">
                               <img
                                  className="swiper-lazy"
                                  data-src={item}
                                  alt="Alocasia 'Zebrina'"
                               />
-										<div className="swiper-lazy-preloader swiper-lazy-preloader-black"></div>
+                              <div className="swiper-lazy-preloader swiper-lazy-preloader-black"></div>
                            </div>
                         </div>
                      </SwiperSlide>
                      <SwiperSlide>
-                        <div className="featured__slide slide-featured">
-                           <div className="slide-featured__content">
-                              <h3 className="slide-featured__title">
+                        <div className="featured__slide slide-featured plant-item">
+                           <div className="slide-featured__content plant-item__content">
+                              <h3 className="slide-featured__title plant-item__title">
                                  Alocasia 'Zebrina'
                               </h3>
-                              <div className="slide-featured__info">
-                                 <div className="slide-featured__description">
+                              <div className="slide-featured__info plant-item__info">
+                                 <div className="slide-featured__description plant-item__description">
                                     For our latitudes, sansevieria is a
                                     houseplant that does well in our apartments
                                     and offices. The plant tolerates a drop in
@@ -104,7 +104,7 @@ const Featured = () => {
                                     feel comfortable. The optimum temperature
                                     regim.
                                  </div>
-                                 <table className="slide-featured__characteristics">
+                                 <table className="slide-featured__characteristics plant-item__characteristics">
                                     <tbody>
                                        <tr>
                                           <td>Name:</td>
@@ -133,31 +133,31 @@ const Featured = () => {
                                     </tbody>
                                  </table>
                               </div>
-                              <button className="slide-featured__btn btn">
+                              <button className="slide-featured__btn plant-item__btn btn">
                                  <p>Go to catalog</p>
                                  <svg>
                                     <use href={`${svg}#sharp-arrow-down`}></use>
                                  </svg>
                               </button>
                            </div>
-                           <div className="slide-featured__img">
+                           <div className="slide-featured__img plant-item__img">
                               <img
                                  className="swiper-lazy"
                                  data-src={item}
                                  alt="Alocasia 'Zebrina'"
                               />
-										<div className="swiper-lazy-preloader swiper-lazy-preloader-black"></div>
+                              <div className="swiper-lazy-preloader swiper-lazy-preloader-black"></div>
                            </div>
                         </div>
                      </SwiperSlide>
                      <SwiperSlide>
-                        <div className="featured__slide slide-featured">
-                           <div className="slide-featured__content">
-                              <h3 className="slide-featured__title">
+                        <div className="featured__slide slide-featured plant-item">
+                           <div className="slide-featured__content plant-item__content">
+                              <h3 className="slide-featured__title plant-item__title">
                                  Alocasia 'Zebrina'
                               </h3>
-                              <div className="slide-featured__info">
-                                 <div className="slide-featured__description">
+                              <div className="slide-featured__info plant-item__info">
+                                 <div className="slide-featured__description plant-item__description">
                                     For our latitudes, sansevieria is a
                                     houseplant that does well in our apartments
                                     and offices. The plant tolerates a drop in
@@ -165,7 +165,7 @@ const Featured = () => {
                                     feel comfortable. The optimum temperature
                                     regim.
                                  </div>
-                                 <table className="slide-featured__characteristics">
+                                 <table className="slide-featured__characteristics plant-item__characteristics">
                                     <tbody>
                                        <tr>
                                           <td>Name:</td>
@@ -194,20 +194,20 @@ const Featured = () => {
                                     </tbody>
                                  </table>
                               </div>
-                              <button className="slide-featured__btn btn">
+                              <button className="slide-featured__btn plant-item__btn btn">
                                  <p>Go to catalog</p>
                                  <svg>
                                     <use href={`${svg}#sharp-arrow-down`}></use>
                                  </svg>
                               </button>
                            </div>
-                           <div className="slide-featured__img">
+                           <div className="slide-featured__img plant-item__img">
                               <img
                                  className="swiper-lazy"
                                  data-src={item}
                                  alt="Alocasia 'Zebrina'"
                               />
-										<div className="swiper-lazy-preloader swiper-lazy-preloader-black"></div>
+                              <div className="swiper-lazy-preloader swiper-lazy-preloader-black"></div>
                            </div>
                         </div>
                      </SwiperSlide>
