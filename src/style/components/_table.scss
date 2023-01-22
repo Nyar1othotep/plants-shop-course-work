@@ -1,0 +1,91 @@
+.item-table {
+   &__right,
+   & {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+   }
+   &__right {
+      width: 100%;
+      justify-content: space-between;
+   }
+   padding: 20px 0;
+   border-top: 1px solid $black;
+   &__img {
+      width: 121px;
+   }
+   &__name {
+      width: 263px;
+   }
+   &__price,
+   &__total {
+      width: 70px;
+      text-align: center;
+   }
+   &__title {
+      margin: 0px 0px 20px 0px;
+      font-weight: 500;
+      font-size: 24px;
+      @include lh(29, 24);
+   }
+   &__remove-icon svg {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      transition: all 0.3s ease 0s;
+      fill: $black;
+      &:hover {
+         fill: $red;
+      }
+   }
+   &__quantity {
+      & svg {
+         width: 17px;
+         height: 17px;
+      }
+      & input {
+         width: 40px;
+      }
+   }
+}
+
+@media (max-width: 768px) {
+   .item-table {
+      &,
+      &__right {
+         gap: 10px;
+      }
+      &__right {
+         position: relative;
+         flex-direction: column;
+      }
+      &__remove-icon {
+         position: absolute;
+         top: 0;
+         right: 0;
+      }
+      &__title {
+         margin: 0px 0px 10px 0px;
+         font-size: 20px;
+      }
+      &__name {
+         width: 100%;
+      }
+      &__price,
+      &__total {
+         width: 100%;
+         text-align: left;
+      }
+		&__price {
+			font-weight: 500;
+		}
+      &__total {
+         font-weight: 600;
+         font-size: 20px;
+			text-align: right;
+      }
+      &__quantity {
+         margin-right: auto;
+      }
+   }
+}

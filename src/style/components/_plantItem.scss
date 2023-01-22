@@ -38,42 +38,10 @@
       flex-wrap: wrap;
       gap: 30px;
    }
-   &__quantity {
-      display: flex;
-      align-items: center;
-      font-weight: 500;
-      font-size: 20px;
-      @include lh(24, 20);
-      & div {
-         display: flex;
-         align-items: center;
-         & > *:not(:last-child) {
-            margin: 0px 5px 0px 0px;
-         }
-      }
-      & svg {
-         width: 24px;
-         height: 24px;
-         cursor: pointer;
-      }
-      & > *:not(:last-child) {
-         margin: 0px 25px 0px 0px;
-      }
-      & input {
-         padding: 5px 0;
-         width: 46px;
-         text-align: center;
-         border-bottom: 2px solid $black;
-      }
-      & input[type="number"]::-webkit-inner-spin-button {
-         -webkit-appearance: none;
-      }
-   }
    &__btn {
       padding: 13px 37px;
       display: flex;
       align-items: center;
-      border: 1px solid $black;
       border-radius: 25px;
       & > *:not(:last-child) {
          margin: 0px 15px 0px 0px;
@@ -150,12 +118,9 @@
       &__price {
          margin: 0px 0px 30px 0px;
       }
-		&__price {
-			font-size: 22px;
-		}
-		&__quantity {
-			font-size: 16px;
-		}
+      &__price {
+         font-size: 22px;
+      }
    }
 }
 
@@ -164,9 +129,6 @@
       padding: 0;
       &__title {
          font-size: 28px;
-      }
-      &__btn {
-         width: 100%;
       }
    }
 }

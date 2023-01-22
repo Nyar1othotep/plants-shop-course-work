@@ -1,6 +1,7 @@
 .accordion {
    &__heading {
       padding: 15px 20px;
+		cursor: pointer;
    }
    &__button {
       font-weight: 600;

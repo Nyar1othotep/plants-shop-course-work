@@ -46,7 +46,7 @@ const PlantItem = () => {
                Price: <span>$7.39</span>
             </div>
             <div className="plant-item__bottom">
-               <div className="plant-item__quantity">
+               <div className="plant-item__quantity quantity">
                   <label htmlFor="quantity">Quantity:</label>
                   <div>
                      <svg>
@@ -63,7 +63,7 @@ const PlantItem = () => {
                      </svg>
                   </div>
                </div>
-               <button className="plant-item__btn btn">
+               <button className="plant-item__btn btn btn--border">
                   <p>Add to cart</p>
                   <svg>
                      <use href={`${svg}#add-to-cart`}></use>

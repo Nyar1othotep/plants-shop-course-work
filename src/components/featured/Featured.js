@@ -72,7 +72,7 @@ const Featured = () => {
                                     </tbody>
                                  </table>
                               </div>
-                              <button className="slide-featured__btn plant-item__btn btn">
+                              <button className="slide-featured__btn plant-item__btn btn btn--border">
                                  <p>Go to catalog</p>
                                  <svg>
                                     <use href={`${svg}#sharp-arrow-down`}></use>
@@ -133,7 +133,7 @@ const Featured = () => {
                                     </tbody>
                                  </table>
                               </div>
-                              <button className="slide-featured__btn plant-item__btn btn">
+                              <button className="slide-featured__btn plant-item__btn btn btn--border">
                                  <p>Go to catalog</p>
                                  <svg>
                                     <use href={`${svg}#sharp-arrow-down`}></use>
@@ -194,7 +194,7 @@ const Featured = () => {
                                     </tbody>
                                  </table>
                               </div>
-                              <button className="slide-featured__btn plant-item__btn btn">
+                              <button className="slide-featured__btn plant-item__btn btn btn--border">
                                  <p>Go to catalog</p>
                                  <svg>
                                     <use href={`${svg}#sharp-arrow-down`}></use>

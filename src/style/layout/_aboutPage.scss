@@ -1,18 +1,26 @@
 @import "../components/aboutAccordion";
 
 .about {
-	&__container {
-		max-width: 1430px;
-	}
-	&__body {
-		padding: 70px 0;
-	}
+   &__container {
+      max-width: 1430px;
+   }
+   &__body {
+      padding: 70px 0px 70px 0px;
+   }
+}
+
+@media (max-width: 992px) {
+   .about {
+      &__body {
+         padding: 20px 0px 70px 0px;
+      }
+   }
 }
 
 @media (max-width: 375px) {
    .about {
-		&__body {
-			padding: 50px 0;
-		}
-	}
+      &__body {
+         padding: 20px 0px 50px 0px;
+      }
+   }
 }
