@@ -1,6 +1,7 @@
 @import "../components/loginForm";
 
-.login-page {
+.login-page,
+.registration-page {
    &__body {
       display: flex;
       align-items: center;
@@ -12,7 +13,8 @@
          margin: 0px 0px 20px 0px;
       }
    }
-   &__login-with-google-btn {
+   &__login-with-google-btn,
+   &__registration-with-google-btn {
       padding: 15px 20px;
       min-height: 55px;
       max-width: 380px;

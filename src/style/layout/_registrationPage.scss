@@ -1,0 +1,10 @@
+.registration-page {
+   & span {
+		max-width: 380px;
+      font-weight: 500;
+      font-size: 12px;
+      @include lh(15, 12);
+      text-align: center;
+		color: $disabled;
+   }
+}

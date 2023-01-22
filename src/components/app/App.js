@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { MainPage, CatalogPage, AboutPage, CartPage, ProceedToCheckoutPage, LoginPage } from "../pages";
+import { MainPage, CatalogPage, AboutPage, CartPage, ProceedToCheckoutPage, LoginPage, RegistrationPage } from "../pages";
 import Header from "../header/Header";
 
 const App = () => {
@@ -15,6 +15,7 @@ const App = () => {
                   <Route path="/cart" element={<CartPage />} />
                   <Route path="/cart/proceed-to-checkout" element={<ProceedToCheckoutPage />} />
                   <Route path="/user/login" element={<LoginPage />} />
+                  <Route path="/user/registration" element={<RegistrationPage />} />
                </Routes>
             </main>
          </div>
