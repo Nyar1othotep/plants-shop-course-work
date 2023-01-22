@@ -89,7 +89,7 @@ const Header = () => {
                         </li>
                         <li className="account-menu-header__item">
                            <NavLink
-                              to="/account"
+                              to="/user"
                               className="account-menu-header__link"
                            >
                               <svg>

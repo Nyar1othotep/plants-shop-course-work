@@ -1,0 +1,38 @@
+form {
+	display: flex;
+   flex-direction: column;
+	width: 100%;
+   & > *:not(:last-child) {
+      margin: 0px 0px 20px 0px;
+   }
+   & div {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+   }
+   & .input {
+      position: relative;
+      gap: 0;
+      & .error {
+			position: absolute;
+			left: 0;
+			bottom: -16px;
+         font-weight: 500;
+         font-size: 12px;
+         @include lh(15, 12);
+         color: $red;
+			user-select: none;
+      }
+   }
+	& button {
+		margin: 10px 0px 0px 0px;
+	}
+}
+
+@media (max-width: 375px) {
+	form {
+		& div {
+			gap: 18px;
+		}
+	}
+}

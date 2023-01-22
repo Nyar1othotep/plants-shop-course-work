@@ -1,0 +1,48 @@
+@import "../components/loginForm";
+
+.login-page {
+   &__body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      width: 100%;
+      height: 80vh;
+      & > *:not(:last-child) {
+         margin: 0px 0px 20px 0px;
+      }
+   }
+   &__login-with-google-btn {
+      padding: 15px 20px;
+      min-height: 55px;
+      max-width: 380px;
+      width: 100%;
+      border-radius: 5px;
+      & > *:not(:last-child) {
+         margin: 0px 20px 0px 0px;
+      }
+      & svg {
+         width: 24px;
+         height: 24px;
+      }
+   }
+   &__to-registration {
+      display: flex;
+      align-items: center;
+      font-weight: 500;
+      font-size: 16px;
+      @include lh(20, 16);
+      & > *:not(:last-child) {
+         margin: 0px 5px 0px 0px;
+      }
+      & p {
+         color: $disabled;
+      }
+      & a {
+         color: $green;
+         &:hover {
+            text-decoration: underline;
+         }
+      }
+   }
+}

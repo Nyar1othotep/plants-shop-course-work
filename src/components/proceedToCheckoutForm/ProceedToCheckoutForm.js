@@ -1,21 +1,6 @@
-import { Formik, Form, useField } from "formik";
+import { Formik, Form } from "formik";
 import * as Yup from "yup";
-
-const MyTextInput = ({ label, ...props }) => {
-   const [field, meta] = useField(props);
-
-   return (
-      <>
-         {label ? <label htmlFor={props.name}>{label}</label> : null}
-         <div className="input">
-            <input {...props} {...field} />
-            {meta.touched && meta.error ? (
-               <div className="error">{meta.error}</div>
-            ) : null}
-         </div>
-      </>
-   );
-};
+import { MyTextInput } from "../../utils/MyTextInput";
 
 const ProceedToCheckoutForm = () => {
    return (
@@ -29,20 +14,20 @@ const ProceedToCheckoutForm = () => {
          }}
          validationSchema={Yup.object({
             address: Yup.string()
-               .min(2, "Minimum 2 characters!")
-               .required("Required field!"),
+               .min(2, "Should be 2 chars minimum.")
+               .required("Required field."),
             office: Yup.string()
-               .min(2, "Minimum 2 characters!")
-               .required("Required field!"),
+               .min(2, "Should be 2 chars minimum.")
+               .required("Required field."),
             index: Yup.string()
-               .min(2, "Minimum 2 characters!")
-               .required("Required field!"),
+               .min(2, "Should be 2 chars minimum.")
+               .required("Required field."),
             name: Yup.string()
-               .min(2, "Minimum 2 characters!")
-               .required("Required field!"),
+               .min(2, "Should be 2 chars minimum.")
+               .required("Required field."),
             phoneNumber: Yup.string()
-               .min(2, "Minimum 2 characters!")
-               .required("Required field!"),
+               .min(2, "Should be 2 chars minimum.")
+               .required("Required field."),
          })}
          onSubmit={(values) => console.log(JSON.stringify(values, null, 2))}
       >
