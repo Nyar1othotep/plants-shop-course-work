@@ -1,5 +1,15 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { MainPage, CatalogPage, AboutPage, CartPage, ProceedToCheckoutPage, LoginPage, RegistrationPage, ProfilePage } from "../pages";
+import {
+   MainPage,
+   CatalogPage,
+   AboutPage,
+   CartPage,
+   ProceedToCheckoutPage,
+   LoginPage,
+   RegistrationPage,
+   ProfilePage,
+   AdminPanelPage,
+} from "../pages";
 import Header from "../header/Header";
 
 const App = () => {
@@ -13,10 +23,17 @@ const App = () => {
                   <Route path="/catalog" element={<CatalogPage />} />
                   <Route path="/about" element={<AboutPage />} />
                   <Route path="/cart" element={<CartPage />} />
-                  <Route path="/cart/proceed-to-checkout" element={<ProceedToCheckoutPage />} />
+                  <Route
+                     path="/cart/proceed-to-checkout"
+                     element={<ProceedToCheckoutPage />}
+                  />
                   <Route path="/user/login" element={<LoginPage />} />
-                  <Route path="/user/registration" element={<RegistrationPage />} />
+                  <Route
+                     path="/user/registration"
+                     element={<RegistrationPage />}
+                  />
                   <Route path="/user/profile" element={<ProfilePage />} />
+                  <Route path="/user/admin-panel" element={<AdminPanelPage />} />
                </Routes>
             </main>
          </div>

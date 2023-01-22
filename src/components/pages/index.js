@@ -6,5 +6,16 @@ import ProceedToCheckoutPage from "./ProceedToCheckoutPage";
 import LoginPage from "./LoginPage";
 import RegistrationPage from "./RegistrationPage";
 import ProfilePage from "./ProfilePage";
+import AdminPanelPage from "./AdminPanelPage";
 
-export { MainPage, CatalogPage, AboutPage, CartPage, ProceedToCheckoutPage, LoginPage, RegistrationPage, ProfilePage };
+export {
+   MainPage,
+   CatalogPage,
+   AboutPage,
+   CartPage,
+   ProceedToCheckoutPage,
+   LoginPage,
+   RegistrationPage,
+   ProfilePage,
+   AdminPanelPage,
+};

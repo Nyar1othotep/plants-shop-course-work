@@ -1,0 +1,43 @@
+.admin-panel-table-list {
+   overflow-x: auto;
+}
+
+.item-admin-panel-table-list {
+   font-weight: 500;
+   font-size: 14px;
+   @include lh(17, 14);
+	min-width: 650px;
+   &__user-id {
+      font-weight: 600;
+   }
+   &__img,
+   &__name,
+   &__price {
+      min-width: auto !important;
+      width: 48px !important;
+   }
+   &__title {
+      margin: 0 !important;
+      font-size: 14px !important;
+   }
+}
+
+@media (max-width: 768px) {
+   .item-admin-panel-table-list {
+      &__right {
+         flex-direction: row !important;
+      }
+      &__name,
+      &__price,
+      &__total {
+         width: auto !important;
+      }
+      &__total {
+         font-weight: 500 !important;
+         font-size: 14px !important;
+      }
+      &__quantity {
+         margin: 0 !important;
+      }
+   }
+}
