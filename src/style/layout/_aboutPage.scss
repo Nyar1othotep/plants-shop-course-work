@@ -1,0 +1,18 @@
+@import "../components/aboutAccordion";
+
+.about {
+	&__container {
+		max-width: 1430px;
+	}
+	&__body {
+		padding: 70px 0;
+	}
+}
+
+@media (max-width: 375px) {
+   .about {
+		&__body {
+			padding: 50px 0;
+		}
+	}
+}

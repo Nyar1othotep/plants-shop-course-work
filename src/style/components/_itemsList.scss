@@ -1,4 +1,5 @@
 .items-list {
+	display: flex;
    max-width: 530px;
    flex: 0 1 40%;
    &__row {
@@ -6,8 +7,6 @@
       flex-wrap: wrap;
       margin: 0px -15px;
       overflow-y: auto;
-      // unicode-bidi: bidi-override;
-      // direction: rtl;
       height: 652px;
       row-gap: 30px;
       scroll-snap-type: y mandatory;

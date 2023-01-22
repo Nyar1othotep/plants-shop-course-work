@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { MainPage, CatalogPage } from "../pages";
+import { MainPage, CatalogPage, AboutPage } from "../pages";
 import Header from "../header/Header";
 
 const App = () => {
@@ -11,6 +11,7 @@ const App = () => {
                <Routes>
                   <Route path="/" element={<MainPage />} />
                   <Route path="/catalog" element={<CatalogPage />} />
+                  <Route path="/about" element={<AboutPage />} />
                </Routes>
             </main>
          </div>

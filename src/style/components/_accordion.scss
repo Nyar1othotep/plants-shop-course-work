@@ -1,0 +1,41 @@
+.accordion {
+   &__heading {
+      padding: 15px 20px;
+   }
+   &__button {
+      font-weight: 600;
+      font-size: 24px;
+      @include lh(29, 24);
+      color: $green;
+   }
+	&__panel {
+		padding: 0px 40px 10px 40px;
+	}
+}
+
+@media (max-width: 1024px) {
+	.accordion {
+		&__button {
+			font-size: 22px;
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.accordion {
+		&__button {
+			font-size: 18px;
+		}
+	}
+}
+
+@media (max-width: 375px) {
+	.accordion {
+		&__heading {
+			padding: 10px 5px;
+		}
+		&__panel {
+			padding: 0px 20px 10px 20px;
+		}
+	}
+}

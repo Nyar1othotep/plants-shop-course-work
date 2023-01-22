@@ -50,10 +50,13 @@ img {
    h2 {
       font-size: 44px;
    }
+	h3 {
+		font-size: 36px;
+	}
 }
 
 @media (max-width: 992px) {
-   h2 {
+   h2, h3 {
       text-align: center;
    }
 }
@@ -65,16 +68,25 @@ img {
    h2 {
       font-size: 40px;
    }
+	h3 {
+		font-size: 32px;
+	}
 }
 
 @media (max-width: 575px) {
    h2 {
       font-size: 36px;
    }
+	h3 {
+		font-size: 30px;
+	}
 }
 
 @media (max-width: 375px) {
    h2 {
-      font-size: 32px;
+      font-size: 28px;
    }
+	h3 {
+		font-size: 22px;
+	}
 }
