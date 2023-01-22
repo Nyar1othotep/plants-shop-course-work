@@ -1,0 +1,26 @@
+.form-input {
+   padding: 20px 15px 10px 15px;
+   position: relative;
+   min-height: 55px;
+   width: 100%;
+   border-bottom: 1px solid $black;
+   &::placeholder {
+      position: absolute;
+      top: 7px;
+      left: 15px;
+      font-weight: 500;
+      font-size: 12px;
+      @include lh(15, 12);
+		color: $disabled;
+   }
+	&[type="number"]::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+   }
+}
+
+form label {
+	margin: 0px 0px 20px 0px;
+	font-weight: 600;
+	font-size: 18px;
+	@include lh(22, 18);
+}
