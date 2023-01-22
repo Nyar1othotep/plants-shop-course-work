@@ -1,0 +1,10 @@
+.item-my-orders-list-table {
+   &__date-info,
+   &__order-status {
+      text-align: right;
+      margin-left: auto;
+   }
+   &__order-status {
+      word-break: break-all;
+   }
+}

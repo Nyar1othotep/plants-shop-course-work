@@ -12,7 +12,8 @@
    padding: 20px 0;
    border-top: 1px solid $black;
    &__img {
-      width: 121px;
+      min-width: 90px;
+		width: 121px;
    }
    &__name {
       width: 263px;
