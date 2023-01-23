@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+   BrowserRouter as Router,
+   Route,
+   Routes,
+   NavLink,
+} from "react-router-dom";
 import {
    MainPage,
    CatalogPage,
@@ -12,11 +17,52 @@ import {
 } from "../pages";
 import Header from "../header/Header";
 
+
+// Временное решение
+const SiteMenu = () => {
+   return (
+      <div className="site-menu">
+         <ul className="site-menu__list">
+            <li className="site-menu__item">
+               <NavLink to="/">MainPage</NavLink>
+            </li>
+            <li className="site-menu__item">
+               <NavLink to="/catalog">CatalogPage</NavLink>
+            </li>
+            <li className="site-menu__item">
+               <NavLink to="/about">AboutPage</NavLink>
+            </li>
+            <li className="site-menu__item">
+               <NavLink to="/cart">CartPage</NavLink>
+            </li>
+            <li className="site-menu__item">
+               <NavLink to="/cart/proceed-to-checkout">
+                  ProceedToCheckoutPage
+               </NavLink>
+            </li>
+            <li className="site-menu__item">
+               <NavLink to="/user/login">LoginPage</NavLink>
+            </li>
+            <li className="site-menu__item">
+               <NavLink to="/user/registration">RegistrationPage</NavLink>
+            </li>
+            <li className="site-menu__item">
+               <NavLink to="/user/profile">ProfilePage</NavLink>
+            </li>
+            <li className="site-menu__item">
+               <NavLink to="/user/admin-panel">AdminPanelPage</NavLink>
+            </li>
+         </ul>
+      </div>
+   );
+};
+
 const App = () => {
    return (
       <Router>
          <div className="app">
             <Header />
+            <SiteMenu />
             <main>
                <Routes>
                   <Route path="/" element={<MainPage />} />
@@ -33,7 +79,10 @@ const App = () => {
                      element={<RegistrationPage />}
                   />
                   <Route path="/user/profile" element={<ProfilePage />} />
-                  <Route path="/user/admin-panel" element={<AdminPanelPage />} />
+                  <Route
+                     path="/user/admin-panel"
+                     element={<AdminPanelPage />}
+                  />
                </Routes>
             </main>
          </div>

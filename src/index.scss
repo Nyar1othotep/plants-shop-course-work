@@ -21,3 +21,44 @@
 @import "./style/components/total";
 @import "./style/components/accordion";
 @import "./style/components/table";
+
+
+// Временное решение
+.site-menu {
+	margin: -100px 0px 0px 0px;
+	position: fixed;
+	right: 10px;
+	top: 50%;
+	z-index: 1000;
+	background: $white;
+	border-radius: 10px;
+	height: 30px;
+	width: 30px;
+	overflow: hidden;
+	border: 2px solid $black;
+	transition: width .2s ease 0s, height 0.2s ease .1s;
+	cursor: pointer;
+	&:hover {
+		width: 272px;
+		height: 319px;
+
+	}
+	&__list {
+		padding: 20px;
+		&>*:not(:last-child) {
+			margin: 0px 0px 10px 0px;
+		}
+	}
+	&__item {
+		& a {
+			color: $black;
+			&:hover {
+				text-decoration: underline;
+			}
+		}
+		& a.active {
+			font-weight: 600;
+			color: $green;
+		}
+	}
+}
