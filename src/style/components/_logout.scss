@@ -1,0 +1,11 @@
+.logout {
+	padding: 0px 0px 40px 0px;
+	max-width: 360px;
+	margin-left: auto;
+	&>*:not(:last-child) {
+		margin: 0px 0px 15px 0px;
+	}
+	&__btn {
+		margin-left: auto;
+	}
+}

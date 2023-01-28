@@ -58,11 +58,11 @@
       }
       &__right {
          position: relative;
-         // flex-direction: column;
+         flex-direction: column;
       }
       &__remove-icon {
          position: absolute;
-         top: 0;
+         top: -8%;
          right: 0;
       }
       &__title {

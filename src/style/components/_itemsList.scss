@@ -1,5 +1,5 @@
 .items-list {
-	display: flex;
+   display: flex;
    max-width: 530px;
    flex: 0 1 40%;
    &__row {
@@ -57,10 +57,12 @@
          transform: scale(0);
          transition: all 0.3s ease 0.1s;
       }
-      .item-items-list:hover & p {
+      .item-items-list:hover & p,
+      .item-items-list.active & p {
          transform: scale(1);
       }
-      .item-items-list:hover & {
+      .item-items-list:hover &,
+      .item-items-list.active & {
          opacity: 1;
       }
    }
