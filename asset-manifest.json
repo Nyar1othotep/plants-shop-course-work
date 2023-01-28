@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/plants-shop-course-work/static/css/main.7eab09af.css",
-    "main.js": "/plants-shop-course-work/static/js/main.067c693b.js",
+    "main.css": "/plants-shop-course-work/static/css/main.30a20043.css",
+    "main.js": "/plants-shop-course-work/static/js/main.c8886771.js",
     "static/media/main-page-bg.jpg": "/plants-shop-course-work/static/media/main-page-bg.361be9140cbe98391ee3.jpg",
     "static/media/main-page-footer-bg.jpg": "/plants-shop-course-work/static/media/main-page-footer-bg.d8f38ba2c47c045f502c.jpg",
     "static/media/branch.png": "/plants-shop-course-work/static/media/branch.68beca8154e997a110e4.png",
     "static/media/item.png": "/plants-shop-course-work/static/media/item.fa3bf99d9c18bd5be93e.png",
     "static/media/sprites.svg": "/plants-shop-course-work/static/media/sprites.bf855fe504de699716e8964791a31b22.svg",
     "index.html": "/plants-shop-course-work/index.html",
-    "main.7eab09af.css.map": "/plants-shop-course-work/static/css/main.7eab09af.css.map",
-    "main.067c693b.js.map": "/plants-shop-course-work/static/js/main.067c693b.js.map"
+    "main.30a20043.css.map": "/plants-shop-course-work/static/css/main.30a20043.css.map",
+    "main.c8886771.js.map": "/plants-shop-course-work/static/js/main.c8886771.js.map"
   },
   "entrypoints": [
-    "static/css/main.7eab09af.css",
-    "static/js/main.067c693b.js"
+    "static/css/main.30a20043.css",
+    "static/js/main.c8886771.js"
   ]
 }
