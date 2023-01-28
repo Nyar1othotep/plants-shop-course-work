@@ -1,8 +1,31 @@
 import RegistrationForm from "../registrationForm/RegistrationForm";
 import svg from "../../resourses/svg/sprites.svg";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setUser } from "store/slices/userSlice";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const RegistrationPage = () => {
+   const dispatch = useDispatch();
+	let navigate = useNavigate();
+
+   const handleRegister = (email, password) => {
+      const auth = getAuth();
+      createUserWithEmailAndPassword(auth, email, password)
+         .then(({ user }) => {
+            dispatch(
+               setUser({
+                  email: user.email,
+                  id: user.uid,
+                  token: user.accessToken,
+               })
+            );
+				navigate("/user/profile");
+         })
+         .catch(console.error);
+   };
+
    return (
       <div className="registration-page">
          <div className="registration-page__container _container">
@@ -14,7 +37,7 @@ const RegistrationPage = () => {
                   <p>Continue with Google</p>
                </button>
                <p style={{ color: "#8E8E8E" }}>or</p>
-               <RegistrationForm />
+               <RegistrationForm handleClick={handleRegister} />
                <div className="registration-page__to-registration">
                   <p>Already have an account?</p>
                   <Link to="/user/login">Log in</Link>

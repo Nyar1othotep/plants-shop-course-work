@@ -17,7 +17,6 @@ import {
 } from "../pages";
 import Header from "../header/Header";
 
-
 // Временное решение
 const SiteMenu = () => {
    return (

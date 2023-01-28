@@ -2,7 +2,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { MyTextInput } from "../../utils/MyTextInput";
 
-const RegistrationForm = () => {
+const RegistrationForm = ({ handleClick }) => {
    return (
       <Formik
          initialValues={{
@@ -12,7 +12,7 @@ const RegistrationForm = () => {
          validationSchema={Yup.object({
             email: Yup.string()
                .matches(
-						// eslint-disable-next-line
+                  // eslint-disable-next-line
                   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                   "Invalid email format."
                )
@@ -22,7 +22,7 @@ const RegistrationForm = () => {
                .min(8, "Password is too short - should be 8 chars minimum.")
                .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
          })}
-         onSubmit={(values) => console.log(JSON.stringify(values, null, 2))}
+         onSubmit={(values) => handleClick(values.email, values.password)}
       >
          <Form className="login-form form">
             <MyTextInput
@@ -33,7 +33,7 @@ const RegistrationForm = () => {
                autoFocus
                placeholder="Email"
             />
-				<MyTextInput
+            <MyTextInput
                className="form-input"
                id="password"
                name="password"

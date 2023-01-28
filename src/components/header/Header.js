@@ -3,9 +3,11 @@ import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { useAuth } from "hooks/use-auth";
 
 const Header = () => {
    const [isOpenBurger, setIsOpenBurger] = useState(false);
+   const { isAuth } = useAuth();
 
    useEffect(() => {
       gsap.registerPlugin(ScrollTrigger);
@@ -89,7 +91,7 @@ const Header = () => {
                         </li>
                         <li className="account-menu-header__item">
                            <NavLink
-                              to="/user"
+                              to={isAuth ? "/user/profile" : "/user/login"}
                               className="account-menu-header__link"
                            >
                               <svg>
