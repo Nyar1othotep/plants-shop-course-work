@@ -31,7 +31,7 @@ const ItemsList = ({ category, onItem, selectedItem }) => {
    const renderItems = (arr) => {
       const clazz = "items-list__item item-items-list";
 
-      const items = arr.map((item, i) => {
+      const items = arr.map((item) => {
          return (
             <li className="items-list__column" key={item.id}>
                <div
@@ -51,7 +51,7 @@ const ItemsList = ({ category, onItem, selectedItem }) => {
          );
       });
 
-      return <ul className="items-list__row">{items}</ul>;
+      return <>{items}</>;
    };
 
    const elements = useMemo(() => {
@@ -59,7 +59,11 @@ const ItemsList = ({ category, onItem, selectedItem }) => {
       // eslint-disable-next-line
    }, [process, selectedItem]);
 
-   return <div className="items-list">{elements}</div>;
+   return (
+      <div className="items-list">
+         <ul className="items-list__row">{elements}</ul>
+      </div>
+   );
 };
 
 export default ItemsList;
