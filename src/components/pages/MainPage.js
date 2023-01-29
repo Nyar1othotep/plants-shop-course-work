@@ -11,7 +11,7 @@ const MainPage = () => {
          <Description />
          <Featured />
          <Reviews />
-			<Footer />
+         <Footer />
       </>
    );
 };

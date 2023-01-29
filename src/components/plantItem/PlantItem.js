@@ -4,21 +4,20 @@ import { db } from "../../firebase";
 import { collection, query, where } from "firebase/firestore";
 import { useHttp } from "hooks/http.hook";
 import setContent from "utils/setContent";
+import { useSelector } from "react-redux";
 
-const PlantItem = ({ selectedItem }) => {
+const PlantItem = () => {
+   const { id } = useSelector((state) => state.item);
    const [item, setItem] = useState([]);
    const itemsCollectionRef = collection(db, "items");
-   const q = query(
-      itemsCollectionRef,
-      where("itemID", "==", parseInt(selectedItem))
-   );
+   const q = query(itemsCollectionRef, where("itemID", "==", parseInt(id)));
 
    const { request, process, setProcess } = useHttp();
 
    useEffect(() => {
       onRequest();
       // eslint-disable-next-line
-   }, [selectedItem]);
+   }, [id]);
 
    const onRequest = () => {
       request(q)
@@ -116,11 +115,7 @@ const PlantItem = ({ selectedItem }) => {
       // eslint-disable-next-line
    }, [process]);
 
-   return (
-      <>
-         {elements}
-      </>
-   );
+   return <>{elements}</>;
 };
 
 export default PlantItem;

@@ -1,4 +1,9 @@
-const ItemsFilter = ({ onItemFilter, category }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { setItemCategory } from "store/slices/itemSlice";
+
+const ItemsFilter = () => {
+   const dispatch = useDispatch();
+   const { category } = useSelector((state) => state.item);
    const clazz = "items-filter__link menu__link";
 
    return (
@@ -9,7 +14,13 @@ const ItemsFilter = ({ onItemFilter, category }) => {
                   className={
                      category === "Sansevieria" ? clazz + " active" : clazz
                   }
-                  onClick={() => onItemFilter("Sansevieria")}
+                  onClick={() =>
+                     dispatch(
+                        setItemCategory({
+                           category: "Sansevieria",
+                        })
+                     )
+                  }
                >
                   SANSEVIERIA
                </div>
@@ -17,7 +28,13 @@ const ItemsFilter = ({ onItemFilter, category }) => {
             <li className="items-filter__item menu__item">
                <div
                   className={category === "Ivy" ? clazz + " active" : clazz}
-                  onClick={() => onItemFilter("Ivy")}
+                  onClick={() =>
+                     dispatch(
+                        setItemCategory({
+                           category: "Ivy",
+                        })
+                     )
+                  }
                >
                   Ivy
                </div>
@@ -27,7 +44,13 @@ const ItemsFilter = ({ onItemFilter, category }) => {
                   className={
                      category === "Zamioculcas" ? clazz + " active" : clazz
                   }
-                  onClick={() => onItemFilter("Zamioculcas")}
+                  onClick={() =>
+                     dispatch(
+                        setItemCategory({
+                           category: "Zamioculcas",
+                        })
+                     )
+                  }
                >
                   Zamioculcas
                </div>

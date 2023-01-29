@@ -3,8 +3,12 @@ import { db } from "../../firebase";
 import { collection, query, where } from "firebase/firestore";
 import { useHttp } from "hooks/http.hook";
 import setContent from "utils/setContent";
+import { useDispatch, useSelector } from "react-redux";
+import { setItemId } from "store/slices/itemSlice";
 
-const ItemsList = ({ category, onItem, selectedItem }) => {
+const ItemsList = () => {
+   const dispatch = useDispatch();
+   const { id, category } = useSelector((state) => state.item);
    const [items, setItems] = useState([]);
    const itemsCollectionRef = collection(db, "items");
    const q = query(itemsCollectionRef, where("category", "==", category));
@@ -35,10 +39,14 @@ const ItemsList = ({ category, onItem, selectedItem }) => {
          return (
             <li className="items-list__column" key={item.id}>
                <div
-                  className={
-                     selectedItem === item.id ? clazz + " active" : clazz
+                  className={id === item.id ? clazz + " active" : clazz}
+                  onClick={() =>
+                     dispatch(
+                        setItemId({
+                           id: item.id,
+                        })
+                     )
                   }
-                  onClick={() => onItem(item.id)}
                >
                   <div className="item-items-list__img">
                      <img src={item.img} alt={item.name} />
@@ -57,7 +65,7 @@ const ItemsList = ({ category, onItem, selectedItem }) => {
    const elements = useMemo(() => {
       return setContent(process, () => renderItems(items), items);
       // eslint-disable-next-line
-   }, [process, selectedItem]);
+   }, [process, id]);
 
    return (
       <div className="items-list">

@@ -11,9 +11,12 @@
 }
 
 .slide-featured {
-	padding: 0 60px;
+   padding: 0 60px;
+   &__btns {
+      margin: 0px 0px 50px 0px;
+      display: flex;
+   }
    &__btn {
-		margin: 0px 0px 50px 0px;
       & svg {
          transform: rotate(-90deg);
       }
