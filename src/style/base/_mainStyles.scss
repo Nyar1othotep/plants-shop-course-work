@@ -36,6 +36,17 @@ img {
    max-width: 100%;
 }
 
+.spinner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 auto;
+	& img {
+		width: 100px;
+		height: 100px;
+	}
+}
+
 /* ----------------CONTAINER------------------------------------------------- */
 
 ._container {

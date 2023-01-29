@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { useAuth } from "hooks/use-auth";
+import { useAuth } from "hooks/useAuth.hook";
 
 const Header = () => {
    const [isOpenBurger, setIsOpenBurger] = useState(false);

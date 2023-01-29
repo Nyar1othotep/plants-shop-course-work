@@ -1,6 +1,6 @@
 import MyOrdersList from "../myOrdersList/MyOrdersList";
 import Logout from "components/logout/Loguot";
-import { useAuth } from "hooks/use-auth";
+import { useAuth } from "hooks/useAuth.hook";
 import { Navigate } from "react-router-dom";
 
 const ProfilePage = () => {

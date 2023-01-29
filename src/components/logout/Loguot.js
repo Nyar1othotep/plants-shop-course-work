@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useAuth } from "hooks/use-auth";
+import { useAuth } from "hooks/useAuth.hook";
 import { removeUser } from "store/slices/userSlice";
 
 const Logout = () => {
