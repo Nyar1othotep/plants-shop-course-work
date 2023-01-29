@@ -1,3 +1,17 @@
 .proceed-to-checkout-form {
    max-width: 380px;
 }
+
+@media (max-width: 420px) {
+	.proceed-to-checkout-form {
+		&__row {
+			margin: 0px 0px 40px 0px !important;
+			display: flex;
+			flex-direction: column;
+			& .input {
+				width: 100%;
+			}
+		}
+	}
+	
+}

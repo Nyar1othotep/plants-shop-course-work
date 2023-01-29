@@ -41,7 +41,7 @@ const ProceedToCheckoutForm = () => {
                autoFocus
                placeholder="Country, city, street, house"
             />
-            <div>
+            <div className="proceed-to-checkout-form__row">
                <MyTextInput
                   className="form-input"
                   id="office"

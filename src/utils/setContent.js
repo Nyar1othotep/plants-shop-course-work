@@ -1,4 +1,4 @@
-// import ErrorMessage from "../components/errorMessage/ErrorMessage";
+import ErrorMessage from "../components/errorMessage/ErrorMessage";
 import Spinner from "../components/spinner/Spinner";
 
 const setContent = (process, Component, data) => {
@@ -10,7 +10,7 @@ const setContent = (process, Component, data) => {
       case "confirmed":
          return <Component data={data} />;
       case "error":
-         return console.log("error");
+         return <ErrorMessage />;
       default:
          throw new Error("Unexpected process state");
    }
