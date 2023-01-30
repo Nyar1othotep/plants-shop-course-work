@@ -23,7 +23,7 @@
       }
    }
    &__price {
-		margin: 0px 0px 60px 0px;
+      margin: 0px 0px 60px 0px;
       font-weight: 500;
       font-size: 28px;
       @include lh(34, 28);
@@ -31,9 +31,15 @@
          font-weight: 400;
       }
    }
-	&__left {
-		margin: 0px 0px 10px 0px;
-	}
+   &__left {
+      margin: 0px 0px 10px 0px;
+   }
+   &__not-available {
+		margin: 20px 0px 0px 0px;
+		font-size: 20px;
+		font-weight: 600;
+      text-align: center;
+   }
    &__bottom {
       display: flex;
       align-items: center;

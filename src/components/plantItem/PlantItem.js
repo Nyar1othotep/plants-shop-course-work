@@ -7,11 +7,11 @@ import setContent from "utils/setContent";
 import { useSelector, useDispatch } from "react-redux";
 import { useAuth } from "hooks/useAuth.hook";
 import { setToCart, setitemQuantity } from "store/slices/toCartSlice";
+import { store } from "store";
 
 const PlantItem = () => {
    const dispatch = useDispatch();
    const { id } = useSelector((state) => state.item);
-   const toCartObject = useSelector((state) => state.toCart);
    const [item, setItem] = useState([]);
    const [quantity, setQuantity] = useState(1);
    const itemsCollectionRef = collection(db, "items");
@@ -30,7 +30,7 @@ const PlantItem = () => {
       if (isAuth) {
          dispatch(
             setitemQuantity({
-               itemQuantity: quantity,
+               itemQuantity: parseInt(quantity),
             })
          );
       }
@@ -48,6 +48,7 @@ const PlantItem = () => {
          ...doc.data(),
          id: doc.id,
       }));
+      setQuantity((quantity) => 1);
       setItem((item) => receivedData);
       if (isAuth) {
          dispatch(
@@ -64,9 +65,13 @@ const PlantItem = () => {
       }
    };
 
-	// Надо исправить. toCartObject вызывается при загрузки документа, а надо чтобы когда выполняется эта функция. useEffect не поможет
    const addToCart = async () => {
-      await addDoc(usersCartCollectionRef, toCartObject);
+      try {
+         await addDoc(usersCartCollectionRef, store.getState().toCart);
+         alert("This product was added to the cart");
+      } catch (error) {
+         console.error(error.message);
+      }
    };
 
    const renderItems = (arr) => {
@@ -114,57 +119,67 @@ const PlantItem = () => {
                   <div className="plant-item__left">
                      Quantity of goods: {item.quantity}
                   </div>
-                  <div className="plant-item__bottom">
-                     <div className="plant-item__quantity quantity">
-                        <label htmlFor="quantity">Quantity:</label>
-                        <div>
-                           <svg
-                              onClick={() =>
-                                 setQuantity((quantity) => quantity - 1)
-                              }
-                           >
-                              <use href={`${svg}#minus`}></use>
-                           </svg>
-                           <input
-                              type="number"
-                              name="quantity"
-                              id="quantity"
-                              min={1}
-                              max={item.quantity}
-                              value={quantity}
-                              placeholder="1"
-                              onChange={(e) =>
-                                 setQuantity((quantity) => e.target.value)
-                              }
-                           />
-                           <svg
-                              onClick={() =>
-                                 setQuantity((quantity) => quantity + 1)
-                              }
-                           >
-                              <use href={`${svg}#plus`}></use>
-                           </svg>
+                  {item.quantity === 0 ? (
+                     <div className="plant-item__not-available">Not available</div>
+                  ) : (
+                     <div className="plant-item__bottom">
+                        <div className="plant-item__quantity quantity">
+                           <label htmlFor="quantity">Quantity:</label>
+                           <div>
+                              <svg
+                                 onClick={() =>
+                                    quantity > 1
+                                       ? setQuantity((quantity) =>
+                                            parseInt(quantity - 1)
+                                         )
+                                       : alert("You can`t decreace anymore.")
+                                 }
+                              >
+                                 <use href={`${svg}#minus`}></use>
+                              </svg>
+                              <input
+                                 type="number"
+                                 name="quantity"
+                                 id="quantity"
+                                 min={1}
+                                 max={item.quantity}
+                                 value={quantity}
+                                 onChange={() =>
+                                    alert("Please, use the buttons")
+                                 }
+                              />
+                              <svg
+                                 onClick={() =>
+                                    quantity < item.quantity
+                                       ? setQuantity((quantity) =>
+                                            parseInt(quantity + 1)
+                                         )
+                                       : alert("You can`t increace anymore.")
+                                 }
+                              >
+                                 <use href={`${svg}#plus`}></use>
+                              </svg>
+                           </div>
                         </div>
+                        <button
+                           className="plant-item__btn btn btn--border"
+                           onClick={() => {
+                              if (!isAuth) {
+                                 alert(
+                                    "You need to login or create an account at first!"
+                                 );
+                              } else {
+                                 addToCart();
+                              }
+                           }}
+                        >
+                           <p>Add to cart</p>
+                           <svg>
+                              <use href={`${svg}#add-to-cart`}></use>
+                           </svg>
+                        </button>
                      </div>
-                     <button
-                        className="plant-item__btn btn btn--border"
-                        onClick={() => {
-                           if (!isAuth) {
-                              alert(
-                                 "You need to login or create an account at first!"
-                              );
-                           } else {
-                              addToCart();
-                              alert("The item has been added to your cart!");
-                           }
-                        }}
-                     >
-                        <p>Add to cart</p>
-                        <svg>
-                           <use href={`${svg}#add-to-cart`}></use>
-                        </svg>
-                     </button>
-                  </div>
+                  )}
                </div>
                <div className="plant-item__img">
                   <img src={item.img} alt="Alocasia 'Zebrina'" />

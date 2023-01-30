@@ -1,7 +1,7 @@
 import svg from "../../resourses/svg/sprites.svg";
 import item from "../../resourses/img/item.png";
 
-const Table = () => {
+const Table = ({items}) => {
    return (
       <div className="table">
          <ul className="table__list">
