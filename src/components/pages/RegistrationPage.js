@@ -17,7 +17,7 @@ const RegistrationPage = () => {
             dispatch(
                setUser({
                   email: user.email,
-                  id: user.uid,
+                  userUID: user.uid,
                   token: user.accessToken,
                })
             );
