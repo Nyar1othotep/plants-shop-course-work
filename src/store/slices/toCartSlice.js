@@ -8,6 +8,7 @@ const initialState = {
    itemDescr: null,
    itemPrice: null,
    itemQuantity: null,
+   itemCategory: null,
 };
 
 const toCartSlice = createSlice({
@@ -22,6 +23,7 @@ const toCartSlice = createSlice({
          state.itemDescr = action.payload.itemDescr;
          state.itemPrice = action.payload.itemPrice;
          state.itemQuantity = action.payload.itemQuantity;
+         state.itemCategory = action.payload.itemCategory;
       },
       setitemQuantity(state, action) {
          state.itemQuantity = action.payload.itemQuantity;

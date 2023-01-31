@@ -17,6 +17,19 @@
       max-width: 948px;
       width: 100%;
    }
+	&__empty-text {
+		font-weight: 600;
+		font-size: 20px;
+	}
+	&__btns {
+		margin: 30px 0px 0px 0px;
+      display: flex;
+   }
+   &__btn {
+      & svg {
+         transform: rotate(-90deg);
+      }
+   }
 }
 
 @media (max-width: 1140px) {
@@ -38,6 +51,14 @@
       &__heading {
          margin: 0px 0px 40px 0px;
       }
+   }
+}
+
+@media (max-width: 575px) {
+	.cart-page {
+		&__btns, &__btns a {
+			width: 100%;
+		}
    }
 }
 

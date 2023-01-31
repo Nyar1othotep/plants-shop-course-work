@@ -59,6 +59,7 @@ const PlantItem = () => {
                itemName: receivedData.map((item) => item.name).join(),
                itemDescr: receivedData.map((item) => item.description).join(),
                itemPrice: receivedData.map((item) => item.price).join(),
+               itemCategory: receivedData.map((item) => item.category).join(),
                itemQuantity: quantity,
             })
          );
@@ -120,7 +121,9 @@ const PlantItem = () => {
                      Quantity of goods: {item.quantity}
                   </div>
                   {item.quantity === 0 ? (
-                     <div className="plant-item__not-available">Not available</div>
+                     <div className="plant-item__not-available">
+                        Not available
+                     </div>
                   ) : (
                      <div className="plant-item__bottom">
                         <div className="plant-item__quantity quantity">
@@ -144,9 +147,7 @@ const PlantItem = () => {
                                  min={1}
                                  max={item.quantity}
                                  value={quantity}
-                                 onChange={() =>
-                                    alert("Please, use the buttons")
-                                 }
+                                 onChange={() => null}
                               />
                               <svg
                                  onClick={() =>

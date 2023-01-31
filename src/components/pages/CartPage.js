@@ -6,12 +6,16 @@ import { useHttp } from "hooks/http.hook";
 import { useAuth } from "hooks/useAuth.hook";
 import setContent from "utils/setContent";
 import svg from "../../resourses/svg/sprites.svg";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setItemId, setItemCategory } from "store/slices/itemSlice";
 
 const CartPage = () => {
+   const dispatch = useDispatch();
    const { isAuth, userUID } = useAuth();
    const [items, setItems] = useState([]);
-	const [isDelete, setIsDelete] = useState(false);
+   const [total, setTotal] = useState(null);
+   const [isDelete, setIsDelete] = useState(false);
    const usersCartCollectionRef = collection(db, "usersCart");
    const q = query(usersCartCollectionRef, where("userID", "==", userUID));
 
@@ -22,7 +26,7 @@ const CartPage = () => {
       // eslint-disable-next-line
    }, []);
 
-	useEffect(() => {
+   useEffect(() => {
       onRequest();
       // eslint-disable-next-line
    }, [isDelete]);
@@ -44,19 +48,59 @@ const CartPage = () => {
          const itemDoc = doc(db, "usersCart", id);
          await deleteDoc(itemDoc);
          alert("Item has been removed from cart");
-			setIsDelete(isDelete => !isDelete)
+         setIsDelete((isDelete) => !isDelete);
       } catch (error) {
          console.error(error.message);
       }
    };
 
    const renderItems = (arr) => {
-      const items = arr.map((item, i) => {
+      setTotal((total) => 0);
+
+      if (arr.length === 0) {
          return (
-            <li className="table__item item-table" key={item.i}>
-               <div className="item-table__img">
-                  <img src={item.itemImg} alt={item.itemName} />
+            <div className="cart-page__empty">
+               <p className="cart-page__empty-text">Your cart is empty</p>
+               <div className="cart-page__btns">
+                  <Link to={"/catalog"}>
+                     <button className="cart-page__btn plant-item__btn btn btn--border">
+                        <p>Go to catalog</p>
+                        <svg>
+                           <use href={`${svg}#sharp-arrow-down`}></use>
+                        </svg>
+                     </button>
+                  </Link>
                </div>
+            </div>
+         );
+      }
+      const items = arr.map((item, i) => {
+         setTotal(
+            (total) =>
+               (total += parseInt(
+                  (item.itemQuantity * item.itemPrice).toFixed(2)
+               ))
+         );
+         return (
+            <li className="table__item item-table" key={i}>
+               <Link
+                  to={"/catalog"}
+                  className="item-table__img"
+                  onClick={() => {
+                     dispatch(
+                        setItemId({
+                           id: item.itemID,
+                        })
+                     );
+                     dispatch(
+                        setItemCategory({
+                           category: item.itemCategory,
+                        })
+                     );
+                  }}
+               >
+                  <img src={item.itemImg} alt={item.itemName} />
+               </Link>
                <div className="item-table__right">
                   <div className="item-table__name">
                      <div className="item-table__title">{item.itemName}</div>
@@ -67,22 +111,10 @@ const CartPage = () => {
                   <div className="item-table__price">${item.itemPrice}</div>
                   <div className="item-table__quantity quantity">
                      {item.itemQuantity}
-                     {/* <div>
-                        <svg>
-                           <use href={`${svg}#minus`}></use>
-                        </svg>
-                        <input
-                           type="number"
-                           name="quantity"
-                           id="quantity"
-                           min={1}
-                        />
-                        <svg>
-                           <use href={`${svg}#plus`}></use>
-                        </svg>
-                     </div> */}
                   </div>
-                  <div className="item-table__total">${item.itemPrice}</div>
+                  <div className="item-table__total">
+                     ${(item.itemQuantity * item.itemPrice).toFixed(2)}
+                  </div>
                   <div
                      className="item-table__remove-icon"
                      onClick={() => deleteItem(item.id)}
@@ -104,6 +136,11 @@ const CartPage = () => {
       // eslint-disable-next-line
    }, [process]);
 
+   const totals = useMemo(() => {
+      return <Total total={total} />;
+      // eslint-disable-next-line
+   }, [total]);
+
    return isAuth ? (
       <div className="cart-page">
          <div className="cart-page__container _container">
@@ -113,7 +150,7 @@ const CartPage = () => {
                </div>
                <div className="cart-page__row">
                   <div className="table">{elements}</div>
-                  <Total />
+                  {totals}
                </div>
             </div>
          </div>
