@@ -1,5 +1,5 @@
 import Total from "../total/Total";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { db } from "../../firebase";
 import { collection, query, where, deleteDoc, doc } from "firebase/firestore";
 import { useHttp } from "hooks/http.hook";
@@ -9,15 +9,18 @@ import svg from "../../resourses/svg/sprites.svg";
 import { Navigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setItemId, setItemCategory } from "store/slices/itemSlice";
+import { setToOrder } from "store/slices/toOrderSlice";
 
 const CartPage = () => {
    const dispatch = useDispatch();
    const { isAuth, userUID } = useAuth();
    const [items, setItems] = useState([]);
-   const [total, setTotal] = useState(null);
+   const [total, setTotal] = useState(0);
+   const [order, setOrder] = useState([]);
    const [isDelete, setIsDelete] = useState(false);
    const usersCartCollectionRef = collection(db, "usersCart");
    const q = query(usersCartCollectionRef, where("userID", "==", userUID));
+   const shouldLog = useRef(true);
 
    const { request, process, setProcess } = useHttp();
 
@@ -31,6 +34,16 @@ const CartPage = () => {
       // eslint-disable-next-line
    }, [isDelete]);
 
+   useEffect(() => {
+      dispatch(
+         setToOrder({
+            userUID: userUID,
+            orderArray: order,
+         })
+      );
+      // eslint-disable-next-line
+   }, [order]);
+
    const onRequest = () => {
       request(q)
          .then(onItemsLoaded)
@@ -41,9 +54,40 @@ const CartPage = () => {
       setItems((items) =>
          data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
       );
+
+      if (shouldLog.current) {
+         shouldLog.current = false;
+         const array = [];
+         data.docs
+            .map((doc) => ({ ...doc.data(), id: doc.id }))
+            .forEach((element) => {
+               const {
+                  itemID,
+                  itemQuantity,
+                  itemImg,
+                  itemCategory,
+                  itemPrice,
+                  itemName,
+                  itemDescr,
+               } = element;
+               const obj = {
+                  itemTotal: parseInt(itemQuantity) * parseInt(itemPrice),
+                  itemID,
+                  itemQuantity,
+                  itemImg,
+                  itemCategory,
+                  itemPrice,
+                  itemName,
+                  itemDescr,
+               };
+               array.push(obj);
+               setOrder((order) => array);
+            });
+      }
    };
 
    const deleteItem = async (id) => {
+      shouldLog.current = true;
       try {
          const itemDoc = doc(db, "usersCart", id);
          await deleteDoc(itemDoc);
@@ -150,7 +194,7 @@ const CartPage = () => {
                </div>
                <div className="cart-page__row">
                   <div className="table">{elements}</div>
-                  {totals}
+                  {items.length !== 0 ? totals : null}
                </div>
             </div>
          </div>

@@ -28,8 +28,18 @@ const toCartSlice = createSlice({
       setitemQuantity(state, action) {
          state.itemQuantity = action.payload.itemQuantity;
       },
+      removeToCart(state) {
+         state.userID = null;
+         state.itemID = null;
+         state.itemImg = null;
+         state.itemName = null;
+         state.itemDescr = null;
+         state.itemPrice = null;
+         state.itemQuantity = null;
+         state.itemCategory = null;
+      },
    },
 });
 
-export const { setToCart, setitemQuantity } = toCartSlice.actions;
+export const { setToCart, setitemQuantity, removeToCart } = toCartSlice.actions;
 export default toCartSlice.reducer;

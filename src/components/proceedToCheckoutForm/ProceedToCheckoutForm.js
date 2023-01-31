@@ -2,7 +2,7 @@ import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { MyTextInput } from "../../utils/MyTextInput";
 
-const ProceedToCheckoutForm = () => {
+const ProceedToCheckoutForm = ({ handleClick }) => {
    return (
       <Formik
          initialValues={{
@@ -29,7 +29,15 @@ const ProceedToCheckoutForm = () => {
                .min(2, "Should be 2 chars minimum.")
                .required("Required field."),
          })}
-         onSubmit={(values) => console.log(JSON.stringify(values, null, 2))}
+         onSubmit={(values) =>
+            handleClick(
+               values.address,
+               values.office,
+               values.index,
+               values.name,
+               values.phoneNumber
+            )
+         }
       >
          <Form className="proceed-to-checkout-form form">
             <MyTextInput

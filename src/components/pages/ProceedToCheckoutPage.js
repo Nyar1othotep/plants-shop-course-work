@@ -1,11 +1,103 @@
 import ProceedToCheckoutForm from "../proceedToCheckoutForm/ProceedToCheckoutForm";
+import { useDispatch } from "react-redux";
+import { setToDelivery } from "store/slices/toOrderSlice";
+import { db } from "../../firebase";
+import {
+   collection,
+   addDoc,
+   deleteDoc,
+   query,
+   where,
+   doc,
+} from "firebase/firestore";
+import { store } from "store";
+import { useAuth } from "hooks/useAuth.hook";
+import { useHttp } from "hooks/http.hook";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { removeToCart } from "store/slices/toCartSlice";
+import { removeToOrderAndDelivery } from "store/slices/toOrderSlice";
 
 const ProceedToCheckoutPage = () => {
+   const dispatch = useDispatch();
+   const { userUID } = useAuth();
+   const navigate = useNavigate();
+   const [itemsID, setItemsID] = useState([]);
+   const usersOrderCollectionRef = collection(db, "usersOrder");
+   const usersCartCollectionRef = collection(db, "usersCart");
+   const q = query(usersCartCollectionRef, where("userID", "==", userUID));
+
+   const { request } = useHttp();
+
+   useEffect(() => {
+      onRequest();
+      // eslint-disable-next-line
+   }, []);
+
+   const onRequest = () => {
+      request(q).then(onItemsLoaded);
+   };
+
+   const onItemsLoaded = (data) => {
+      const loadedData = data.docs.map((doc) => ({
+         ...doc.data(),
+         id: doc.id,
+      }));
+      setItemsID((items) => loadedData.map((item) => item.id));
+   };
+
+   const addToCart = async () => {
+      try {
+         await addDoc(usersOrderCollectionRef, store.getState().toOrder);
+      } catch (error) {
+         console.error(error.message);
+      }
+   };
+
+   const deleteItems = async (itemsID) => {
+      const items = await itemsID;
+      try {
+         for (const itemID of items) {
+            const itemDoc = doc(db, "usersCart", itemID);
+            await deleteDoc(itemDoc);
+         }
+      } catch (error) {
+         console.error(error.message);
+      }
+   };
+
+   const handleProceedToCheckout = (
+      country,
+      office,
+      index,
+      firstAndLastName,
+      phone
+   ) => {
+      dispatch(
+         setToDelivery({
+            country: country,
+            office: office,
+            index: index,
+            firstAndLastName: firstAndLastName,
+            phone: phone,
+            date: new Date().toLocaleDateString(),
+            time: new Date().toLocaleTimeString(),
+            status: "Waiting for sending",
+         })
+      );
+
+      addToCart();
+      deleteItems(itemsID);
+      dispatch(removeToCart());
+      dispatch(removeToOrderAndDelivery());
+      navigate("/user/profile");
+   };
+
    return (
       <div className="proceed-to-checkout-page">
          <div className="proceed-to-checkout-page__container _container">
             <div className="proceed-to-checkout-page__body">
-               <ProceedToCheckoutForm />
+               <ProceedToCheckoutForm handleClick={handleProceedToCheckout} />
             </div>
          </div>
       </div>
