@@ -3,10 +3,12 @@ import { useAuth } from "hooks/useAuth.hook";
 import { removeUser } from "store/slices/userSlice";
 import { removeToCart } from "store/slices/toCartSlice";
 import { removeToOrderAndDelivery } from "store/slices/toOrderSlice";
+import { signOut, getAuth } from "firebase/auth";
 
 const Logout = () => {
    const dispatch = useDispatch();
    const { email } = useAuth();
+   const auth = getAuth();
 
    return (
       <div className="logout">
@@ -22,6 +24,7 @@ const Logout = () => {
                dispatch(removeUser());
                dispatch(removeToCart());
                dispatch(removeToOrderAndDelivery());
+               signOut(auth);
             }}
          >
             Log out

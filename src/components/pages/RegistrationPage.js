@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "store/slices/userSlice";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
+import { useAuth } from "hooks/useAuth.hook";
 
 const RegistrationPage = () => {
    const dispatch = useDispatch();
-	let navigate = useNavigate();
+   let navigate = useNavigate();
+   const { isAuth } = useAuth();
 
    const handleRegister = (email, password) => {
       const auth = getAuth();
@@ -21,12 +23,12 @@ const RegistrationPage = () => {
                   token: user.accessToken,
                })
             );
-				navigate("/user/profile");
+            navigate("/user/profile");
          })
          .catch(console.error);
    };
 
-   return (
+   return !isAuth ? (
       <div className="registration-page">
          <div className="registration-page__container _container">
             <div className="registration-page__body">
@@ -49,6 +51,8 @@ const RegistrationPage = () => {
             </div>
          </div>
       </div>
+   ) : (
+      <Navigate to="/user/profile" />
    );
 };
 

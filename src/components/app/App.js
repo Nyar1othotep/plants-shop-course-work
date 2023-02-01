@@ -1,9 +1,4 @@
-import {
-   HashRouter,
-   Route,
-   Routes,
-   NavLink,
-} from "react-router-dom";
+import { HashRouter, Route, Routes, NavLink } from "react-router-dom";
 import {
    MainPage,
    CatalogPage,
@@ -16,6 +11,10 @@ import {
    AdminPanelPage,
 } from "../pages";
 import Header from "../header/Header";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { setUser } from "store/slices/userSlice";
 
 // Временное решение
 const SiteMenu = () => {
@@ -57,6 +56,26 @@ const SiteMenu = () => {
 };
 
 const App = () => {
+   const dispatch = useDispatch();
+   const auth = getAuth();
+
+   useEffect(() => {
+      onAuthStateChanged(auth, (data) => {
+         try {
+            dispatch(
+               setUser({
+                  email: data.email,
+                  userUID: data.uid,
+                  token: data.accessToken,
+               })
+            );
+         } catch (error) {
+            return false;
+         }
+      });
+      // eslint-disable-next-line
+   }, []);
+
    return (
       <HashRouter>
          <div className="app">

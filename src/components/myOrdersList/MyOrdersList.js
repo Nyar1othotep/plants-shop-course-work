@@ -5,11 +5,12 @@ import setContent from "utils/setContent";
 import { useHttp } from "hooks/http.hook";
 import { useAuth } from "hooks/useAuth.hook";
 import svg from "../../resourses/svg/sprites.svg";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setItemId, setItemCategory } from "store/slices/itemSlice";
 
 const MyOrdersList = () => {
+   let navigate = useNavigate();
    const dispatch = useDispatch();
    const [items, setItems] = useState([]);
    const { userUID } = useAuth();
@@ -17,7 +18,8 @@ const MyOrdersList = () => {
    const q = query(
       usersOrderCollectionRef,
       where("userUID", "==", userUID),
-      orderBy("date", "desc")
+      orderBy("date", "desc"),
+		orderBy("time", "desc")
    );
 
    const { request, process, setProcess } = useHttp();
@@ -43,6 +45,10 @@ const MyOrdersList = () => {
 
    const focusOnItem = (id) => {
       itemRefs.current[id].classList.toggle("active");
+   };
+
+   const handleClick = (e) => {
+      e.currentTarget.classList.toggle("active");
    };
 
    const renderItems = (arr) => {
@@ -87,13 +93,14 @@ const MyOrdersList = () => {
                   <div className="item-my-orders-list-table__row">
                      <button
                         className="item-my-orders-list-table__btn btn btn--border"
-                        onClick={() => {
+                        onClick={(e) => {
                            focusOnItem(i);
+                           handleClick(e);
                         }}
                      >
                         <p>Details</p>
                         <svg>
-                           <use href={`${svg}#arrow-down`}></use>
+                           <use href={`${svg}#order-btn-arrow`}></use>
                         </svg>
                      </button>
                      <div className="item-my-orders-list-table__status">
@@ -101,39 +108,43 @@ const MyOrdersList = () => {
                      </div>
                   </div>
                </div>
-               <ul
+               <table
                   className="item-my-orders-list-table__order-list"
                   ref={(el) => (itemRefs.current[i] = el)}
                >
-                  {item.orderArray.map((item, i) => {
-                     return (
-                        <Link
-                           className="item-my-orders-list-table__order-list-item"
-                           key={i}
-                           onClick={() => {
-                              dispatch(
-                                 setItemId({
-                                    id: item.itemID,
-                                 })
-                              );
-                              dispatch(
-                                 setItemCategory({
-                                    category: item.itemCategory,
-                                 })
-                              );
-                           }}
-                           to="/catalog"
-                        >
-                           <div>{i + 1}</div>
-                           <img src={item.itemImg} alt={item.itemName} />
-                           <div>{item.itemName.substring(0, 15) + "..."}</div>
-                           <div>${item.itemPrice}</div>
-                           <div>{item.itemQuantity}</div>
-                           <div>${item.itemTotal}</div>
-                        </Link>
-                     );
-                  })}
-               </ul>
+                  <tbody>
+                     {item.orderArray.map((item, i) => {
+                        return (
+                           <tr
+                              key={i}
+                              onClick={() => {
+                                 dispatch(
+                                    setItemId({
+                                       id: item.itemID,
+                                    })
+                                 );
+                                 dispatch(
+                                    setItemCategory({
+                                       category: item.itemCategory,
+                                    })
+                                 );
+                                 navigate("/catalog");
+                              }}
+                           >
+                              <td>{i + 1}</td>
+
+                              <td>
+                                 <img src={item.itemImg} alt={item.itemName} />
+                              </td>
+                              <td>{item.itemName.substring(0, 15) + "..."}</td>
+                              <td>${item.itemPrice}</td>
+                              <td>{item.itemQuantity}</td>
+                              <td>${item.itemTotal}</td>
+                           </tr>
+                        );
+                     })}
+                  </tbody>
+               </table>
             </li>
          );
       });

@@ -9,3 +9,9 @@
       height: 80vh;
    }
 }
+
+@media (max-width: 768px) {
+   .proceed-to-checkout-page {
+      padding: 100px 0;
+   }
+}

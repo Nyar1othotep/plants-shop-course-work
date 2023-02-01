@@ -4,11 +4,13 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "store/slices/userSlice";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
+import { useAuth } from "hooks/useAuth.hook";
 
 const LoginPage = () => {
    const dispatch = useDispatch();
    let navigate = useNavigate();
+   const { isAuth } = useAuth();
 
    const handleLogin = (email, password) => {
       const auth = getAuth();
@@ -26,7 +28,7 @@ const LoginPage = () => {
          .catch(console.error);
    };
 
-   return (
+   return !isAuth ? (
       <div className="login-page">
          <div className="login-page__container _container">
             <div className="login-page__body">
@@ -45,6 +47,8 @@ const LoginPage = () => {
             </div>
          </div>
       </div>
+   ) : (
+      <Navigate to="/user/profile" />
    );
 };
 
