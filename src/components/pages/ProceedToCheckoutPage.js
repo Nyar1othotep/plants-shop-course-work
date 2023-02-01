@@ -14,13 +14,13 @@ import { store } from "store";
 import { useAuth } from "hooks/useAuth.hook";
 import { useHttp } from "hooks/http.hook";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Navigate } from "react-router-dom";
 import { removeToCart } from "store/slices/toCartSlice";
 import { removeToOrderAndDelivery } from "store/slices/toOrderSlice";
 
 const ProceedToCheckoutPage = () => {
    const dispatch = useDispatch();
-   const { userUID } = useAuth();
+   const { isAuth, userUID } = useAuth();
    const navigate = useNavigate();
    const [itemsID, setItemsID] = useState([]);
    const usersOrderCollectionRef = collection(db, "usersOrder");
@@ -93,7 +93,7 @@ const ProceedToCheckoutPage = () => {
       navigate("/user/profile");
    };
 
-   return (
+   return isAuth ? (
       <div className="proceed-to-checkout-page">
          <div className="proceed-to-checkout-page__container _container">
             <div className="proceed-to-checkout-page__body">
@@ -101,7 +101,9 @@ const ProceedToCheckoutPage = () => {
             </div>
          </div>
       </div>
-   );
+   ) : (
+		<Navigate to="/user/login" />
+	)
 };
 
 export default ProceedToCheckoutPage;
