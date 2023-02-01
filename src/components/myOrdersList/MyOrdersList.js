@@ -1,17 +1,24 @@
-import item from "../../resourses/img/item.png";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { db } from "../../firebase";
-import { collection, query, where } from "firebase/firestore";
+import { collection, query, where, orderBy } from "firebase/firestore";
 import setContent from "utils/setContent";
 import { useHttp } from "hooks/http.hook";
 import { useAuth } from "hooks/useAuth.hook";
+import svg from "../../resourses/svg/sprites.svg";
+import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setItemId, setItemCategory } from "store/slices/itemSlice";
 
 const MyOrdersList = () => {
+   const dispatch = useDispatch();
    const [items, setItems] = useState([]);
-   const [subItems, setSubItems] = useState([]);
    const { userUID } = useAuth();
    const usersOrderCollectionRef = collection(db, "usersOrder");
-   const q = query(usersOrderCollectionRef, where("userUID", "==", userUID));
+   const q = query(
+      usersOrderCollectionRef,
+      where("userUID", "==", userUID),
+      orderBy("date", "desc")
+   );
 
    const { request, process, setProcess } = useHttp();
 
@@ -30,16 +37,17 @@ const MyOrdersList = () => {
       setItems((items) =>
          data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
       );
-      setSubItems((subItems) =>
-         data.docs
-            .map((doc) => ({ ...doc.data(), id: doc.id }))
-            .map((item) => {
-               return item.orderArray;
-            })
-      );
    };
 
-   const renderItems = (arr, subArr) => {
+   const itemRefs = useRef([]);
+
+   const focusOnItem = (id) => {
+      itemRefs.current[id].classList.toggle("active");
+   };
+
+   const renderItems = (arr) => {
+      let total = 0;
+
       if (arr.length === 0) {
          return (
             <div className="my-orders-list-table__empty">
@@ -48,69 +56,97 @@ const MyOrdersList = () => {
          );
       }
 
-		let items;
-
-		// перезаписал на полседний у которого в массиве 5 элементов и еще надо дату и время вывести
-      subArr.map((item, i) => {
-         items = item.map((el, i) => {
-            return (
-               <li
-                  className="my-orders-list-table__item item-my-orders-list-table table__item item-table"
-                  key={el.i}
-               >
-                  <div className="item-my-orders-list-table__img item-table__img">
-                     <img src={el.itemImg} alt={el.itemName} />
-                  </div>
-                  <div className="item-my-orders-list-table__right item-table__right">
-                     <div className="item-my-orders-list-table__name item-table__name">
-                        <div className="item-my-orders-list-table__title item-table__title">
-                           {el.itemName}
-                        </div>
-                        <div className="item-my-orders-list-table__descr item-table__descr">
-                           {el.itemDescr}
-                        </div>
-                     </div>
-                     <div className="item-my-orders-list-table__price item-table__price">
-                        ${el.itemPrice}
-                     </div>
-                     <div className="item-my-orders-list-table__quantity item-table__quantity">
-                        {el.itemQuantity}
-                     </div>
-                     <div className="item-my-orders-list-table__total item-table__total">
-                        ${el.itemTotal}
-                     </div>
-                     <div className="item-my-orders-list-table__date-info">
-                        <div className="item-my-orders-list-table__date">
-                           01/01/2023
-                        </div>
-                        <div className="item-my-orders-list-table__time">
-                           10:47
-                        </div>
-                     </div>
-                     <div className="item-my-orders-list-table__order-status">
-                        Sent
-                     </div>
-                  </div>
-               </li>
-            );
+      const items = arr.map((item, i) => {
+         item.orderArray.map((item) => {
+            return (total += parseInt(item.itemTotal));
          });
+
+         return (
+            <li
+               className="my-orders-list-table__item item-my-orders-list-table"
+               key={item.id}
+            >
+               <div className="item-my-orders-list-table__item">
+                  <div className="item-my-orders-list-table__row">
+                     <div className="item-my-orders-list-table__order-id">
+                        Order ID: {item.id}
+                     </div>
+                     <div className="item-my-orders-list-table__date-time">
+                        <span>{item.date}</span>
+                        <span>{item.time}</span>
+                     </div>
+                  </div>
+                  <div className="item-my-orders-list-table__row">
+                     <div className="item-my-orders-list-table__quantity">
+                        Quantity: <span>{item.orderArray.length}</span>
+                     </div>
+                     <div className="item-my-orders-list-table__total">
+                        Total Amount: <span>${total}</span>
+                     </div>
+                  </div>
+                  <div className="item-my-orders-list-table__row">
+                     <button
+                        className="item-my-orders-list-table__btn btn btn--border"
+                        onClick={() => {
+                           focusOnItem(i);
+                        }}
+                     >
+                        <p>Details</p>
+                        <svg>
+                           <use href={`${svg}#arrow-down`}></use>
+                        </svg>
+                     </button>
+                     <div className="item-my-orders-list-table__status">
+                        Status: <span>{item.status}</span>
+                     </div>
+                  </div>
+               </div>
+               <ul
+                  className="item-my-orders-list-table__order-list"
+                  ref={(el) => (itemRefs.current[i] = el)}
+               >
+                  {item.orderArray.map((item, i) => {
+                     return (
+                        <Link
+                           className="item-my-orders-list-table__order-list-item"
+                           key={i}
+                           onClick={() => {
+                              dispatch(
+                                 setItemId({
+                                    id: item.itemID,
+                                 })
+                              );
+                              dispatch(
+                                 setItemCategory({
+                                    category: item.itemCategory,
+                                 })
+                              );
+                           }}
+                           to="/catalog"
+                        >
+                           <div>{i + 1}</div>
+                           <img src={item.itemImg} alt={item.itemName} />
+                           <div>{item.itemName.substring(0, 15) + "..."}</div>
+                           <div>${item.itemPrice}</div>
+                           <div>{item.itemQuantity}</div>
+                           <div>${item.itemTotal}</div>
+                        </Link>
+                     );
+                  })}
+               </ul>
+            </li>
+         );
       });
 
-      return (
-         <ul className="my-orders-list-table__list table__list">{items}</ul>
-      );
+      return <ul className="my-orders-list-table__list">{items}</ul>;
    };
 
    const elements = useMemo(() => {
-      return setContent(process, () => renderItems(items, subItems), items);
+      return setContent(process, () => renderItems(items), items);
       // eslint-disable-next-line
    }, [process]);
 
-   return (
-      <div className="my-orders-list-table table">
-         <ul className="my-orders-list-table__list table__list">{elements}</ul>
-      </div>
-   );
+   return <div className="my-orders-list-table">{elements}</div>;
 };
 
 export default MyOrdersList;

@@ -10,6 +10,7 @@ import { Navigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setItemId, setItemCategory } from "store/slices/itemSlice";
 import { setToOrder } from "store/slices/toOrderSlice";
+import { removeToOrderAndDelivery } from "store/slices/toOrderSlice";
 
 const CartPage = () => {
    const dispatch = useDispatch();
@@ -93,6 +94,7 @@ const CartPage = () => {
          await deleteDoc(itemDoc);
          alert("Item has been removed from cart");
          setIsDelete((isDelete) => !isDelete);
+         dispatch(removeToOrderAndDelivery());
       } catch (error) {
          console.error(error.message);
       }
