@@ -1,5 +1,5 @@
 import {
-   HashRouter,
+   BrowserRouter as Router,
    Route,
    Routes,
    NavLink,
@@ -58,7 +58,7 @@ const SiteMenu = () => {
 
 const App = () => {
    return (
-      <HashRouter>
+      <Router>
          <div className="app">
             <Header />
             <SiteMenu />
@@ -85,7 +85,7 @@ const App = () => {
                </Routes>
             </main>
          </div>
-      </HashRouter>
+      </Router>
    );
 };
 export default App;
