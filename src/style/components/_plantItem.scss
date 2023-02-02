@@ -60,6 +60,12 @@
          height: 24px;
       }
    }
+	&__quantity {
+		span {
+			width: 30px;
+			text-align: center;
+		}
+	}
 }
 
 @media (max-width: 1440px) {

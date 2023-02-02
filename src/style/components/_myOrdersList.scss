@@ -3,17 +3,21 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      margin: 0px 0px 15px 0px;
+      margin: 0px 0px 10px 0px;
       & svg {
-			margin: 0px 10px 0px 0px;
+         margin: 0px 10px 0px 0px;
          width: 24px;
          height: 24px;
       }
       & label {
-			display: flex;
-			align-items: center;
+         display: flex;
+         align-items: center;
          margin: 0px 20px 0px 0px;
          font-weight: 600;
+      }
+      & select {
+         padding: 5px 0;
+         cursor: pointer;
       }
    }
 }

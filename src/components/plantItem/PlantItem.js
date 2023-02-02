@@ -128,7 +128,7 @@ const PlantItem = ({ handelClick }) => {
                   ) : (
                      <div className="plant-item__bottom">
                         <div className="plant-item__quantity quantity">
-                           <label htmlFor="quantity">Quantity:</label>
+                           <label>Quantity:</label>
                            <div>
                               <svg
                                  onClick={() =>
@@ -141,15 +141,7 @@ const PlantItem = ({ handelClick }) => {
                               >
                                  <use href={`${svg}#minus`}></use>
                               </svg>
-                              <input
-                                 type="number"
-                                 name="quantity"
-                                 id="quantity"
-                                 min={1}
-                                 max={item.quantity}
-                                 value={quantity}
-                                 onChange={() => null}
-                              />
+                              <span>{quantity}</span>
                               <svg
                                  onClick={() =>
                                     quantity < item.quantity

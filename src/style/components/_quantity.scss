@@ -7,15 +7,15 @@
    & div {
       display: flex;
       align-items: center;
+      padding: 5px 10px;
+      border: 1px solid $black;
+      border-radius: 25px;
       & > *:not(:last-child) {
          margin: 0px 5px 0px 0px;
       }
-		& > *:last-child {
-         margin: 0px 0px 0px 10px;
-      }
    }
    & svg {
-		padding: 5px;
+      padding: 5px;
       width: 35px;
       height: 35px;
       cursor: pointer;
@@ -23,19 +23,13 @@
    & > *:not(:last-child) {
       margin: 0px 25px 0px 0px;
    }
-   & input {
-      padding: 5px 0;
-      width: 46px;
-      text-align: center;
-      border-bottom: 2px solid $black;
-   }
-   & input[type="number"]::-webkit-inner-spin-button {
-      -webkit-appearance: none;
-	}
 }
 
 @media (max-width: 768px) {
    .quantity {
       font-size: 16px;
+		& div {
+			padding: 2px 5px;
+		}
    }
 }

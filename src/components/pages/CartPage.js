@@ -152,7 +152,7 @@ const CartPage = ({ handelClick }) => {
                      </div>
                   </div>
                   <div className="item-table__price">${item.itemPrice}</div>
-                  <div className="item-table__quantity quantity">
+                  <div className="item-table__quantity">
                      {item.itemQuantity}
                   </div>
                   <div className="item-table__total">

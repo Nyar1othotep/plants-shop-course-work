@@ -9,6 +9,8 @@ import {
    query,
    where,
    doc,
+   updateDoc,
+   increment,
 } from "firebase/firestore";
 import { store } from "store";
 import { useAuth } from "hooks/useAuth.hook";
@@ -68,6 +70,22 @@ const ProceedToCheckoutPage = ({ handelClick }) => {
       }
    };
 
+   const updateItems = async (orderArray) => {
+      const array = await orderArray;
+      try {
+         array.forEach(async (item) => {
+            const itemDoc = doc(db, "items", item.itemID);
+            const updateFields = {
+               numberOfOrders: increment(item.itemQuantity),
+               quantity: increment(-item.itemQuantity),
+            };
+            await updateDoc(itemDoc, updateFields);
+         });
+      } catch (error) {
+         console.error(error.message);
+      }
+   };
+
    const handleProceedToCheckout = (
       country,
       office,
@@ -89,6 +107,7 @@ const ProceedToCheckoutPage = ({ handelClick }) => {
       );
 
       addToCart();
+      updateItems(orderArray);
       deleteItems(itemsID);
       dispatch(removeToCart());
       dispatch(removeToOrderAndDelivery());
