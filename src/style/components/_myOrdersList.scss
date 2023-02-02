@@ -1,3 +1,23 @@
+.my-orders-list-table {
+   &__filter {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin: 0px 0px 15px 0px;
+      & svg {
+			margin: 0px 10px 0px 0px;
+         width: 24px;
+         height: 24px;
+      }
+      & label {
+			display: flex;
+			align-items: center;
+         margin: 0px 20px 0px 0px;
+         font-weight: 600;
+      }
+   }
+}
+
 .my-orders-list-table__list {
    & > *:not(:last-child) {
       margin: 0px 0px 40px 0px;
@@ -48,20 +68,28 @@
          transform: rotate(180deg);
       }
    }
+   &__btn-cancel {
+      margin: 30px 0px 0px auto;
+   }
    &__order-list {
       display: none;
       margin: 20px 0px 0px 0px;
       max-width: 600px;
       overflow-x: auto;
+      border-spacing: 0px 5px;
       &.active {
          display: block;
       }
-      & tr {
+      & thead tr {
+         font-size: 15px;
+         text-align: center;
+      }
+      & tbody tr {
          font-size: 15px;
          color: $black;
          transition: all 0.3s ease 0s;
          border-radius: 5px;
-			cursor: pointer;
+         cursor: pointer;
          &:hover {
             background: $order-list-background;
          }

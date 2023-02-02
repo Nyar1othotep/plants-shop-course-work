@@ -12,7 +12,7 @@ import { setItemId, setItemCategory } from "store/slices/itemSlice";
 import { setToOrder } from "store/slices/toOrderSlice";
 import { removeToOrderAndDelivery } from "store/slices/toOrderSlice";
 
-const CartPage = () => {
+const CartPage = ({ handelClick }) => {
    const dispatch = useDispatch();
    const { isAuth, userUID } = useAuth();
    const [items, setItems] = useState([]);
@@ -22,13 +22,9 @@ const CartPage = () => {
    const usersCartCollectionRef = collection(db, "usersCart");
    const q = query(usersCartCollectionRef, where("userID", "==", userUID));
    const shouldLog = useRef(true);
+   let tempTotal = 0;
 
    const { request, process, setProcess } = useHttp();
-
-   useEffect(() => {
-      onRequest();
-      // eslint-disable-next-line
-   }, []);
 
    useEffect(() => {
       onRequest();
@@ -72,7 +68,9 @@ const CartPage = () => {
                   itemDescr,
                } = element;
                const obj = {
-                  itemTotal: parseInt(itemQuantity) * parseInt(itemPrice),
+                  itemTotal:
+                     parseFloat(itemQuantity).toFixed(2) *
+                     parseFloat(itemPrice).toFixed(2),
                   itemID,
                   itemQuantity,
                   itemImg,
@@ -92,6 +90,7 @@ const CartPage = () => {
       try {
          const itemDoc = doc(db, "usersCart", id);
          await deleteDoc(itemDoc);
+         handelClick(userUID);
          alert("Item has been removed from cart");
          setIsDelete((isDelete) => !isDelete);
          dispatch(removeToOrderAndDelivery());
@@ -101,7 +100,7 @@ const CartPage = () => {
    };
 
    const renderItems = (arr) => {
-      setTotal((total) => 0);
+      tempTotal = 0;
 
       if (arr.length === 0) {
          return (
@@ -121,12 +120,10 @@ const CartPage = () => {
          );
       }
       const items = arr.map((item, i) => {
-         setTotal(
-            (total) =>
-               (total += parseInt(
-                  (item.itemQuantity * item.itemPrice).toFixed(2)
-               ))
+         tempTotal += parseFloat(
+            (item.itemQuantity * item.itemPrice).toFixed(2)
          );
+
          return (
             <li className="table__item item-table" key={i}>
                <Link
@@ -163,7 +160,14 @@ const CartPage = () => {
                   </div>
                   <div
                      className="item-table__remove-icon"
-                     onClick={() => deleteItem(item.id)}
+                     onClick={() => {
+                        if (
+                           window.confirm(
+                              "Are you sure you want to cancel this item?"
+                           )
+                        )
+                           deleteItem(item.id);
+                     }}
                   >
                      <svg>
                         <use href={`${svg}#remove`}></use>
@@ -173,6 +177,8 @@ const CartPage = () => {
             </li>
          );
       });
+
+      setTotal((total) => tempTotal);
 
       return <ul className="table__list">{items}</ul>;
    };

@@ -1,5 +1,5 @@
 import ProceedToCheckoutForm from "../proceedToCheckoutForm/ProceedToCheckoutForm";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setToDelivery } from "store/slices/toOrderSlice";
 import { db } from "../../firebase";
 import {
@@ -18,11 +18,12 @@ import { useNavigate, Navigate } from "react-router-dom";
 import { removeToCart } from "store/slices/toCartSlice";
 import { removeToOrderAndDelivery } from "store/slices/toOrderSlice";
 
-const ProceedToCheckoutPage = () => {
+const ProceedToCheckoutPage = ({ handelClick }) => {
    const dispatch = useDispatch();
    const { isAuth, userUID } = useAuth();
    const navigate = useNavigate();
    const [itemsID, setItemsID] = useState([]);
+   const { orderArray } = useSelector((state) => state.toOrder);
    const usersOrderCollectionRef = collection(db, "usersOrder");
    const usersCartCollectionRef = collection(db, "usersCart");
    const q = query(usersCartCollectionRef, where("userID", "==", userUID));
@@ -61,6 +62,7 @@ const ProceedToCheckoutPage = () => {
             const itemDoc = doc(db, "usersCart", itemID);
             await deleteDoc(itemDoc);
          }
+         handelClick(userUID);
       } catch (error) {
          console.error(error.message);
       }
@@ -93,7 +95,7 @@ const ProceedToCheckoutPage = () => {
       navigate("/user/profile");
    };
 
-   return isAuth ? (
+   return isAuth && orderArray !== [] && orderArray !== null ? (
       <div className="proceed-to-checkout-page">
          <div className="proceed-to-checkout-page__container _container">
             <div className="proceed-to-checkout-page__body">
@@ -102,8 +104,8 @@ const ProceedToCheckoutPage = () => {
          </div>
       </div>
    ) : (
-		<Navigate to="/user/login" />
-	)
+      <Navigate to="/user/login" />
+   );
 };
 
 export default ProceedToCheckoutPage;

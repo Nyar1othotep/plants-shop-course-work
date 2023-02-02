@@ -1,5 +1,6 @@
 import bg from "../../resourses/img/main-page-bg.jpg";
 import svg from "../../resourses/svg/sprites.svg";
+import AnchorLink from "react-anchor-link-smooth-scroll";
 
 const Preview = () => {
    return (
@@ -22,14 +23,17 @@ const Preview = () => {
                      <use href={`${svg}#frame`}></use>
                   </svg>
                </div>
-               <div className="preview-page__frame preview-page__btn-next">
+               <AnchorLink 
+                  href="#description"
+                  className="preview-page__frame preview-page__btn-next"
+               >
                   <span>
-                     N <br /> e <br /> x <br /> t
+                     Next
                   </span>
                   <svg>
                      <use href={`${svg}#arrow-next`}></use>
                   </svg>
-               </div>
+               </AnchorLink>
                <div className="preview-page__text">
                   <h1>
                      Plants <br /> shop

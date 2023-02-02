@@ -1,6 +1,13 @@
 import { useState, useEffect, useMemo, useRef } from "react";
 import { db } from "../../firebase";
-import { collection, query, where, orderBy } from "firebase/firestore";
+import {
+   collection,
+   query,
+   where,
+   orderBy,
+   deleteDoc,
+   doc,
+} from "firebase/firestore";
 import setContent from "utils/setContent";
 import { useHttp } from "hooks/http.hook";
 import { useAuth } from "hooks/useAuth.hook";
@@ -8,18 +15,22 @@ import svg from "../../resourses/svg/sprites.svg";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setItemId, setItemCategory } from "store/slices/itemSlice";
+import { Link } from "react-router-dom";
 
 const MyOrdersList = () => {
    let navigate = useNavigate();
    const dispatch = useDispatch();
    const [items, setItems] = useState([]);
+   const [filter, setFilter] = useState("desc");
    const { userUID } = useAuth();
+   const shouldLog = useRef(true);
+   const [isDelete, setIsDelete] = useState(false);
    const usersOrderCollectionRef = collection(db, "usersOrder");
    const q = query(
       usersOrderCollectionRef,
       where("userUID", "==", userUID),
-      orderBy("date", "desc"),
-		orderBy("time", "desc")
+      orderBy("date", filter),
+      orderBy("time", filter)
    );
 
    const { request, process, setProcess } = useHttp();
@@ -27,7 +38,7 @@ const MyOrdersList = () => {
    useEffect(() => {
       onRequest();
       // eslint-disable-next-line
-   }, []);
+   }, [isDelete, filter]);
 
    const onRequest = () => {
       request(q)
@@ -51,20 +62,44 @@ const MyOrdersList = () => {
       e.currentTarget.classList.toggle("active");
    };
 
+   const deleteItem = async (id) => {
+      shouldLog.current = true;
+      try {
+         const itemDoc = doc(db, "usersOrder", id);
+         await deleteDoc(itemDoc);
+         alert("Item has been removed from orders");
+         setIsDelete((isDelete) => !isDelete);
+      } catch (error) {
+         console.error(error.message);
+      }
+   };
+
    const renderItems = (arr) => {
       let total = 0;
 
       if (arr.length === 0) {
          return (
-            <div className="my-orders-list-table__empty">
-               FUCKING NOTHING, YOU`RE LITTLE BITCH!!!!!
+            <div className="my-orders-list__empty cart-page__empty">
+               <p className="my-orders-list__empty-text cart-page__empty-text">
+                  You haven't ordered anything yet
+               </p>
+               <div className="my-orders-list__btns cart-page__btns">
+                  <Link to={"/catalog"}>
+                     <button className="my-orders-list__btn cart-page__btn plant-item__btn btn btn--border">
+                        <p>Go to catalog</p>
+                        <svg>
+                           <use href={`${svg}#sharp-arrow-down`}></use>
+                        </svg>
+                     </button>
+                  </Link>
+               </div>
             </div>
          );
       }
 
       const items = arr.map((item, i) => {
          item.orderArray.map((item) => {
-            return (total += parseInt(item.itemTotal));
+            return (total += parseFloat(item.itemTotal));
          });
 
          return (
@@ -87,7 +122,7 @@ const MyOrdersList = () => {
                         Quantity: <span>{item.orderArray.length}</span>
                      </div>
                      <div className="item-my-orders-list-table__total">
-                        Total Amount: <span>${total}</span>
+                        Total Amount: <span>${total.toFixed(2)}</span>
                      </div>
                   </div>
                   <div className="item-my-orders-list-table__row">
@@ -112,6 +147,16 @@ const MyOrdersList = () => {
                   className="item-my-orders-list-table__order-list"
                   ref={(el) => (itemRefs.current[i] = el)}
                >
+                  <thead>
+                     <tr>
+                        <th>№</th>
+                        <th>Img</th>
+                        <th>Name</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                     </tr>
+                  </thead>
                   <tbody>
                      {item.orderArray.map((item, i) => {
                         return (
@@ -145,6 +190,24 @@ const MyOrdersList = () => {
                      })}
                   </tbody>
                </table>
+               {item.status === "Waiting for sending" ? (
+                  <button
+                     className="item-my-orders-list-table__btn item-my-orders-list-table__btn-cancel btn btn--border"
+                     onClick={() => {
+                        if (
+                           window.confirm(
+                              "Are you sure you want to cancel this order?"
+                           )
+                        )
+                           deleteItem(item.id);
+                     }}
+                  >
+                     <p>Cancel order</p>
+                     <svg>
+                        <use href={`${svg}#remove`}></use>
+                     </svg>
+                  </button>
+               ) : null}
             </li>
          );
       });
@@ -157,7 +220,30 @@ const MyOrdersList = () => {
       // eslint-disable-next-line
    }, [process]);
 
-   return <div className="my-orders-list-table">{elements}</div>;
+   return (
+      <div className="my-orders-list-table">
+         <div className="my-orders-list-table__filter">
+            <label htmlFor="filter">
+               <svg>
+                  <use href={`${svg}#filter`}></use>
+               </svg>
+               <p>Filter by:</p>
+            </label>
+            <select
+               name="filter"
+               id="filter"
+               value={filter}
+               onChange={(e) => {
+                  setFilter((filter) => e.target.value);
+               }}
+            >
+               <option value="desc">Descending</option>
+               <option value="asc">Ascending</option>
+            </select>
+         </div>
+         {elements}
+      </div>
+   );
 };
 
 export default MyOrdersList;

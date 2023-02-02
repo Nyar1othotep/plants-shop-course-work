@@ -10,11 +10,18 @@ import {
    ProfilePage,
    AdminPanelPage,
 } from "../pages";
+import { db } from "../../firebase";
 import Header from "../header/Header";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { setUser } from "store/slices/userSlice";
+import {
+   collection,
+   query,
+   where,
+   getCountFromServer,
+} from "firebase/firestore";
 
 // Временное решение
 const SiteMenu = () => {
@@ -58,6 +65,8 @@ const SiteMenu = () => {
 const App = () => {
    const dispatch = useDispatch();
    const auth = getAuth();
+   const [countCart, setCountCart] = useState(0);
+   const usersCartCollectionRef = collection(db, "usersCart");
 
    useEffect(() => {
       onAuthStateChanged(auth, (data) => {
@@ -69,6 +78,7 @@ const App = () => {
                   token: data.accessToken,
                })
             );
+            getCountOfItemsFromCart(data.uid);
          } catch (error) {
             return false;
          }
@@ -76,20 +86,43 @@ const App = () => {
       // eslint-disable-next-line
    }, []);
 
+   const getCountOfItemsFromCart = async (userUID) => {
+      const query_ = query(
+         usersCartCollectionRef,
+         where("userID", "==", userUID)
+      );
+      const snapshot = await getCountFromServer(query_);
+      setCountCart((countCart) => snapshot.data().count);
+   };
+
    return (
       <HashRouter>
          <div className="app">
-            <Header />
+            <Header countCart={countCart} />
             <SiteMenu />
             <main>
                <Routes>
                   <Route path="/" element={<MainPage />} />
-                  <Route path="/catalog" element={<CatalogPage />} />
+                  <Route
+                     path="/catalog"
+                     element={
+                        <CatalogPage handelClick={getCountOfItemsFromCart} />
+                     }
+                  />
                   <Route path="/about" element={<AboutPage />} />
-                  <Route path="/cart" element={<CartPage />} />
+                  <Route
+                     path="/cart"
+                     element={
+                        <CartPage handelClick={getCountOfItemsFromCart} />
+                     }
+                  />
                   <Route
                      path="/cart/proceed-to-checkout"
-                     element={<ProceedToCheckoutPage />}
+                     element={
+                        <ProceedToCheckoutPage
+                           handelClick={getCountOfItemsFromCart}
+                        />
+                     }
                   />
                   <Route path="/user/login" element={<LoginPage />} />
                   <Route

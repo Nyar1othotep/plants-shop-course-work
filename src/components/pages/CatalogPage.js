@@ -2,7 +2,7 @@ import ItemsFilter from "../itemsFilter/ItemsFilter";
 import ItemsList from "../itemsList/ItemsList";
 import PlantItem from "../plantItem/PlantItem";
 
-const CatalogPage = () => {
+const CatalogPage = ({ handelClick }) => {
    return (
       <div className="catalog">
          <div className="catalog__container _container">
@@ -10,7 +10,7 @@ const CatalogPage = () => {
                <ItemsFilter />
                <div className="catalog__row">
                   <ItemsList />
-                  <PlantItem />
+                  <PlantItem handelClick={handelClick} />
                </div>
             </div>
          </div>

@@ -9,7 +9,7 @@ import { useAuth } from "hooks/useAuth.hook";
 import { setToCart, setitemQuantity } from "store/slices/toCartSlice";
 import { store } from "store";
 
-const PlantItem = () => {
+const PlantItem = ({ handelClick }) => {
    const dispatch = useDispatch();
    const { id } = useSelector((state) => state.item);
    const [item, setItem] = useState([]);
@@ -69,6 +69,7 @@ const PlantItem = () => {
    const addToCart = async () => {
       try {
          await addDoc(usersCartCollectionRef, store.getState().toCart);
+         handelClick(userUID);
          alert("This product was added to the cart");
       } catch (error) {
          console.error(error.message);

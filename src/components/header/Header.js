@@ -5,7 +5,7 @@ import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useAuth } from "hooks/useAuth.hook";
 
-const Header = () => {
+const Header = ({ countCart }) => {
    const [isOpenBurger, setIsOpenBurger] = useState(false);
    const { isAuth } = useAuth();
 
@@ -79,7 +79,7 @@ const Header = () => {
                <div className="header__right">
                   <nav className="header__account-menu account-menu-header">
                      <ul className="account-menu-header__list">
-                        <li className="account-menu-header__item">
+                        <li className="account-menu-header__item basket">
                            <NavLink
                               to="/cart"
                               className="account-menu-header__link"
@@ -88,6 +88,11 @@ const Header = () => {
                                  <use href={`${svg}#basket`}></use>
                               </svg>
                            </NavLink>
+                           {countCart !== 0 ? (
+                              <div className="account-menu-header__basket-count">
+                                 {countCart}
+                              </div>
+                           ) : null}
                         </li>
                         <li className="account-menu-header__item">
                            <NavLink

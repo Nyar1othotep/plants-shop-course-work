@@ -13,6 +13,7 @@ body {
    font-weight: 400;
    font-size: 18px;
    @include lh(22, 18);
+	scroll-behavior: smooth;
 }
 
 h1 {

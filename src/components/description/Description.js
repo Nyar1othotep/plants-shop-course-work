@@ -4,6 +4,7 @@ const Description = () => {
    return (
       <section
          className="section description"
+			id="description"
          style={{
             background: `url(${branch}) right center no-repeat`,
             backgroundSize: "",

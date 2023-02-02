@@ -7,14 +7,14 @@ const Total = ({total}) => {
             <li className="total__column">
                <div className="total__item item-total">
                   <div className="item-total__title">Subtotal:</div>
-                  <div className="item-total__money">${total}</div>
+                  <div className="item-total__money">${total.toFixed(2)}</div>
                </div>
             </li>
             <li className="total__column">
                <div className="total__item item-total">
                   <div className="item-total__title">Grand total:</div>
                   <div className="item-total__money item-total__money--grand">
-                     ${total}
+                     ${total.toFixed(2)}
                   </div>
                </div>
             </li>
