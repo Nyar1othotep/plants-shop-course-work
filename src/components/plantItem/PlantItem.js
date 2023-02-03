@@ -1,15 +1,16 @@
 import svg from "../../resourses/svg/sprites.svg";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { db } from "../../firebase";
 import { collection, query, where, addDoc } from "firebase/firestore";
 import { useHttp } from "hooks/http.hook";
-import setContent from "utils/setContent";
 import { useSelector, useDispatch } from "react-redux";
 import { useAuth } from "hooks/useAuth.hook";
 import { setToCart, setitemQuantity } from "store/slices/toCartSlice";
 import { store } from "store";
+import Spinner from "components/spinner/Spinner";
+import ErrorMessage from "components/errorMessage/ErrorMessage";
 
-const PlantItem = ({ handelClick }) => {
+const PlantItem = ({ handelClick, isReAuth }) => {
    const dispatch = useDispatch();
    const { id } = useSelector((state) => state.item);
    const [item, setItem] = useState([]);
@@ -24,7 +25,7 @@ const PlantItem = ({ handelClick }) => {
    useEffect(() => {
       onRequest();
       // eslint-disable-next-line
-   }, [id]);
+   }, [id, isReAuth]);
 
    useEffect(() => {
       if (isAuth) {
@@ -43,23 +44,23 @@ const PlantItem = ({ handelClick }) => {
          .then(() => setProcess("confirmed"));
    };
 
-   const onItemLoaded = (data) => {
-      const receivedData = data.docs.map((doc) => ({
+   const onItemLoaded = async (data) => {
+      const receivedData = await data.docs.map((doc) => ({
          ...doc.data(),
          id: doc.id,
-      }));
+      }))[0];
       setQuantity((quantity) => 1);
       setItem((item) => receivedData);
       if (isAuth) {
          dispatch(
             setToCart({
                userID: userUID,
-               itemID: receivedData.map((item) => item.id).join(),
-               itemImg: receivedData.map((item) => item.img).join(),
-               itemName: receivedData.map((item) => item.name).join(),
-               itemDescr: receivedData.map((item) => item.description).join(),
-               itemPrice: receivedData.map((item) => item.price).join(),
-               itemCategory: receivedData.map((item) => item.category).join(),
+               itemID: receivedData.id,
+               itemImg: receivedData.img,
+               itemName: receivedData.name,
+               itemDescr: receivedData.description,
+               itemPrice: receivedData.price,
+               itemCategory: receivedData.category,
                itemQuantity: quantity,
             })
          );
@@ -76,10 +77,26 @@ const PlantItem = ({ handelClick }) => {
       }
    };
 
-   const renderItems = (arr) => {
-      const items = arr.map((item) => {
-         return (
-            <div className="plant-item" key={item.id}>
+   const onDecreace = () => {
+      quantity > 1
+         ? setQuantity((quantity) => parseInt(quantity - 1))
+         : alert("You can`t decreace anymore.");
+   };
+
+   const onIncreace = (itemQuantity) => {
+      quantity < itemQuantity
+         ? setQuantity((quantity) => parseInt(quantity + 1))
+         : alert("You can`t increace anymore.");
+   };
+
+   return (
+      <>
+         {process === "loading" ? (
+            <Spinner />
+         ) : process === "error" ? (
+            <ErrorMessage />
+         ) : (
+            <div className="plant-item">
                <div className="plant-item__content">
                   <h3 className="plant-item__title">{item.name}</h3>
                   <div className="plant-item__info">
@@ -131,25 +148,25 @@ const PlantItem = ({ handelClick }) => {
                            <label>Quantity:</label>
                            <div>
                               <svg
-                                 onClick={() =>
-                                    quantity > 1
-                                       ? setQuantity((quantity) =>
-                                            parseInt(quantity - 1)
-                                         )
-                                       : alert("You can`t decreace anymore.")
-                                 }
+                                 tabIndex={0}
+                                 onClick={onDecreace}
+                                 onKeyPress={(e) => {
+                                    if (e.key === " " || e.key === "Enter") {
+                                       onDecreace();
+                                    }
+                                 }}
                               >
                                  <use href={`${svg}#minus`}></use>
                               </svg>
                               <span>{quantity}</span>
                               <svg
-                                 onClick={() =>
-                                    quantity < item.quantity
-                                       ? setQuantity((quantity) =>
-                                            parseInt(quantity + 1)
-                                         )
-                                       : alert("You can`t increace anymore.")
-                                 }
+                                 tabIndex={0}
+                                 onClick={() => onIncreace(item.quantity)}
+                                 onKeyPress={(e) => {
+                                    if (e.key === " " || e.key === "Enter") {
+                                       onIncreace(item.quantity);
+                                    }
+                                 }}
                               >
                                  <use href={`${svg}#plus`}></use>
                               </svg>
@@ -179,19 +196,9 @@ const PlantItem = ({ handelClick }) => {
                   <img src={item.img} alt="Alocasia 'Zebrina'" />
                </div>
             </div>
-         );
-      });
-
-      return <>{items}</>;
-   };
-
-   const elements = useMemo(() => {
-      return setContent(process, () => renderItems(item), item);
-      // этот прикол надо будет исправить, если возникнут проблемы с долгим перерендорингом
-      // eslint-disable-next-line
-   }, [process, quantity]);
-
-   return <>{elements}</>;
+         )}
+      </>
+   );
 };
 
 export default PlantItem;

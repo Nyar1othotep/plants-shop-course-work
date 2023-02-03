@@ -1,6 +1,8 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 
-const Total = ({total}) => {
+
+const Total = memo(({ total }) => {
    return (
       <div className="total">
          <ul className="total__row">
@@ -26,6 +28,6 @@ const Total = ({total}) => {
          </Link>
       </div>
    );
-};
+});
 
 export default Total;

@@ -66,6 +66,7 @@ const App = () => {
    const dispatch = useDispatch();
    const auth = getAuth();
    const [countCart, setCountCart] = useState(0);
+   const [isReAuth, setIsReAuth] = useState("");
    const usersCartCollectionRef = collection(db, "usersCart");
 
    useEffect(() => {
@@ -79,6 +80,7 @@ const App = () => {
                })
             );
             getCountOfItemsFromCart(data.uid);
+            setIsReAuth((isReAuth) => data.uid);
          } catch (error) {
             return false;
          }
@@ -106,7 +108,10 @@ const App = () => {
                   <Route
                      path="/catalog"
                      element={
-                        <CatalogPage handelClick={getCountOfItemsFromCart} />
+                        <CatalogPage
+                           handelClick={getCountOfItemsFromCart}
+                           isReAuth={isReAuth}
+                        />
                      }
                   />
                   <Route path="/about" element={<AboutPage />} />

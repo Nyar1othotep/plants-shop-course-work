@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { db } from "../../firebase";
 import { collection, query, where } from "firebase/firestore";
 import { useHttp } from "hooks/http.hook";
@@ -12,9 +12,7 @@ const ItemsList = () => {
    const [items, setItems] = useState([]);
    const itemsCollectionRef = collection(db, "items");
    const q = query(itemsCollectionRef, where("category", "==", category));
-
    const { request, process, setProcess } = useHttp();
-
    useEffect(() => {
       onRequest();
       // eslint-disable-next-line
@@ -32,21 +30,39 @@ const ItemsList = () => {
       );
    };
 
+   const onItem = (itemID, index) => {
+      dispatch(
+         setItemId({
+            id: itemID,
+         })
+      );
+      focusOnItem(index);
+   };
+
+   const itemRefs = useRef([]);
+
+   const focusOnItem = (id) => {
+      itemRefs.current.forEach((item) => item.classList.remove("active"));
+      itemRefs.current[id].classList.add("active");
+      itemRefs.current[id].focus();
+   };
+
    const renderItems = (arr) => {
       const clazz = "items-list__item item-items-list";
 
-      const items = arr.map((item) => {
+      const items = arr.map((item, i) => {
          return (
             <li className="items-list__column" key={item.id}>
                <div
                   className={id === item.id ? clazz + " active" : clazz}
-                  onClick={() =>
-                     dispatch(
-                        setItemId({
-                           id: item.id,
-                        })
-                     )
-                  }
+                  tabIndex={0}
+                  ref={(el) => (itemRefs.current[i] = el)}
+                  onClick={() => onItem(item.id, i)}
+                  onKeyPress={(e) => {
+                     if (e.key === " " || e.key === "Enter") {
+                        onItem(item.id, i);
+                     }
+                  }}
                >
                   <div className="item-items-list__img">
                      <img src={item.img} alt={item.name} />
@@ -65,7 +81,7 @@ const ItemsList = () => {
    const elements = useMemo(() => {
       return setContent(process, () => renderItems(items), items);
       // eslint-disable-next-line
-   }, [process, id]);
+   }, [process]);
 
    return (
       <div className="items-list">

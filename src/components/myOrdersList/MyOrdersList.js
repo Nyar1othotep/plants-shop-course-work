@@ -7,6 +7,8 @@ import {
    orderBy,
    deleteDoc,
    doc,
+   updateDoc,
+   increment,
 } from "firebase/firestore";
 import setContent from "utils/setContent";
 import { useHttp } from "hooks/http.hook";
@@ -23,8 +25,6 @@ const MyOrdersList = () => {
    const [items, setItems] = useState([]);
    const [filter, setFilter] = useState("desc");
    const { userUID } = useAuth();
-   const shouldLog = useRef(true);
-   const [isDelete, setIsDelete] = useState(false);
    const usersOrderCollectionRef = collection(db, "usersOrder");
    const q = query(
       usersOrderCollectionRef,
@@ -38,7 +38,7 @@ const MyOrdersList = () => {
    useEffect(() => {
       onRequest();
       // eslint-disable-next-line
-   }, [isDelete, filter]);
+   }, [filter]);
 
    const onRequest = () => {
       request(q)
@@ -62,16 +62,46 @@ const MyOrdersList = () => {
       e.currentTarget.classList.toggle("active");
    };
 
-   const deleteItem = async (id) => {
-      shouldLog.current = true;
+   const updateItems = async (orderArray) => {
+      const array = await orderArray;
       try {
-         const itemDoc = doc(db, "usersOrder", id);
-         await deleteDoc(itemDoc);
-         alert("Item has been removed from orders");
-         setIsDelete((isDelete) => !isDelete);
+         array.forEach(async (item) => {
+            const itemDoc = doc(db, "items", item.itemID);
+            const updateFields = {
+               numberOfOrders: increment(-item.itemQuantity),
+               quantity: increment(item.itemQuantity),
+            };
+            await updateDoc(itemDoc, updateFields);
+         });
       } catch (error) {
          console.error(error.message);
       }
+   };
+
+   const deleteItem = async (id, orderArray) => {
+      try {
+         const itemDoc = doc(db, "usersOrder", id);
+         await deleteDoc(itemDoc);
+         updateItems(orderArray);
+         onRequest();
+         alert("Item has been removed from orders");
+      } catch (error) {
+         console.error(error.message);
+      }
+   };
+
+   const onDetails = (itemID, itemCategory) => {
+      dispatch(
+         setItemId({
+            id: itemID,
+         })
+      );
+      dispatch(
+         setItemCategory({
+            category: itemCategory,
+         })
+      );
+      navigate("/catalog");
    };
 
    const renderItems = (arr) => {
@@ -79,13 +109,13 @@ const MyOrdersList = () => {
 
       if (arr.length === 0) {
          return (
-            <div className="my-orders-list__empty cart-page__empty">
-               <p className="my-orders-list__empty-text cart-page__empty-text">
+            <div className="my-orders-list-table__empty cart-page__empty">
+               <p className="my-orders-list-table__empty-text cart-page__empty-text">
                   You haven't ordered anything yet
                </p>
-               <div className="my-orders-list__btns cart-page__btns">
+               <div className="my-orders-list-table__btns cart-page__btns">
                   <Link to={"/catalog"}>
-                     <button className="my-orders-list__btn cart-page__btn plant-item__btn btn btn--border">
+                     <button className="my-orders-list-table__btn cart-page__btn plant-item__btn btn btn--border">
                         <p>Go to catalog</p>
                         <svg>
                            <use href={`${svg}#sharp-arrow-down`}></use>
@@ -162,18 +192,14 @@ const MyOrdersList = () => {
                         return (
                            <tr
                               key={i}
-                              onClick={() => {
-                                 dispatch(
-                                    setItemId({
-                                       id: item.itemID,
-                                    })
-                                 );
-                                 dispatch(
-                                    setItemCategory({
-                                       category: item.itemCategory,
-                                    })
-                                 );
-                                 navigate("/catalog");
+                              tabIndex={0}
+                              onClick={() =>
+                                 onDetails(item.itemID, item.itemCategory)
+                              }
+                              onKeyPress={(e) => {
+                                 if (e.key === " " || e.key === "Enter") {
+                                    onDetails(item.itemID, item.itemCategory);
+                                 }
                               }}
                            >
                               <td>{i + 1}</td>
@@ -199,7 +225,7 @@ const MyOrdersList = () => {
                               "Are you sure you want to cancel this order?"
                            )
                         )
-                           deleteItem(item.id);
+                           deleteItem(item.id, item.orderArray);
                      }}
                   >
                      <p>Cancel order</p>

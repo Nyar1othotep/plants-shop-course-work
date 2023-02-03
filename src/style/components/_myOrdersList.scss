@@ -18,8 +18,12 @@
       & select {
          padding: 5px 0;
          cursor: pointer;
+         background: none;
       }
    }
+	&__empty {
+		padding: 20px 0px 0px 0px;
+	}
 }
 
 .my-orders-list-table__list {
