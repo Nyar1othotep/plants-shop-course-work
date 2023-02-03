@@ -3,9 +3,14 @@ import svg from "../../resourses/svg/sprites.svg";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "store/slices/userSlice";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+   getAuth,
+   signInWithEmailAndPassword,
+   signInWithPopup,
+} from "firebase/auth";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useAuth } from "hooks/useAuth.hook";
+import { googleAuth, provider } from "../../firebase";
 
 const LoginPage = () => {
    const dispatch = useDispatch();
@@ -28,11 +33,27 @@ const LoginPage = () => {
          .catch(console.error);
    };
 
+   const handleLoginWithGoogle = () => {
+      signInWithPopup(googleAuth, provider).then(({ user }) => {
+         dispatch(
+            setUser({
+               email: user.email,
+               userUID: user.uid,
+               token: user.accessToken,
+            })
+         );
+         navigate("/user/profile");
+      });
+   };
+
    return !isAuth ? (
       <div className="login-page">
          <div className="login-page__container _container">
             <div className="login-page__body">
-               <button className="login-page__login-with-google-btn btn btn--border">
+               <button
+                  className="login-page__login-with-google-btn btn btn--border"
+                  onClick={handleLoginWithGoogle}
+               >
                   <svg>
                      <use href={`${svg}#google`}></use>
                   </svg>
