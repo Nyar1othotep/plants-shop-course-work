@@ -3,14 +3,9 @@ import svg from "../../resourses/svg/sprites.svg";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setUser } from "store/slices/userSlice";
-import {
-   getAuth,
-   createUserWithEmailAndPassword,
-   signInWithPopup,
-} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useAuth } from "hooks/useAuth.hook";
-import { googleAuth, provider } from "../../firebase";
 
 const RegistrationPage = () => {
    const dispatch = useDispatch();
@@ -33,32 +28,20 @@ const RegistrationPage = () => {
          .catch(console.error);
    };
 
-   const handleLoginWithGoogle = () => {
-      signInWithPopup(googleAuth, provider).then(({ user }) => {
-         dispatch(
-            setUser({
-               email: user.email,
-               userUID: user.uid,
-               token: user.accessToken,
-            })
-         );
-         navigate("/user/profile");
-      });
-   };
-
    return !isAuth ? (
       <div className="registration-page">
          <div className="registration-page__container _container">
             <div className="registration-page__body">
-               <button
-                  className="registration-page__registration-with-google-btn btn btn--border"
-                  onClick={handleLoginWithGoogle}
-               >
-                  <svg>
-                     <use href={`${svg}#google`}></use>
-                  </svg>
-                  <p>Continue with Google</p>
-               </button>
+               <div className="registration-page__btns">
+                  <Link to="/user/login">
+                     <button className="registration-page__login-btn btn btn--border">
+                        <svg>
+                           <use href={`${svg}#create`}></use>
+                        </svg>
+                        <p>Go to Log in</p>
+                     </button>
+                  </Link>
+               </div>
                <p style={{ color: "#8E8E8E" }}>or</p>
                <RegistrationForm handleClick={handleRegister} />
                <div className="registration-page__to-registration">
