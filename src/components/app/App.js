@@ -88,13 +88,13 @@ const App = () => {
       // eslint-disable-next-line
    }, []);
 
-   const getCountOfItemsFromCart = async (userUID) => {
+   const getCountOfItemsFromCart = async (userUID, logout = false) => {
       const query_ = query(
          usersCartCollectionRef,
          where("userID", "==", userUID)
       );
       const snapshot = await getCountFromServer(query_);
-      setCountCart((countCart) => snapshot.data().count);
+      setCountCart((countCart) => (!logout ? snapshot.data().count : 0));
    };
 
    return (
@@ -134,7 +134,12 @@ const App = () => {
                      path="/user/registration"
                      element={<RegistrationPage />}
                   />
-                  <Route path="/user/profile" element={<ProfilePage />} />
+                  <Route
+                     path="/user/profile"
+                     element={
+                        <ProfilePage handelClick={getCountOfItemsFromCart} />
+                     }
+                  />
                   <Route
                      path="/user/admin-panel"
                      element={<AdminPanelPage />}

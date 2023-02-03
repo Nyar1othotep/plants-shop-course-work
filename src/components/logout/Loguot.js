@@ -5,9 +5,9 @@ import { removeToCart } from "store/slices/toCartSlice";
 import { removeToOrderAndDelivery } from "store/slices/toOrderSlice";
 import { signOut, getAuth } from "firebase/auth";
 
-const Logout = () => {
+const Logout = ({ handelClick }) => {
    const dispatch = useDispatch();
-   const { email } = useAuth();
+   const { email, userUID } = useAuth();
    const auth = getAuth();
 
    return (
@@ -24,6 +24,7 @@ const Logout = () => {
                dispatch(removeUser());
                dispatch(removeToCart());
                dispatch(removeToOrderAndDelivery());
+               handelClick(userUID, true);
                signOut(auth);
             }}
          >
