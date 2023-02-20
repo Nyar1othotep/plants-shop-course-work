@@ -14,13 +14,16 @@ const RegistrationForm = ({ handleClick }) => {
                .matches(
                   // eslint-disable-next-line
                   /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                  "Invalid email format."
+                  "Неверный формат электронной почты."
                )
-               .required("Required field."),
+               .required("Обязательное поле."),
             password: Yup.string()
-               .required("Required field")
-               .min(8, "Password is too short - should be 8 chars minimum.")
-               .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
+               .required("Обязательное поле.")
+               .min(8, "Пароль слишком короткий — минимум 8 символов.")
+               .matches(
+                  /[a-zA-Z]/,
+                  "Пароль может содержать только латинские буквы."
+               ),
          })}
          onSubmit={(values) => handleClick(values.email, values.password)}
       >
@@ -38,13 +41,13 @@ const RegistrationForm = ({ handleClick }) => {
                id="password"
                name="password"
                type="password"
-               placeholder="Password"
+               placeholder="Пароль"
             />
             <button
                className="proceed-to-checkout-form__btn btn btn--black"
                type="submit"
             >
-               Create account
+               Создать аккаунт
             </button>
          </Form>
       </Formik>

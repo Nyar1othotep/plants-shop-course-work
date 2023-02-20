@@ -42,7 +42,7 @@ const Header = ({ countCart }) => {
                   <svg>
                      <use href={`${svg}#logo`}></use>
                   </svg>
-                  <span>Plants</span>
+                  <span>Растения</span>
                </Link>
                <nav
                   className={`header__menu menu-header menu ${
@@ -55,7 +55,7 @@ const Header = ({ countCart }) => {
                            to="/"
                            className="menu-header__link menu__link"
                         >
-                           Home
+                           Главная
                         </NavLink>
                      </li>
                      <li className="menu-header__item menu__item">
@@ -63,7 +63,7 @@ const Header = ({ countCart }) => {
                            to="/catalog"
                            className="menu-header__link menu__link"
                         >
-                           Catalog
+                           Каталог
                         </NavLink>
                      </li>
                      <li className="menu-header__item menu__item">
@@ -71,7 +71,7 @@ const Header = ({ countCart }) => {
                            to="/about"
                            className="menu-header__link menu__link"
                         >
-                           About
+                           О нас
                         </NavLink>
                      </li>
                   </ul>

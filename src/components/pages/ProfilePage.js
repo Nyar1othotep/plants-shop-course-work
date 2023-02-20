@@ -12,7 +12,7 @@ const ProfilePage = ({ handelClick }) => {
             <div className="profile-page__body">
                <Logout handelClick={handelClick} />
                <div className="profile-page__heading">
-                  <h2>My orders</h2>
+                  <h2>Мои заказы</h2>
                </div>
                <MyOrdersList />
             </div>

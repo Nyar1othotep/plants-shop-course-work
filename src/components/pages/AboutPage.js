@@ -6,7 +6,7 @@ const AboutPage = () => {
          <div className="about__container _container">
             <div className="about__body">
                <div className="about__heading">
-                  <h2>About company</h2>
+                  <h2>О КОМПАНИИ</h2>
                </div>
                <AboutAccordion />
             </div>

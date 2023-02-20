@@ -71,7 +71,7 @@ const PlantItem = ({ handelClick, isReAuth }) => {
       try {
          await addDoc(usersCartCollectionRef, store.getState().toCart);
          handelClick(userUID);
-         alert("This product was added to the cart");
+         alert("Товар добавлен в корзину");
       } catch (error) {
          console.error(error.message);
       }
@@ -80,13 +80,13 @@ const PlantItem = ({ handelClick, isReAuth }) => {
    const onDecreace = () => {
       quantity > 1
          ? setQuantity((quantity) => parseInt(quantity - 1))
-         : alert("You can`t decreace anymore.");
+         : alert("Вы не можете больше уменьшаться.");
    };
 
    const onIncreace = (itemQuantity) => {
       quantity < itemQuantity
          ? setQuantity((quantity) => parseInt(quantity + 1))
-         : alert("You can`t increace anymore.");
+         : alert("Вы больше не можете увеличивать.");
    };
 
    return (
@@ -106,46 +106,46 @@ const PlantItem = ({ handelClick, isReAuth }) => {
                      <table className="plant-item__characteristics">
                         <tbody>
                            <tr>
-                              <td>Name:</td>
+                              <td>Имя:</td>
                               <td>{item.category}</td>
                            </tr>
                            <tr>
-                              <td>Plant type:</td>
+                              <td>Тип растения:</td>
                               <td>{item["plant-type"]}</td>
                            </tr>
                            <tr>
-                              <td>Place:</td>
+                              <td>Место:</td>
                               <td>{item.place}</td>
                            </tr>
                            <tr>
-                              <td>Height:</td>
+                              <td>Высота:</td>
                               <td>{item["height-width"]}</td>
                            </tr>
                            <tr>
-                              <td>Light:</td>
+                              <td>Свет:</td>
                               <td>{item.light}</td>
                            </tr>
                            <tr>
-                              <td>Room temperature:</td>
+                              <td>Комнатная температура:</td>
                               <td>{item["room-temperature"]}</td>
                            </tr>
                         </tbody>
                      </table>
                   </div>
                   <div className="plant-item__price">
-                     Price: <span>${item.price}</span>
+                     Цена: <span>${item.price}</span>
                   </div>
                   <div className="plant-item__left">
-                     Quantity of goods: {item.quantity}
+                     Количество товаров: {item.quantity}
                   </div>
                   {item.quantity === 0 ? (
                      <div className="plant-item__not-available">
-                        Not available
+                        Нет в наличии
                      </div>
                   ) : (
                      <div className="plant-item__bottom">
                         <div className="plant-item__quantity quantity">
-                           <label>Quantity:</label>
+                           <label>Количество:</label>
                            <div>
                               <svg
                                  tabIndex={0}
@@ -177,14 +177,14 @@ const PlantItem = ({ handelClick, isReAuth }) => {
                            onClick={() => {
                               if (!isAuth) {
                                  alert(
-                                    "You need to login or create an account at first!"
+                                    "Сначала вам необходимо войти или создать учетную запись!"
                                  );
                               } else {
                                  addToCart();
                               }
                            }}
                         >
-                           <p>Add to cart</p>
+                           <p>Добавить в корзину</p>
                            <svg>
                               <use href={`${svg}#add-to-cart`}></use>
                            </svg>
@@ -193,7 +193,7 @@ const PlantItem = ({ handelClick, isReAuth }) => {
                   )}
                </div>
                <div className="plant-item__img">
-                  <img src={item.img} alt="Alocasia 'Zebrina'" />
+                  <img src={item.img} alt={item.name} />
                </div>
             </div>
          )}

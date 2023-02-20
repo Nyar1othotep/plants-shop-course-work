@@ -10,7 +10,6 @@ import {
 } from "firebase/auth";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useAuth } from "hooks/useAuth.hook";
-import { googleAuth, provider } from "../../firebase";
 
 const LoginPage = () => {
    const dispatch = useDispatch();
@@ -43,15 +42,15 @@ const LoginPage = () => {
                         <svg>
                            <use href={`${svg}#create`}></use>
                         </svg>
-                        <p>Create an account</p>
+                        <p>Создать аккаунт</p>
                      </button>
                   </Link>
                </div>
-               <p style={{ color: "#8E8E8E" }}>or</p>
+               <p style={{ color: "#8E8E8E" }}>или</p>
                <LoginForm handleClick={handleLogin} />
                <div className="login-page__to-registration">
-                  <p>No account?</p>
-                  <Link to="/user/registration">Create one</Link>
+                  <p>Нет аккаунта?</p>
+                  <Link to="/user/registration">Создай</Link>
                </div>
             </div>
          </div>

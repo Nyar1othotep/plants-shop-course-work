@@ -6,7 +6,7 @@ const Reviews = () => {
          <div className="reviews__container _container">
             <div className="reviews__body">
                <div className="reviews__heading">
-                  <h2>Reviews</h2>
+                  <h2>ОТЗЫВЫ</h2>
                </div>
                <div className="reviews__inner-container">
                   <div className="reviews__row">
@@ -19,19 +19,19 @@ const Reviews = () => {
                            </div>
                            <div className="item-reviews__user">
                               <div className="item-reviews__name">
-                                 Patrick Clarke
+                                 Надежда Ульянова
                               </div>
                               <div className="item-reviews__verification">
-                                 Verified
+                                 Верифицирован
                               </div>
                            </div>
                            <div className="item-reviews__plant">
-                              Alocasia 'Zebrina'
+                              Алоказия 'Зебрина'
                            </div>
                            <div className="item-reviews__comment">
-                              The team at Plants Shop was communicative and
-                              professional. The plants look great and staff are
-                              really excited to have them in the office.
+                              Команда Plants Shop была коммуникабельной и
+                              профессиональной. Растения выглядят великолепно, и
+                              персонал очень рад видеть их в офисе.
                            </div>
                         </div>
                      </div>
@@ -44,19 +44,19 @@ const Reviews = () => {
                            </div>
                            <div className="item-reviews__user">
                               <div className="item-reviews__name">
-                                 Rita Strogoff
+                                 Рита Строгова
                               </div>
                               <div className="item-reviews__verification">
-                                 Verified
+                                 Верифицирован
                               </div>
                            </div>
                            <div className="item-reviews__plant">
-                              Alocasia 'Zebrina'
+                              Алоказия 'Зебрина'
                            </div>
                            <div className="item-reviews__comment">
-                              My daughter was absolutely thrilled with the plant
-                              thank you very much for your assistance her office
-                              will look beautiful now.
+                              Моя дочь была в восторге от растения, большое
+                              спасибо за вашу помощь, теперь ее офис будет
+                              выглядеть красиво.
                            </div>
                         </div>
                      </div>

@@ -14,20 +14,20 @@ const ProceedToCheckoutForm = ({ handleClick }) => {
          }}
          validationSchema={Yup.object({
             address: Yup.string()
-               .min(2, "Should be 2 chars minimum.")
-               .required("Required field."),
+               .min(2, "Должно быть минимум 2 символа.")
+               .required("Обязательное поле."),
             office: Yup.string()
-               .min(2, "Should be 2 chars minimum.")
-               .required("Required field."),
+               .min(2, "Должно быть минимум 2 символа.")
+               .required("Обязательное поле."),
             index: Yup.string()
-               .min(2, "Should be 2 chars minimum.")
-               .required("Required field."),
+               .min(2, "Должно быть минимум 2 символа.")
+               .required("Обязательное поле."),
             name: Yup.string()
-               .min(2, "Should be 2 chars minimum.")
-               .required("Required field."),
+               .min(2, "Должно быть минимум 2 символа.")
+               .required("Обязательное поле."),
             phoneNumber: Yup.string()
-               .min(2, "Should be 2 chars minimum.")
-               .required("Required field."),
+               .min(2, "Должно быть минимум 2 символа.")
+               .required("Обязательное поле."),
          })}
          onSubmit={(values) =>
             handleClick(
@@ -42,12 +42,12 @@ const ProceedToCheckoutForm = ({ handleClick }) => {
          <Form className="proceed-to-checkout-form form">
             <MyTextInput
                className="form-input"
-               label="Delivery address:"
+               label="Адрес доставки:"
                id="address"
                name="address"
                type="text"
                autoFocus
-               placeholder="Country, city, street, house"
+               placeholder="Страна, город, улица, дом"
             />
             <div className="proceed-to-checkout-form__row">
                <MyTextInput
@@ -55,36 +55,36 @@ const ProceedToCheckoutForm = ({ handleClick }) => {
                   id="office"
                   name="office"
                   type="text"
-                  placeholder="Apartment/office"
+                  placeholder="Квартира/офис"
                />
                <MyTextInput
                   className="form-input"
                   id="index"
                   name="index"
                   type="text"
-                  placeholder="Index"
+                  placeholder="Индекс"
                />
             </div>
             <MyTextInput
                className="form-input"
-               label="Recipient data:"
+               label="Данные получателя:"
                id="name"
                name="name"
                type="text"
-               placeholder="First and last name"
+               placeholder="Имя и фамилия"
             />
             <MyTextInput
                className="form-input"
                id="phoneNumber"
                name="phoneNumber"
                type="number"
-               placeholder="Phone number"
+               placeholder="Номер телефона"
             />
             <button
                className="proceed-to-checkout-form__btn btn btn--black"
                type="submit"
             >
-               Pay
+               Оплатить
             </button>
          </Form>
       </Formik>

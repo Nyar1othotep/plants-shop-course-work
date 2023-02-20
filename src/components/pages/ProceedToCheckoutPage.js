@@ -102,7 +102,7 @@ const ProceedToCheckoutPage = ({ handelClick }) => {
             phone: phone,
             date: new Date().toLocaleDateString(),
             time: new Date().toLocaleTimeString(),
-            status: "Waiting for sending",
+            status: "Ожидание отправки",
          })
       );
 

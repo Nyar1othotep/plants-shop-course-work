@@ -13,10 +13,10 @@ const Footer = () => {
          <div className="footer__container _container">
             <div className="footer__body">
                <div className="footer__proverb">
-                  Money doesn`t grow on trees but it can plant them
+                  ДЕНЬГИ НЕ РАСТУТ НА ДЕРЕВЬЯХ, НО ОНИ МОГУТ ИХ ПОСАДИТЬ
                </div>
                <div className="footer__socials socials-footer">
-                  <div className="socials-footer__title">Socials</div>
+                  <div className="socials-footer__title">СОЦИАЛЬНЫЕ СЕТИ</div>
                   <ul className="socials-footer__row">
                      <li className="socials-footer__column">
                         <div className="socials-footer__item item-socials-footer">
@@ -43,32 +43,32 @@ const Footer = () => {
                               </li>
                            </ul>
                            <button className="item-socials-footer__btn btn">
-                              Get coupon
+                              Купон
                            </button>
                         </div>
                      </li>
                      <li className="socials-footer__column">
                         <div className="socials-footer__item item-socials-footer">
                            <div className="item-socials-footer__title">
-                              Careers
+                              Карьера
                            </div>
                            <ul className="item-socials-footer__row">
                               <li className="item-socials-footer__item">
                                  {/* Заглушка, потом надо сделать ссылку через реакт роутер */}
                                  <span className="item-socials-footer__link">
-                                    How it works
+                                    Как это работает
                                  </span>
                               </li>
                               <li className="item-socials-footer__item">
                                  {/* Заглушка, потом надо сделать ссылку через реакт роутер */}
                                  <span className="item-socials-footer__link">
-                                    Our mission
+                                    Наша миссия
                                  </span>
                               </li>
                               <li className="item-socials-footer__item">
                                  {/* Заглушка, потом надо сделать ссылку через реакт роутер */}
                                  <span className="item-socials-footer__link">
-                                    Our mission
+                                    Наша миссия
                                  </span>
                               </li>
                            </ul>
@@ -77,25 +77,25 @@ const Footer = () => {
                      <li className="socials-footer__column">
                         <div className="socials-footer__item item-socials-footer">
                            <div className="item-socials-footer__title">
-                              FAQs
+                              Часто задаваемые вопросы
                            </div>
                            <ul className="item-socials-footer__row">
                               <li className="item-socials-footer__item">
                                  {/* Заглушка, потом надо сделать ссылку через реакт роутер */}
                                  <span className="item-socials-footer__link">
-                                    Get the app
+                                    Приложение
                                  </span>
                               </li>
                               <li className="item-socials-footer__item">
                                  {/* Заглушка, потом надо сделать ссылку через реакт роутер */}
                                  <span className="item-socials-footer__link">
-                                    Contact us
+                                    Связаться с нами
                                  </span>
                               </li>
                               <li className="item-socials-footer__item">
                                  {/* Заглушка, потом надо сделать ссылку через реакт роутер */}
                                  <span className="item-socials-footer__link">
-                                    Privacy policy
+                                    Политика конфиденциальности
                                  </span>
                               </li>
                            </ul>
@@ -104,17 +104,15 @@ const Footer = () => {
                      <li className="socials-footer__column">
                         <div className="socials-footer__item item-socials-footer item-socials-footer__block-copyright">
                            <div className="item-socials-footer__title">
-                              Small change. Big change.
+                              Небольшой изменение. Большие изменения.
                            </div>
                            <div className="item-socials-footer__copyright">
                               Copyright © 2022
                            </div>
                            <div className="item-socials-footer__text">
-                              Lorem ipsum dolor sit amet, consectetur adipiscing
-                              elit, sed do eiusmod tempor incididunt ut labore
-                              et dolore magna aliqua. Ut enim ad minim veniam,
-                              quis nostrud exercitation ullamco laboris nisi ut
-                              aliquip ex ea commodo consequat.
+                              Этот сайт был создан для курсовой работы, поэтому
+                              некоторые изображения и текст могут быть
+                              заимствованы с других сайтов.
                            </div>
                         </div>
                      </li>

@@ -84,7 +84,7 @@ const MyOrdersList = () => {
          await deleteDoc(itemDoc);
          updateItems(orderArray);
          onRequest();
-         alert("Item has been removed from orders");
+         alert("Товар удален из заказов");
       } catch (error) {
          console.error(error.message);
       }
@@ -111,12 +111,12 @@ const MyOrdersList = () => {
          return (
             <div className="my-orders-list-table__empty cart-page__empty">
                <p className="my-orders-list-table__empty-text cart-page__empty-text">
-                  You haven't ordered anything yet
+                  Вы еще ничего не заказывали
                </p>
                <div className="my-orders-list-table__btns cart-page__btns">
                   <Link to={"/catalog"}>
                      <button className="my-orders-list-table__btn cart-page__btn plant-item__btn btn btn--border">
-                        <p>Go to catalog</p>
+                        <p>Перейти в каталог</p>
                         <svg>
                            <use href={`${svg}#sharp-arrow-down`}></use>
                         </svg>
@@ -149,10 +149,10 @@ const MyOrdersList = () => {
                   </div>
                   <div className="item-my-orders-list-table__row">
                      <div className="item-my-orders-list-table__quantity">
-                        Quantity: <span>{item.orderArray.length}</span>
+                        Количество: <span>{item.orderArray.length}</span>
                      </div>
                      <div className="item-my-orders-list-table__total">
-                        Total Amount: <span>${total.toFixed(2)}</span>
+                        Общая сумма: <span>${total.toFixed(2)}</span>
                      </div>
                   </div>
                   <div className="item-my-orders-list-table__row">
@@ -163,13 +163,13 @@ const MyOrdersList = () => {
                            handleClick(e);
                         }}
                      >
-                        <p>Details</p>
+                        <p>Подробности</p>
                         <svg>
                            <use href={`${svg}#order-btn-arrow`}></use>
                         </svg>
                      </button>
                      <div className="item-my-orders-list-table__status">
-                        Status: <span>{item.status}</span>
+                        Статус: <span>{item.status}</span>
                      </div>
                   </div>
                </div>
@@ -180,11 +180,11 @@ const MyOrdersList = () => {
                   <thead>
                      <tr>
                         <th>№</th>
-                        <th>Img</th>
-                        <th>Name</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
+                        <th>Изоб.</th>
+                        <th>Название</th>
+                        <th>Цена</th>
+                        <th>Количество</th>
+                        <th>Сумма</th>
                      </tr>
                   </thead>
                   <tbody>
@@ -216,19 +216,19 @@ const MyOrdersList = () => {
                      })}
                   </tbody>
                </table>
-               {item.status === "Waiting for sending" ? (
+               {item.status === "Ожидание отправки" ? (
                   <button
                      className="item-my-orders-list-table__btn item-my-orders-list-table__btn-cancel btn btn--border"
                      onClick={() => {
                         if (
                            window.confirm(
-                              "Are you sure you want to cancel this order?"
+                              "Вы уверены, что хотите отменить этот заказ?"
                            )
                         )
                            deleteItem(item.id, item.orderArray);
                      }}
                   >
-                     <p>Cancel order</p>
+                     <p>Отменить заказ</p>
                      <svg>
                         <use href={`${svg}#remove`}></use>
                      </svg>
@@ -253,7 +253,7 @@ const MyOrdersList = () => {
                <svg>
                   <use href={`${svg}#filter`}></use>
                </svg>
-               <p>Filter by:</p>
+               <p>Сортировать по:</p>
             </label>
             <select
                name="filter"
@@ -263,8 +263,8 @@ const MyOrdersList = () => {
                   setFilter((filter) => e.target.value);
                }}
             >
-               <option value="desc">Descending</option>
-               <option value="asc">Ascending</option>
+               <option value="desc">По убыванию</option>
+               <option value="asc">По возрастанию</option>
             </select>
          </div>
          {elements}

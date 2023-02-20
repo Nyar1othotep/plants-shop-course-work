@@ -4,7 +4,7 @@ const Description = () => {
    return (
       <section
          className="section description"
-			id="description"
+         id="description"
          style={{
             background: `url(${branch}) right center no-repeat`,
             backgroundSize: "",
@@ -14,26 +14,28 @@ const Description = () => {
             <div className="description__body">
                <div className="description__content">
                   <div className="description__heading">
-                     <h2>Decorate your home with plants</h2>
+                     <h2>УКРАШАЙТЕ СВОЙ ДОМ РАСТЕНИЯМИ</h2>
                   </div>
                   <div className="description__text">
                      <p>
-                        As the nights get longer, bring a sense of calm to your
-                        bedroom with plants. Hanging plants, like Rapunzel the
-                        golden pothos, add interest at different heights and
-                        won’t mind a little shade. Susie the snake plant and
-                        Pippa the peace lily have striking structure and they
-                        release oxygen at night - practical and pretty.
+                        По мере того, как ночи становятся длиннее, привнесите в
+                        спальню ощущение спокойствия с помощью растений. Висячие
+                        растения, такие как золотой потос Рапунцель, добавляют
+                        интереса на разной высоте и не возражают против
+                        небольшой тени. Змеиное растение Сьюзи и мирная лилия
+                        Пиппа имеют поразительную структуру и ночью выделяют
+                        кислород - практичные и красивые.
                      </p>
                      <p>
-                        Fill empty corners with a tall, thin plant like Silvy
-                        the satin pothos on a mosspole or Phil the philodendron
-                        scandens. Minimal floorspace, maximum impact.
+                        Заполните пустые углы высокими тонкими растениями,
+                        такими как атласный потос Сильви на моховом шесте или
+                        филодендрон сканденс Фил. Минимум площади, максимум
+                        эффекта.
                      </p>
                      <p>
-                        Don’t forget your pots. Matching neutral pots will look
-                        clean and elegant, while a mix of styles and patterns
-                        looks eclectic and fun.
+                        Не забывайте свои горшки. Подходящие нейтральные горшки
+                        будут выглядеть чистыми и элегантными, а сочетание
+                        стилей и узоров выглядит эклектично и весело.
                      </p>
                   </div>
                </div>

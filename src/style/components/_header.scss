@@ -29,10 +29,10 @@
       }
       & span {
          padding: 7px 0px 0px 12px;
-         font-family: "Hammersmith One";
-         font-weight: 400;
-         font-size: 23px;
-         @include lh(29, 23);
+         font-weight: 500;
+         letter-spacing: 0px;
+         font-size: 18px;
+         @include lh(24, 18);
          text-transform: uppercase;
          color: $black;
       }
@@ -99,26 +99,26 @@
          width: 24px;
          height: 24px;
       }
-		&.basket {
-			position: relative;
-		}
+      &.basket {
+         position: relative;
+      }
    }
-	&__basket-count {
-		position: absolute;
-		top: -12px;
-		left: -12px;
-		width: 20px;
-		height: 20px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		font-size: 12px;
-		font-weight: 900;
-		color: $white;
-		background: $red;
-		border-radius: 50%;
-		z-index: -1;
-	}
+   &__basket-count {
+      position: absolute;
+      top: -12px;
+      left: -12px;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 900;
+      color: $white;
+      background: $red;
+      border-radius: 50%;
+      z-index: -1;
+   }
 }
 
 @media (max-width: 992px) {
@@ -239,5 +239,15 @@
 
    .account-menu-header {
       margin-left: auto;
+   }
+}
+
+@media (max-width: 375px) {
+   .header {
+      &__logo {
+         & span {
+            font-size: 14px;
+         }
+      }
    }
 }

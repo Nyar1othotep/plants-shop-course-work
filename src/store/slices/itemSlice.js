@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
    id: "1",
-   category: "Sansevieria",
+   category: "Сансевиерия",
 };
 
 const itemSlice = createSlice({

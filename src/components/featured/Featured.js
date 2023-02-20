@@ -60,27 +60,27 @@ const Featured = () => {
                         <table className="slide-featured__characteristics plant-item__characteristics">
                            <tbody>
                               <tr>
-                                 <td>Name:</td>
+                                 <td>Имя:</td>
                                  <td>{item.category}</td>
                               </tr>
                               <tr>
-                                 <td>Plant type:</td>
+                                 <td>Тип растения:</td>
                                  <td>{item["plant-type"]}</td>
                               </tr>
                               <tr>
-                                 <td>Place:</td>
+                                 <td>Место:</td>
                                  <td>{item.place}</td>
                               </tr>
                               <tr>
-                                 <td>Height:</td>
+                                 <td>Высота:</td>
                                  <td>{item["height-width"]}</td>
                               </tr>
                               <tr>
-                                 <td>Light:</td>
+                                 <td>Свет:</td>
                                  <td>{item.light}</td>
                               </tr>
                               <tr>
-                                 <td>Room temperature:</td>
+                                 <td>Комнатная температура:</td>
                                  <td>{item["room-temperature"]}</td>
                               </tr>
                            </tbody>
@@ -103,7 +103,7 @@ const Featured = () => {
                                  );
                               }}
                            >
-                              <p>Go to catalog</p>
+                              <p>Перейти в каталог</p>
                               <svg>
                                  <use href={`${svg}#sharp-arrow-down`}></use>
                               </svg>
@@ -112,7 +112,7 @@ const Featured = () => {
                      </div>
                   </div>
                   <div className="slide-featured__img plant-item__img">
-                     <img src={item.img} alt="Alocasia 'Zebrina'" />
+                     <img src={item.img} alt={item.name} />
                   </div>
                </div>
             </SwiperSlide>
@@ -144,7 +144,7 @@ const Featured = () => {
          <div className="featured__container _container">
             <div className="featured__body">
                <div className="featured__heading">
-                  <h2>Featured Plants</h2>
+                  <h2>ИЗБРАННЫЕ РАСТЕНИЯ</h2>
                </div>
                <div className="featured__slider-container">{elements}</div>
             </div>

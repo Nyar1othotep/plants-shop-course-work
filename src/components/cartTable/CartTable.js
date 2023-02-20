@@ -81,7 +81,7 @@ const CartTable = memo(({ handelClick, setTotalPrice }) => {
          await deleteDoc(itemDoc);
          onRequest();
          handelClick(userUID);
-         alert("Item has been removed from cart");
+         alert("Товар удален из корзины");
          dispatch(removeToOrderAndDelivery());
       } catch (error) {
          console.error(error.message);
@@ -89,7 +89,9 @@ const CartTable = memo(({ handelClick, setTotalPrice }) => {
    };
 
    const onRemove = (itemID) => {
-      if (window.confirm("Are you sure you want to cancel this item?"))
+      if (
+         window.confirm("Вы уверены, что хотите удалить из корзины этот товар?")
+      )
          deleteItem(itemID);
    };
 
@@ -100,11 +102,11 @@ const CartTable = memo(({ handelClick, setTotalPrice }) => {
          setTotalPrice(0);
          return (
             <div className="cart-page__empty">
-               <p className="cart-page__empty-text">Your cart is empty</p>
+               <p className="cart-page__empty-text">Ваша корзина пуста</p>
                <div className="cart-page__btns">
                   <Link to={"/catalog"}>
                      <button className="cart-page__btn plant-item__btn btn btn--border">
-                        <p>Go to catalog</p>
+                        <p>Перейти в каталог</p>
                         <svg>
                            <use href={`${svg}#sharp-arrow-down`}></use>
                         </svg>

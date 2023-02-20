@@ -18,7 +18,7 @@ const CartPage = ({ handelClick }) => {
          <div className="cart-page__container _container">
             <div className="cart-page__body">
                <div className="cart-page__heading">
-                  <h2>Cart</h2>
+                  <h2>КОРЗИНА</h2>
                </div>
                <div className="cart-page__row">
                   <CartTable

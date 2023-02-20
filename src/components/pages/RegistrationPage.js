@@ -38,19 +38,19 @@ const RegistrationPage = () => {
                         <svg>
                            <use href={`${svg}#create`}></use>
                         </svg>
-                        <p>Go to Log in</p>
+                        <p>Перейти к авторизации</p>
                      </button>
                   </Link>
                </div>
-               <p style={{ color: "#8E8E8E" }}>or</p>
+               <p style={{ color: "#8E8E8E" }}>или</p>
                <RegistrationForm handleClick={handleRegister} />
                <div className="registration-page__to-registration">
-                  <p>Already have an account?</p>
-                  <Link to="/user/login">Log in</Link>
+                  <p>Уже есть аккаунт?</p>
+                  <Link to="/user/login">Авторизоваться</Link>
                </div>
                <span>
-                  By clicking "Create account", I agree to Plants`s TOS and
-                  Privacy Policy
+                  Нажимая «Создать учетную запись», я соглашаюсь с TOS Plants и
+                  политикой конфиденциальности
                </span>
             </div>
          </div>

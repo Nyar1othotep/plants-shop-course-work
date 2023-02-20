@@ -28,7 +28,7 @@ const Preview = () => {
                   className="preview-page__frame preview-page__btn-next"
                >
                   <span>
-                     Next
+                     Далее
                   </span>
                   <svg>
                      <use href={`${svg}#arrow-next`}></use>
@@ -36,7 +36,7 @@ const Preview = () => {
                </AnchorLink>
                <div className="preview-page__text">
                   <h1>
-                     Plants <br /> shop
+                     Магазин <br /> растений
                   </h1>
                </div>
             </div>

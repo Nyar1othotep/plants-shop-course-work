@@ -16,7 +16,7 @@ const Logout = ({ handelClick }) => {
             <strong>Email:</strong> {email}
          </div>
          <div className="logout__user-role">
-            <strong>Role:</strong> customer
+            <strong>Роль:</strong> Покупатель
          </div>
          <button
             className="logout__btn btn btn--black"
@@ -28,7 +28,7 @@ const Logout = ({ handelClick }) => {
                signOut(auth);
             }}
          >
-            Log out
+            Выйти
          </button>
       </div>
    );
