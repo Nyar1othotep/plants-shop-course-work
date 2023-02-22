@@ -1,5 +1,6 @@
 import Stats from "components/stats/Stats";
 import OrdersHistory from "components/ordersHistory/OrdersHistory";
+import Categories from "components/categories/Categories";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "hooks/useAuth.hook";
 
@@ -12,10 +13,13 @@ const AdminPanelPage = () => {
             <div className="admin-panel-page__body">
                <div className="admin-panel-page__heading">
                   <h2>Админ панель</h2>
+               </div>
+               <div className="admin-panel-page__row">
                   <div className="admin-panel-page__info info-admin-panel-page">
                      <Stats />
                      <OrdersHistory />
                   </div>
+                  <Categories />
                </div>
             </div>
          </div>

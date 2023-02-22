@@ -62,7 +62,7 @@ const Footer = () => {
                               <li className="item-socials-footer__item">
                                  {/* Заглушка, потом надо сделать ссылку через реакт роутер */}
                                  <span className="item-socials-footer__link">
-                                    Наша миссия
+                                    Наша цель
                                  </span>
                               </li>
                               <li className="item-socials-footer__item">
@@ -104,7 +104,7 @@ const Footer = () => {
                      <li className="socials-footer__column">
                         <div className="socials-footer__item item-socials-footer item-socials-footer__block-copyright">
                            <div className="item-socials-footer__title">
-                              Небольшой изменение. Большие изменения.
+                              Небольшое изменение. Большие изменения.
                            </div>
                            <div className="item-socials-footer__copyright">
                               Copyright © 2022

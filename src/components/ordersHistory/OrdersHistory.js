@@ -33,7 +33,9 @@ const OrdersHistory = () => {
    };
 
    const onItemsLoaded = (data) => {
-      const gotData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+      const gotData = data.docs
+         .map((doc) => ({ ...doc.data(), id: doc.id }))
+         .reverse();
       setItems((items) => gotData);
    };
 
@@ -88,8 +90,14 @@ const OrdersHistory = () => {
          <div className="orders-history__table">{elements}</div>
          <div
             className="orders-history__all-orders"
+            tabIndex={0}
             onClick={() => {
                navigate(`/orders`);
+            }}
+            onKeyPress={(e) => {
+               if (e.key === " " || e.key === "Enter") {
+                  navigate(`/orders`);
+               }
             }}
          >
             Перейти ко всем заказам

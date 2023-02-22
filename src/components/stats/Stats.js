@@ -60,7 +60,7 @@ const Stats = () => {
                   <div className="item-stats__value">
                      {countItems === 0 ? <Spinner /> : countItems}
                   </div>
-                  <div className="item-stats__label">Активные товары</div>
+                  <div className="item-stats__label">Всего товаров</div>
                </div>
             </li>
 

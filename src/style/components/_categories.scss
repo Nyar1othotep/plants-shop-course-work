@@ -1,0 +1,36 @@
+.categories {
+   h3 {
+      margin: 0px 0px 40px 0px;
+   }
+   &__row,
+   &__item {
+      display: flex;
+      align-items: center;
+   }
+   &__row {
+      & > *:not(:last-child) {
+         margin: 0px 30px 0px 0px;
+      }
+   }
+   &__remove-icon svg,
+   &__add-icon svg {
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      transition: all 0.3s ease 0s;
+   }
+   &__remove-icon svg {
+      margin: 0px 0px -5px 10px;
+      fill: $black;
+      &:hover {
+         fill: $red;
+      }
+   }
+
+   &__add-icon svg {
+      fill: $black;
+      &:hover {
+         fill: $disabled;
+      }
+   }
+}

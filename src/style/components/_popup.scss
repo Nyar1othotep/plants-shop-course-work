@@ -1,0 +1,17 @@
+.popup {
+   &-overlay {
+      background: #00000080;
+   }
+   &-content {
+      margin: auto;
+      max-width: 600px;
+      width: 100%;
+      padding: 0 15px;
+      & .add-category-form {
+         padding: 30px 15px;
+         background: $white;
+         border-radius: 10px;
+         border: 1px solid $black;
+      }
+   }
+}
