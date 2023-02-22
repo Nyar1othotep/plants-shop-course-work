@@ -7,7 +7,7 @@ import { signOut, getAuth } from "firebase/auth";
 
 const Logout = ({ handelClick }) => {
    const dispatch = useDispatch();
-   const { email, userUID } = useAuth();
+   const { email, userUID, isAdmin } = useAuth();
    const auth = getAuth();
 
    return (
@@ -16,7 +16,7 @@ const Logout = ({ handelClick }) => {
             <strong>Email:</strong> {email}
          </div>
          <div className="logout__user-role">
-            <strong>Роль:</strong> Покупатель
+            <strong>Роль:</strong> {isAdmin ? "Админ" : "Покупатель"}
          </div>
          <button
             className="logout__btn btn btn--black"

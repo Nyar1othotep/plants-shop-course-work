@@ -21,9 +21,9 @@
          background: none;
       }
    }
-	&__empty {
-		padding: 20px 0px 0px 0px;
-	}
+   &__empty {
+      padding: 20px 0px 0px 0px;
+   }
 }
 
 .my-orders-list-table__list {
@@ -154,6 +154,19 @@
          }
          & > *:not(:last-child) {
             margin: 0px 0px 20px 0px;
+         }
+      }
+   }
+}
+
+@media (max-width: 375px) {
+   .my-orders-list-table {
+      &__filter {
+         & label {
+            font-size: 12px;
+         }
+         & select {
+            font-size: 12px;
          }
       }
    }

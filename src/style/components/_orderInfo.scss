@@ -1,0 +1,28 @@
+.order-info {
+   h3 {
+      margin: 0px 0px 40px 0px;
+   }
+   &__row {
+      & > *:not(:last-child) {
+         margin: 0px 0px 10px 0px;
+      }
+      span {
+         font-weight: 600;
+      }
+   }
+   &__select {
+      display: flex;
+      align-items: center;
+      & > *:not(:last-child) {
+         margin: 0px 10px 0px 0px;
+      }
+      label {
+         font-weight: 600;
+      }
+      select {
+         padding: 5px 10px;
+         border: 1px solid $black;
+         border-radius: 10px;
+      }
+   }
+}

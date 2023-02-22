@@ -1,0 +1,64 @@
+.orders-history {
+   max-width: 550px;
+   width: 100%;
+   h3 {
+      margin: 0px 0px 40px 0px;
+   }
+   &__table {
+      overflow-x: auto;
+      width: 100%;
+   }
+   &__row {
+      & tbody {
+         & > *:not(:last-child) {
+            margin: 0px 0px 5px 0px;
+         }
+      }
+   }
+   &__all-orders {
+      margin: 10px 0px 0px 0px;
+      font-size: 16px;
+      font-weight: 500;
+      text-decoration: underline;
+      cursor: pointer;
+      transition: all 0.3s ease 0s;
+      &:hover {
+         color: $disabled;
+      }
+   }
+}
+
+.item-orders-history {
+   padding: 5px;
+   display: flex;
+   align-items: center;
+   font-size: 14px;
+   cursor: pointer;
+   transition: all 0.3s ease 0s;
+   &:hover {
+      background: $order-list-background;
+   }
+   &.active {
+      background: $order-list-background;
+   }
+   & td {
+      padding: 0 10px;
+      text-align: left;
+      white-space: nowrap;
+   }
+   &__date {
+      width: 100px;
+   }
+   &__time {
+      width: 110px;
+   }
+}
+
+@media (max-width: 992px) {
+   .orders-history {
+      max-width: 100%;
+      &__row {
+         margin: 0 auto;
+      }
+   }
+}

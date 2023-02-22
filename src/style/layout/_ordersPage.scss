@@ -1,0 +1,45 @@
+.orders-page {
+   &__body {
+      padding: 70px 0px 70px 0px;
+      display: flex;
+      & > * {
+         flex: 0 1 50%;
+      }
+   }
+}
+
+@media (max-width: 1060px) {
+   .orders-page {
+      h3 {
+         text-align: center;
+      }
+      &__body {
+         flex-direction: column;
+         & > * {
+            flex: 0 1 100%;
+         }
+         & > *:not(:last-child) {
+            margin: 0px 0px 60px 0px;
+         }
+      }
+      & .orders-history__row {
+         margin: 0 auto;
+      }
+   }
+}
+
+@media (max-width: 992px) {
+   .orders-page {
+      &__body {
+         padding: 20px 0px 70px 0px;
+      }
+   }
+}
+
+@media (max-width: 375px) {
+   .orders-page {
+      &__body {
+         padding: 20px 0px 50px 0px;
+      }
+   }
+}

@@ -133,7 +133,7 @@ const PlantItem = ({ handelClick, isReAuth }) => {
                      </table>
                   </div>
                   <div className="plant-item__price">
-                     Цена: <span>${item.price}</span>
+                     Цена: <span>{item.price}₽</span>
                   </div>
                   <div className="plant-item__left">
                      Количество товаров: {item.quantity}

@@ -145,12 +145,12 @@ const CartTable = memo(({ handelClick, setTotalPrice }) => {
                         {item.itemDescr.substring(0, 80) + "..."}
                      </div>
                   </div>
-                  <div className="item-table__price">${item.itemPrice}</div>
+                  <div className="item-table__price">{item.itemPrice}₽</div>
                   <div className="item-table__quantity">
                      {item.itemQuantity}
                   </div>
                   <div className="item-table__total">
-                     ${(item.itemQuantity * item.itemPrice).toFixed(2)}
+                     {(item.itemQuantity * item.itemPrice).toFixed(2)}₽
                   </div>
                   <div
                      className="item-table__remove-icon"

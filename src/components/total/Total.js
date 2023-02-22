@@ -8,14 +8,14 @@ const Total = memo(({ total }) => {
             <li className="total__column">
                <div className="total__item item-total">
                   <div className="item-total__title">Пром. итог:</div>
-                  <div className="item-total__money">${total.toFixed(2)}</div>
+                  <div className="item-total__money">{total.toFixed(2)}₽</div>
                </div>
             </li>
             <li className="total__column">
                <div className="total__item item-total">
                   <div className="item-total__title">Итого:</div>
                   <div className="item-total__money item-total__money--grand">
-                     ${total.toFixed(2)}
+                     {total.toFixed(2)}₽
                   </div>
                </div>
             </li>

@@ -1,0 +1,30 @@
+.skeleton {
+   & > *:not(:last-child) {
+      margin: 0px 0px 10px 0px;
+   }
+   &__block {
+      background-color: $scrollbar;
+      height: 20px;
+      &--one {
+         max-width: 270px;
+      }
+      &--two {
+         max-width: 470px;
+      }
+      &--three {
+         max-width: 350px;
+      }
+      &--four {
+         max-width: 410px;
+      }
+      &--five {
+         max-width: 230px;
+      }
+      &--six {
+         max-width: 270px;
+      }
+      &--seven {
+         max-width: 170px;
+      }
+   }
+}

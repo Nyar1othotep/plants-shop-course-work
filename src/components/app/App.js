@@ -9,6 +9,7 @@ import {
    RegistrationPage,
    ProfilePage,
    AdminPanelPage,
+   OrdersPage,
 } from "../pages";
 import { db } from "../../firebase";
 import Header from "../header/Header";
@@ -71,7 +72,7 @@ const App = () => {
 
    useEffect(() => {
       onAuthStateChanged(auth, (data) => {
-         try {
+         if (data !== null) {
             dispatch(
                setUser({
                   email: data.email,
@@ -79,11 +80,9 @@ const App = () => {
                   token: data.accessToken,
                })
             );
-            getCountOfItemsFromCart(data.uid);
-            setIsReAuth((isReAuth) => data.uid);
-         } catch (error) {
-            return false;
          }
+         getCountOfItemsFromCart(data.uid);
+         setIsReAuth((isReAuth) => data.uid);
       });
       // eslint-disable-next-line
    }, []);
@@ -144,6 +143,7 @@ const App = () => {
                      path="/user/admin-panel"
                      element={<AdminPanelPage />}
                   />
+                  <Route path="/orders" element={<OrdersPage />} />
                </Routes>
             </main>
          </div>

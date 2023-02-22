@@ -1,0 +1,31 @@
+.orders-list {
+   h3 {
+      margin: 0px 0px 40px 0px;
+   }
+   & .orders-history__table {
+      max-height: 600px;
+      direction: rtl;
+   }
+   & .orders-history__row {
+      margin-right: auto;
+   }
+   table {
+      overflow-y: auto;
+   }
+}
+
+@media (max-width: 992px) {
+   .orders-list {
+      & .orders-history__table {
+         max-height: 400px;
+      }
+   }
+}
+
+@media (max-width: 375px) {
+   .orders-list {
+      & .orders-history__table {
+         max-height: 300px;
+      }
+   }
+}

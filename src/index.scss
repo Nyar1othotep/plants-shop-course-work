@@ -12,6 +12,7 @@
 @import "./style/layout/registrationPage";
 @import "./style/layout/profilePage";
 @import "./style/layout/adminPanelPage";
+@import "./style/layout/ordersPage";
 @import "./style/components/header";
 @import "./style/components/footer";
 @import "./style/components/buttons";
@@ -23,6 +24,11 @@
 @import "./style/components/table";
 @import "./style/components/logout";
 @import "./style/components/spinner";
+@import "./style/components/stats";
+@import "./style/components/ordersHistory";
+@import "./style/components/skeleton";
+@import "./style/components/orderInfo";
+@import "./style/components/ordersList";
 
 
 // Временное решение

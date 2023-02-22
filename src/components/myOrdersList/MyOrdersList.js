@@ -105,8 +105,6 @@ const MyOrdersList = () => {
    };
 
    const renderItems = (arr) => {
-      let total = 0;
-
       if (arr.length === 0) {
          return (
             <div className="my-orders-list-table__empty cart-page__empty">
@@ -128,6 +126,8 @@ const MyOrdersList = () => {
       }
 
       const items = arr.map((item, i) => {
+         let total = 0;
+
          item.orderArray.map((item) => {
             return (total += parseFloat(item.itemTotal));
          });
@@ -140,7 +140,7 @@ const MyOrdersList = () => {
                <div className="item-my-orders-list-table__item">
                   <div className="item-my-orders-list-table__row">
                      <div className="item-my-orders-list-table__order-id">
-                        Order ID: {item.id}
+                        ID заказа: {item.id}
                      </div>
                      <div className="item-my-orders-list-table__date-time">
                         <span>{item.date}</span>
@@ -152,7 +152,7 @@ const MyOrdersList = () => {
                         Количество: <span>{item.orderArray.length}</span>
                      </div>
                      <div className="item-my-orders-list-table__total">
-                        Общая сумма: <span>${total.toFixed(2)}</span>
+                        Общая сумма: <span>{total.toFixed(2)}₽</span>
                      </div>
                   </div>
                   <div className="item-my-orders-list-table__row">
@@ -208,9 +208,9 @@ const MyOrdersList = () => {
                                  <img src={item.itemImg} alt={item.itemName} />
                               </td>
                               <td>{item.itemName.substring(0, 15) + "..."}</td>
-                              <td>${item.itemPrice}</td>
+                              <td>{item.itemPrice}₽</td>
                               <td>{item.itemQuantity}</td>
-                              <td>${item.itemTotal}</td>
+                              <td>{item.itemTotal}₽</td>
                            </tr>
                         );
                      })}
