@@ -8,6 +8,11 @@
    &__heading {
       margin: 0px 0px 60px 0px;
    }
+   &__row {
+      & > *:not(:last-child) {
+         padding: 0px 0px 60px 0px;
+      }
+   }
    &__info {
       margin: 60px 0px 0px 0px;
       display: flex;

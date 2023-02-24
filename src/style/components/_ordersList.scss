@@ -9,6 +9,9 @@
    & .orders-history__row {
       margin-right: auto;
    }
+   & .orders-history__item {
+      flex-direction: row-reverse;
+   }
    table {
       overflow-y: auto;
    }

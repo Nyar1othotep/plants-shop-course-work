@@ -6,7 +6,6 @@ import { setUser } from "store/slices/userSlice";
 import {
    getAuth,
    signInWithEmailAndPassword,
-   signInWithPopup,
 } from "firebase/auth";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useAuth } from "hooks/useAuth.hook";

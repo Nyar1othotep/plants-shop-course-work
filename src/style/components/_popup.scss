@@ -1,6 +1,7 @@
 .popup {
    &-overlay {
       background: #00000080;
+      overflow: auto;
    }
    &-content {
       margin: auto;

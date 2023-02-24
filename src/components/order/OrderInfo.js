@@ -26,10 +26,12 @@ const OrderInfo = () => {
    const onRequest = async () => {
       setProcess((process) => "loading");
       const docSnap = await getDoc(docRef);
-      setItems((items) => docSnap.data());
-      if (docSnap) {
+      if (docSnap.data()) {
+         setItems((items) => docSnap.data());
          setItemStatus((itemStatus) => docSnap.data().status);
          setProcess((process) => "confirmed");
+      } else {
+         setProcess((process) => "waiting");
       }
    };
 
@@ -60,7 +62,7 @@ const OrderInfo = () => {
 
    return (
       <div className="order-info">
-         {!orderId ? (
+         {!orderId || process === "waiting" ? (
             <Skeleton />
          ) : process === "loading" ? (
             <Spinner />

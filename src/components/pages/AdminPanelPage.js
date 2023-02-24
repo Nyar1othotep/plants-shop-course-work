@@ -1,11 +1,14 @@
 import Stats from "components/stats/Stats";
 import OrdersHistory from "components/ordersHistory/OrdersHistory";
 import Categories from "components/categories/Categories";
+import Items from "components/items/Items";
 import { Navigate } from "react-router-dom";
 import { useAuth } from "hooks/useAuth.hook";
+import { useState } from "react";
 
 const AdminPanelPage = () => {
    const { isAdmin } = useAuth();
+   const [reload, setReload] = useState(false);
 
    return isAdmin ? (
       <div className="admin-panel-page">
@@ -19,7 +22,8 @@ const AdminPanelPage = () => {
                      <Stats />
                      <OrdersHistory />
                   </div>
-                  <Categories />
+                  <Categories setReload={setReload} reload={reload} />
+                  <Items reload={reload} />
                </div>
             </div>
          </div>

@@ -8,9 +8,12 @@
       align-items: center;
    }
    &__row {
-      & > *:not(:last-child) {
-         margin: 0px 30px 0px 0px;
-      }
+      flex-wrap: wrap;
+      row-gap: 15px;
+      column-gap: 25px;
+   }
+   &__item {
+      word-break: break-all;
    }
    &__remove-icon svg,
    &__add-icon svg {

@@ -11,7 +11,7 @@ const AddNewCategory = ({ handleClick, onClose }) => {
          validationSchema={Yup.object({
             title: Yup.string()
                .required("Обязательное поле.")
-               .min(1, "Минин 1 символ."),
+               .min(1, "Минимум 1 символ."),
          })}
          onSubmit={(values, { resetForm }) => {
             handleClick(values.title);

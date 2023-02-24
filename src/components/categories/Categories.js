@@ -7,7 +7,7 @@ import svg from "../../resourses/svg/sprites.svg";
 import Popup from "reactjs-popup";
 import AddNewCategory from "components/addNewCategory/AddNewCategory";
 
-const Categories = () => {
+const Categories = ({ setReload, reload }) => {
    const [categories, setCategories] = useState([]);
    const categoriesCollectionRef = collection(db, "categories");
 
@@ -34,6 +34,7 @@ const Categories = () => {
          const itemDoc = doc(db, "categories", id);
          await deleteDoc(itemDoc);
          onRequest();
+         setReload((reload) => !reload);
          alert("Категория удалена");
       } catch (error) {
          console.error(error.message);
@@ -50,6 +51,7 @@ const Categories = () => {
          category: title,
       });
       onRequest();
+      setReload((reload) => !reload);
       alert("Категория добавлена!");
    };
 
@@ -81,11 +83,11 @@ const Categories = () => {
             {items}
             <Popup
                trigger={
-                  <li className="categories__item categories__add-icon">
+                  <button className="categories__item categories__add-icon">
                      <svg>
                         <use href={`${svg}#plus`}></use>
                      </svg>
-                  </li>
+                  </button>
                }
                position="top left"
                lockScroll
