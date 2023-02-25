@@ -1,7 +1,8 @@
 form {
-	display: flex;
+   position: relative;
+   display: flex;
    flex-direction: column;
-	width: 100%;
+   width: 100%;
    & > *:not(:last-child) {
       margin: 0px 0px 20px 0px;
    }
@@ -14,25 +15,41 @@ form {
       position: relative;
       gap: 0;
       & .error {
-			position: absolute;
-			left: 0;
-			bottom: -16px;
+         position: absolute;
+         left: 0;
+         bottom: -16px;
          font-weight: 500;
          font-size: 12px;
          @include lh(15, 12);
          color: $red;
-			user-select: none;
+         user-select: none;
       }
    }
-	& button {
-		margin: 10px 0px 0px 0px;
-	}
+   & button {
+      margin: 10px 0px 0px 0px;
+   }
+   .form__close {
+      position: absolute;
+      right: -15px;
+      top: -15px;
+      background: $white;
+      border-radius: 50%;
+      svg {
+         width: 40px;
+         height: 40px;
+         cursor: pointer;
+         transition: all 0.3s ease 0s;
+         &:hover {
+            fill: $disabled;
+         }
+      }
+   }
 }
 
 @media (max-width: 375px) {
-	form {
-		& div {
-			gap: 18px;
-		}
-	}
+   form {
+      & div {
+         gap: 18px;
+      }
+   }
 }

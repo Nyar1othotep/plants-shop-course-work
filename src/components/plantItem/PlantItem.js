@@ -1,7 +1,14 @@
 import svg from "../../resourses/svg/sprites.svg";
 import { useState, useEffect } from "react";
 import { db } from "../../firebase";
-import { collection, query, where, addDoc } from "firebase/firestore";
+import {
+   collection,
+   query,
+   where,
+   addDoc,
+   getDoc,
+   doc,
+} from "firebase/firestore";
 import { useHttp } from "hooks/http.hook";
 import { useSelector, useDispatch } from "react-redux";
 import { useAuth } from "hooks/useAuth.hook";
@@ -13,11 +20,10 @@ import ErrorMessage from "components/errorMessage/ErrorMessage";
 const PlantItem = ({ handelClick, isReAuth }) => {
    const dispatch = useDispatch();
    const { id } = useSelector((state) => state.item);
-   const [item, setItem] = useState([]);
+   const [item, setItem] = useState({});
    const [quantity, setQuantity] = useState(1);
-   const itemsCollectionRef = collection(db, "items");
+   const itemRef = doc(db, "items", id);
    const usersCartCollectionRef = collection(db, "usersCart");
-   const q = query(itemsCollectionRef, where("itemID", "==", parseInt(id)));
 
    const { request, process, setProcess } = useHttp();
    const { isAuth, userUID } = useAuth();
@@ -39,7 +45,7 @@ const PlantItem = ({ handelClick, isReAuth }) => {
    }, [quantity]);
 
    const onRequest = () => {
-      request(q)
+      request(itemRef, true)
          .then(onItemLoaded)
          .then(() => setProcess("confirmed"));
    };

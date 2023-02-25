@@ -1,6 +1,7 @@
 import { Formik, Form } from "formik";
 import * as Yup from "yup";
 import { MyTextInput } from "../../utils/MyTextInput";
+import svg from "../../resourses/svg/sprites.svg";
 
 const AddNewCategory = ({ handleClick, onClose }) => {
    return (
@@ -20,6 +21,11 @@ const AddNewCategory = ({ handleClick, onClose }) => {
          }}
       >
          <Form className="add-category-form form">
+            <div className="form__close" onClick={() => onClose()}>
+               <svg>
+                  <use href={`${svg}#remove`}></use>
+               </svg>
+            </div>
             <MyTextInput
                className="form-input"
                id="title"

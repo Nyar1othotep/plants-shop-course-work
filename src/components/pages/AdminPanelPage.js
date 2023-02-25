@@ -19,7 +19,7 @@ const AdminPanelPage = () => {
                </div>
                <div className="admin-panel-page__row">
                   <div className="admin-panel-page__info info-admin-panel-page">
-                     <Stats />
+                     <Stats reload={reload} />
                      <OrdersHistory />
                   </div>
                   <Categories setReload={setReload} reload={reload} />

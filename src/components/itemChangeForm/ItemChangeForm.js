@@ -1,24 +1,26 @@
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { MyTextInput } from "../../utils/MyTextInput";
+import svg from "../../resourses/svg/sprites.svg";
 
 const ItemChangeForm = ({
    handleClick,
    onClose,
-   description,
-   place,
-   quantity,
-   light,
-   price,
-   heightWith,
-   img,
-   category,
-   name,
-   plantType,
-   numberOfOrders,
+   description = "",
+   place = "",
+   quantity = 0,
+   light = "",
+   price = "",
+   heightWith = "",
+   img = "",
+   category = "",
+   name = "",
+   plantType = "",
+   numberOfOrders = 0,
    id,
-   roomTemperature,
+   roomTemperature = "",
    categoriesArray,
+   addForm = false,
 }) => {
    return (
       <Formik
@@ -71,9 +73,6 @@ const ItemChangeForm = ({
             numberOfOrders: Yup.string()
                .required("Обязательное поле.")
                .min(1, "Минимум 1 символ."),
-            id: Yup.string()
-               .required("Обязательное поле.")
-               .min(1, "Минимум 1 символ."),
             roomTemperature: Yup.string()
                .required("Обязательное поле.")
                .min(1, "Минимум 1 символ."),
@@ -99,6 +98,11 @@ const ItemChangeForm = ({
          }}
       >
          <Form className="item-change-form add-category-form form">
+            <div className="form__close" onClick={() => onClose()}>
+               <svg>
+                  <use href={`${svg}#remove`}></use>
+               </svg>
+            </div>
             <strong>ID товара: {id}</strong>
             <MyTextInput
                label="Название товара"
@@ -202,7 +206,7 @@ const ItemChangeForm = ({
                className="proceed-to-checkout-form__btn btn btn--black"
                type="submit"
             >
-               Изменить
+               {addForm ? "Добавить" : "Изменить"}
             </button>
          </Form>
       </Formik>

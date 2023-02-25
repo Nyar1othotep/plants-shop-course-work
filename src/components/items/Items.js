@@ -1,6 +1,12 @@
 import { useState, useEffect, useMemo } from "react";
 import { db } from "../../firebase";
-import { collection, deleteDoc, doc, addDoc } from "firebase/firestore";
+import {
+   collection,
+   deleteDoc,
+   doc,
+   addDoc,
+   updateDoc,
+} from "firebase/firestore";
 import { useHttp } from "hooks/http.hook";
 import setContent from "utils/setContent";
 import svg from "../../resourses/svg/sprites.svg";
@@ -56,15 +62,7 @@ const Items = ({ reload }) => {
    //       deleteCategory(itemID);
    // };
 
-   // const addNewDoc = async (title) => {
-   //    await addDoc(collection(db, "categories"), {
-   //       category: title,
-   //    });
-   //    onRequest();
-   //    alert("Категория добавлена!");
-   // };
-
-   const updateItem = (
+   const addNewItem = async (
       description,
       place,
       quantity,
@@ -79,21 +77,58 @@ const Items = ({ reload }) => {
       id,
       roomTemperature
    ) => {
-      console.log(
+      await addDoc(collection(db, "items"), {
          description,
          place,
-         quantity,
+         quantity: parseInt(quantity),
          light,
          price,
-         heightWith,
+         "height-width": heightWith,
          img,
          category,
          name,
-         plantType,
-         numberOfOrders,
-         id,
-         roomTemperature
-      );
+         "plant-type": plantType,
+         numberOfOrders: parseInt(numberOfOrders),
+         // itemID: parseInt(id),
+         "room-temperature": roomTemperature,
+      });
+      onRequest();
+      alert("Товар добавлен!");
+   };
+
+   const updateItem = async (
+      description,
+      place,
+      quantity,
+      light,
+      price,
+      heightWith,
+      img,
+      category,
+      name,
+      plantType,
+      numberOfOrders,
+      id,
+      roomTemperature
+   ) => {
+      const itemDoc = doc(db, "items", id);
+      const updateFields = {
+         description,
+         place,
+         quantity: parseInt(quantity),
+         light,
+         price,
+         "height-width": heightWith,
+         img,
+         category,
+         name,
+         "plant-type": plantType,
+         numberOfOrders: parseInt(numberOfOrders),
+         "room-temperature": roomTemperature,
+      };
+      await updateDoc(itemDoc, updateFields);
+      onRequest();
+      alert("Товар изменен!");
    };
 
    const renderItems = (arr, categoriesArray) => {
@@ -102,13 +137,32 @@ const Items = ({ reload }) => {
             <li className="items__column" key={category.id}>
                <h4>{category.category}</h4>
                <ul className="items__list">
-                  <li className="items__item item-items add">
-                     <div className="item-items__content">
-                        <svg>
-                           <use href={`${svg}#plus`}></use>
-                        </svg>
-                     </div>
-                  </li>
+                  <Popup
+                     trigger={
+                        <li className="items__item item-items add">
+                           <div className="item-items__content">
+                              <svg>
+                                 <use href={`${svg}#plus`}></use>
+                              </svg>
+                           </div>
+                        </li>
+                     }
+                     position="top left"
+                     lockScroll
+                     closeOnEscape
+                     modal
+                  >
+                     {(close) => (
+                        <ItemChangeForm
+                           id={arr.length + 1}
+                           categoriesArray={categoriesArray}
+                           handleClick={addNewItem}
+                           onClose={close}
+                           addForm={true}
+                        />
+                     )}
+                  </Popup>
+
                   {arr.map((item) => {
                      const clazz = "item-items__inner";
                      return category.category === item.category ? (

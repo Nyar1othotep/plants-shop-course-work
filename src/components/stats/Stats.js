@@ -5,7 +5,7 @@ import { collection, getCountFromServer } from "firebase/firestore";
 import { useHttp } from "hooks/http.hook";
 import Spinner from "components/spinner/Spinner";
 
-const Stats = () => {
+const Stats = ({ reload }) => {
    const [totalIncome, setTotalIncome] = useState(0);
    const [countItems, setCountItems] = useState(0);
    const [countItemsSold, setCountItemsSold] = useState(0);
@@ -22,7 +22,7 @@ const Stats = () => {
       getCount(usersOrderCollectionRef, setCountItemsSold, countItemsSold);
       getCount(categoriesCollectionRef, setCountCategory, countCategory);
       // eslint-disable-next-line
-   }, []);
+   }, [reload]);
 
    const onRequest = () => {
       request(usersOrderCollectionRef)
