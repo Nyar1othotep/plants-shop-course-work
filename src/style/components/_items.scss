@@ -50,6 +50,7 @@
       width: 100px;
    }
    &__inner {
+		cursor: pointer;
       & > * {
          margin: 0px 0px 5px 0px;
       }
@@ -91,12 +92,20 @@
       font-size: 16px;
       font-weight: 500;
    }
+   &__btns {
+      & > *:not(:last-child) {
+         margin: 0px 0px 5px 0px;
+      }
+   }
    &__btn {
       width: 100%;
       padding: 6px 10px;
       font-size: 14px;
       font-weight: 400;
       border-radius: 25px;
+      &--delete {
+         min-height: auto;
+      }
    }
 }
 

@@ -49,6 +49,10 @@ const ItemsFilter = () => {
    };
 
    const renderItems = (arr) => {
+		if (arr.length === 0) {
+         return <p>Категорий еще нет</p>;
+      }
+
       const clazz = "items-list__item item-items-list";
 
       const categories = arr.map((item, i) => {

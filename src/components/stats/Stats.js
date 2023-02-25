@@ -10,6 +10,7 @@ const Stats = ({ reload }) => {
    const [countItems, setCountItems] = useState(0);
    const [countItemsSold, setCountItemsSold] = useState(0);
    const [countCategory, setCountCategory] = useState(0);
+   const [processOfData, setProcessOfData] = useState("waiting");
    const itemsCollectionRef = collection(db, "items");
    const usersOrderCollectionRef = collection(db, "usersOrder");
    const categoriesCollectionRef = collection(db, "categories");
@@ -42,8 +43,12 @@ const Stats = ({ reload }) => {
    };
 
    const getCount = async (ref, setState, state) => {
+      setProcessOfData((processOfData) => "loading");
       const snapshot = await getCountFromServer(ref);
       setState((state) => snapshot.data().count);
+      if (snapshot) {
+         setProcessOfData((processOfData) => "confirmed");
+      }
    };
 
    return (
@@ -58,7 +63,7 @@ const Stats = ({ reload }) => {
                </div>
                <div className="item-stats__inner">
                   <div className="item-stats__value">
-                     {countItems === 0 ? <Spinner /> : countItems}
+                     {processOfData === "loading" ? <Spinner /> : countItems}
                   </div>
                   <div className="item-stats__label">Всего товаров</div>
                </div>
@@ -72,7 +77,11 @@ const Stats = ({ reload }) => {
                </div>
                <div className="item-stats__inner">
                   <div className="item-stats__value">
-                     {countItemsSold === 0 ? <Spinner /> : countItemsSold}
+                     {processOfData === "loading" ? (
+                        <Spinner />
+                     ) : (
+                        countItemsSold
+                     )}
                   </div>
                   <div className="item-stats__label">Всего заказов</div>
                </div>
@@ -86,7 +95,7 @@ const Stats = ({ reload }) => {
                </div>
                <div className="item-stats__inner">
                   <div className="item-stats__value">
-                     {countCategory === 0 ? <Spinner /> : countCategory}
+                     {processOfData === "loading" ? <Spinner /> : countCategory}
                   </div>
                   <div className="item-stats__label">Всего категорий</div>
                </div>

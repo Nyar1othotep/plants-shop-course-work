@@ -1,14 +1,7 @@
 import svg from "../../resourses/svg/sprites.svg";
 import { useState, useEffect } from "react";
 import { db } from "../../firebase";
-import {
-   collection,
-   query,
-   where,
-   addDoc,
-   getDoc,
-   doc,
-} from "firebase/firestore";
+import { collection, addDoc, doc } from "firebase/firestore";
 import { useHttp } from "hooks/http.hook";
 import { useSelector, useDispatch } from "react-redux";
 import { useAuth } from "hooks/useAuth.hook";
@@ -16,13 +9,14 @@ import { setToCart, setitemQuantity } from "store/slices/toCartSlice";
 import { store } from "store";
 import Spinner from "components/spinner/Spinner";
 import ErrorMessage from "components/errorMessage/ErrorMessage";
+import Skeleton from "components/skeleton/Skeleton";
 
 const PlantItem = ({ handelClick, isReAuth }) => {
    const dispatch = useDispatch();
    const { id } = useSelector((state) => state.item);
    const [item, setItem] = useState({});
    const [quantity, setQuantity] = useState(1);
-   const itemRef = doc(db, "items", id);
+   const itemRef = id !== null ? doc(db, "items", id) : null;
    const usersCartCollectionRef = collection(db, "usersCart");
 
    const { request, process, setProcess } = useHttp();
@@ -45,23 +39,24 @@ const PlantItem = ({ handelClick, isReAuth }) => {
    }, [quantity]);
 
    const onRequest = () => {
-      request(itemRef, true)
-         .then(onItemLoaded)
-         .then(() => setProcess("confirmed"));
+      if (id !== null) {
+         request(itemRef, true)
+            .then(onItemLoaded)
+            .then(() => setProcess("confirmed"));
+      } else {
+         setProcess("waiting");
+      }
    };
 
    const onItemLoaded = async (data) => {
-      const receivedData = await data.docs.map((doc) => ({
-         ...doc.data(),
-         id: doc.id,
-      }))[0];
+      const receivedData = await data.data();
       setQuantity((quantity) => 1);
       setItem((item) => receivedData);
       if (isAuth) {
          dispatch(
             setToCart({
                userID: userUID,
-               itemID: receivedData.id,
+               itemID: data.id,
                itemImg: receivedData.img,
                itemName: receivedData.name,
                itemDescr: receivedData.description,
@@ -101,6 +96,10 @@ const PlantItem = ({ handelClick, isReAuth }) => {
             <Spinner />
          ) : process === "error" ? (
             <ErrorMessage />
+         ) : process === "waiting" ? (
+            <div className="plant-item skeleton">
+               <Skeleton />
+            </div>
          ) : (
             <div className="plant-item">
                <div className="plant-item__content">

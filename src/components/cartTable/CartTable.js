@@ -53,10 +53,10 @@ const CartTable = memo(({ handelClick, setTotalPrice }) => {
             itemDescr,
          } = element;
          const obj = {
+            itemID,
             itemTotal: (
                parseFloat(itemQuantity) * parseFloat(itemPrice)
             ).toFixed(2),
-            itemID,
             itemQuantity,
             itemImg,
             itemCategory,

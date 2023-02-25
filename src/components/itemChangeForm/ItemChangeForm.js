@@ -17,7 +17,7 @@ const ItemChangeForm = ({
    name = "",
    plantType = "",
    numberOfOrders = 0,
-   id,
+   id = "Авто.",
    roomTemperature = "",
    categoriesArray,
    addForm = false,
@@ -130,6 +130,7 @@ const ItemChangeForm = ({
             />
             <label htmlFor={category}>Категория товара</label>
             <Field id="category" name="category" as="select">
+               <option value="">Выберите категорию</option>
                {categoriesArray.map((item) => {
                   return (
                      <option value={item.category} key={item.id}>

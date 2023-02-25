@@ -80,7 +80,11 @@ const Categories = ({ setReload, reload }) => {
 
       return (
          <ul className="categories__row">
-            {items}
+            {arr.length !== 0 ? (
+               items
+            ) : (
+               <p>Категорий еще нет, но вы можете их добавить</p>
+            )}
             <Popup
                trigger={
                   <button className="categories__item categories__add-icon">

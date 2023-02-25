@@ -40,6 +40,10 @@ const OrdersHistory = () => {
    };
 
    const renderItems = (arr) => {
+      if (arr.length === 0) {
+         return <p>Заказов еще нет</p>;
+      }
+
       const items = arr.map((item) => {
          return (
             <tr

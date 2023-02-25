@@ -65,7 +65,9 @@ const ItemsList = () => {
    const itemRefs = useRef([]);
 
    const focusOnItem = (id) => {
-      itemRefs.current.forEach((item) => item.classList.remove("active"));
+      itemRefs.current.forEach((item) =>
+         item !== null ? item.classList.remove("active") : null
+      );
       itemRefs.current[id].classList.add("active");
       itemRefs.current[id].focus();
    };
@@ -111,7 +113,8 @@ const ItemsList = () => {
          <ul className="items-list__row">
             {isEmptyData || isEmptyCategory ? (
                <div>
-                  В этой категории еще нет товаров или она больше не существует.
+                  Выберите другую категорию, т.к. в этой категории еще нет товаров
+                  или она больше не существует.
                </div>
             ) : (
                elements

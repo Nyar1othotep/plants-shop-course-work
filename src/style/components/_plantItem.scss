@@ -3,11 +3,20 @@
    align-items: center;
    justify-content: space-between;
    flex: 0 1 60%;
+   &.skeleton {
+      display: block;
+   }
    &__content {
       flex: 0 1 60%;
    }
    &__img {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex: 0 1 40%;
+      img {
+         max-height: 600px;
+      }
    }
    &__title,
    &__description {
@@ -35,9 +44,9 @@
       margin: 0px 0px 10px 0px;
    }
    &__not-available {
-		margin: 20px 0px 0px 0px;
-		font-size: 20px;
-		font-weight: 600;
+      margin: 20px 0px 0px 0px;
+      font-size: 20px;
+      font-weight: 600;
       text-align: center;
    }
    &__bottom {
@@ -60,12 +69,12 @@
          height: 24px;
       }
    }
-	&__quantity {
-		span {
-			width: 30px;
-			text-align: center;
-		}
-	}
+   &__quantity {
+      span {
+         width: 30px;
+         text-align: center;
+      }
+   }
 }
 
 @media (max-width: 1440px) {
@@ -90,6 +99,9 @@
       }
       &__img {
          flex: 0 1 100%;
+         img {
+            max-height: 400px;
+         }
       }
       &__title {
          font-size: 36px;
@@ -119,6 +131,11 @@
 @media (max-width: 835px) {
    .plant-item {
       flex: 0 1 100%;
+      &__img {
+         img {
+            max-height: 300px;
+         }
+      }
    }
 }
 
@@ -145,5 +162,13 @@
       &__title {
          font-size: 28px;
       }
+      &__img {
+         img {
+            max-height: 250px;
+         }
+      }
+		&__btn {
+			padding: 13px 20px;
+		}
    }
 }

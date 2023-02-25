@@ -44,6 +44,10 @@ const OrdersList = () => {
    };
 
    const renderItems = (arr) => {
+      if (arr.length === 0) {
+         return <p className="orders-history__empty">Заказов еще нет</p>;
+      }
+
       const clazz = "orders-history__item item-orders-history";
 
       const items = arr.map((item, i) => {
