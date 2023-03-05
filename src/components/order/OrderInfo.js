@@ -6,8 +6,10 @@ import Spinner from "components/spinner/Spinner";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setItemId, setItemCategory } from "store/slices/itemSlice";
+import { useAlert } from "react-alert";
 
 const OrderInfo = () => {
+   const alert = useAlert();
    let navigate = useNavigate();
    const dispatch = useDispatch();
    const { orderId } = useSelector((state) => state.order);
@@ -50,13 +52,13 @@ const OrderInfo = () => {
    };
 
    const updateStatus = async (itemID, status) => {
-      console.log(status);
       if (itemID) {
          const itemDoc = doc(db, "usersOrder", itemID);
          const updateFields = {
             status: status,
          };
          await updateDoc(itemDoc, updateFields);
+         alert.success(`Статус изменен на: ${status}!`);
       }
    };
 

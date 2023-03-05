@@ -10,8 +10,10 @@ import { useDispatch } from "react-redux";
 import { removeToOrderAndDelivery } from "store/slices/toOrderSlice";
 import { setItemId, setItemCategory } from "store/slices/itemSlice";
 import { setToOrder } from "store/slices/toOrderSlice";
+import { useAlert } from "react-alert";
 
 const CartTable = memo(({ handelClick, setTotalPrice }) => {
+   const alert = useAlert();
    const dispatch = useDispatch();
    const { userUID } = useAuth();
    const [items, setItems] = useState([]);
@@ -81,10 +83,14 @@ const CartTable = memo(({ handelClick, setTotalPrice }) => {
          await deleteDoc(itemDoc);
          onRequest();
          handelClick(userUID);
-         alert("Товар удален из корзины");
+         alert.success("Товар удален из корзины");
          dispatch(removeToOrderAndDelivery());
       } catch (error) {
-         console.error(error.message);
+         let errors = (function () {
+            let index = error.message.indexOf("(");
+            return index > -1 ? error.message.slice(index) : error.message;
+         })();
+         alert.error(errors);
       }
    };
 

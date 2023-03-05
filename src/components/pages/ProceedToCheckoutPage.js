@@ -19,12 +19,20 @@ import { useEffect, useState } from "react";
 import { useNavigate, Navigate } from "react-router-dom";
 import { removeToCart } from "store/slices/toCartSlice";
 import { removeToOrderAndDelivery } from "store/slices/toOrderSlice";
+import { useAlert } from "react-alert";
+import Helmet from "react-helmet";
+import Popup from "reactjs-popup";
+import BuyForm from "components/buyForm/BuyFrom";
 
 const ProceedToCheckoutPage = ({ handelClick }) => {
+   const alert = useAlert();
    const dispatch = useDispatch();
    const { isAuth, userUID } = useAuth();
    const navigate = useNavigate();
    const [itemsID, setItemsID] = useState([]);
+   const [isPay, setIsPay] = useState(false);
+   const [isBuy, setIsBuy] = useState(false);
+   const [orderData, setOrderData] = useState({});
    const { orderArray } = useSelector((state) => state.toOrder);
    const usersOrderCollectionRef = collection(db, "usersOrder");
    const usersCartCollectionRef = collection(db, "usersCart");
@@ -52,8 +60,13 @@ const ProceedToCheckoutPage = ({ handelClick }) => {
    const addToCart = async () => {
       try {
          await addDoc(usersOrderCollectionRef, store.getState().toOrder);
+         alert.success("Товар успешно заказан!");
       } catch (error) {
-         console.error(error.message);
+         let errors = (function () {
+            let index = error.message.indexOf("(");
+            return index > -1 ? error.message.slice(index) : error.message;
+         })();
+         alert.error(errors);
       }
    };
 
@@ -66,7 +79,11 @@ const ProceedToCheckoutPage = ({ handelClick }) => {
          }
          handelClick(userUID);
       } catch (error) {
-         console.error(error.message);
+         let errors = (function () {
+            let index = error.message.indexOf("(");
+            return index > -1 ? error.message.slice(index) : error.message;
+         })();
+         alert.error(errors);
       }
    };
 
@@ -82,7 +99,11 @@ const ProceedToCheckoutPage = ({ handelClick }) => {
             await updateDoc(itemDoc, updateFields);
          });
       } catch (error) {
-         console.error(error.message);
+         let errors = (function () {
+            let index = error.message.indexOf("(");
+            return index > -1 ? error.message.slice(index) : error.message;
+         })();
+         alert.error(errors);
       }
    };
 
@@ -93,13 +114,26 @@ const ProceedToCheckoutPage = ({ handelClick }) => {
       firstAndLastName,
       phone
    ) => {
+      setIsPay((isPay) => true);
+      let obj = {
+         country,
+         office,
+         index,
+         firstAndLastName,
+         phone,
+      };
+      setOrderData((orderData) => obj);
+   };
+
+   const handleBuy = () => {
+      document.body.style.overflow = "auto";
       dispatch(
          setToDelivery({
-            country: country,
-            office: office,
-            index: index,
-            firstAndLastName: firstAndLastName,
-            phone: phone,
+            country: orderData.country,
+            office: orderData.office,
+            index: orderData.index,
+            firstAndLastName: orderData.firstAndLastName,
+            phone: orderData.phone,
             date: new Date().toLocaleDateString(),
             time: new Date().toLocaleTimeString(),
             status: "Ожидание отправки",
@@ -115,13 +149,40 @@ const ProceedToCheckoutPage = ({ handelClick }) => {
    };
 
    return isAuth && orderArray !== [] && orderArray !== null ? (
-      <div className="proceed-to-checkout-page">
-         <div className="proceed-to-checkout-page__container _container">
-            <div className="proceed-to-checkout-page__body">
-               <ProceedToCheckoutForm handleClick={handleProceedToCheckout} />
+      <>
+         <Helmet>
+            <meta
+               name="description"
+               content={`Plants shop - оформление товара`}
+            />
+            <title>Plants shop - оформление товара</title>
+         </Helmet>
+         <div className="proceed-to-checkout-page">
+            <div className="proceed-to-checkout-page__container _container">
+               <div className="proceed-to-checkout-page__body">
+                  <ProceedToCheckoutForm
+                     handleClick={handleProceedToCheckout}
+                  />
+                  <Popup
+                     open={isPay}
+                     position="top left"
+                     lockScroll
+                     closeOnEscape
+                     modal
+                  >
+                     {(close) => (
+                        <BuyForm
+                           onClose={close}
+                           handleBuy={handleBuy}
+                           setIsBuy={setIsBuy}
+                           isBuy={isBuy}
+                        />
+                     )}
+                  </Popup>
+               </div>
             </div>
          </div>
-      </div>
+      </>
    ) : (
       <Navigate to="/user/login" />
    );

@@ -10,8 +10,10 @@ import { store } from "store";
 import Spinner from "components/spinner/Spinner";
 import ErrorMessage from "components/errorMessage/ErrorMessage";
 import Skeleton from "components/skeleton/Skeleton";
+import { useAlert } from "react-alert";
 
 const PlantItem = ({ handelClick, isReAuth }) => {
+   const alert = useAlert();
    const dispatch = useDispatch();
    const { id } = useSelector((state) => state.item);
    const [item, setItem] = useState({});
@@ -72,22 +74,26 @@ const PlantItem = ({ handelClick, isReAuth }) => {
       try {
          await addDoc(usersCartCollectionRef, store.getState().toCart);
          handelClick(userUID);
-         alert("Товар добавлен в корзину");
+         alert.success("Товар добавлен в корзину!");
       } catch (error) {
-         console.error(error.message);
+         let errors = (function () {
+            let index = error.message.indexOf("(");
+            return index > -1 ? error.message.slice(index) : error.message;
+         })();
+         alert.error(errors);
       }
    };
 
    const onDecreace = () => {
       quantity > 1
          ? setQuantity((quantity) => parseInt(quantity - 1))
-         : alert("Вы не можете больше уменьшаться.");
+         : alert.error("Вы не можете больше уменьшать.");
    };
 
    const onIncreace = (itemQuantity) => {
       quantity < itemQuantity
          ? setQuantity((quantity) => parseInt(quantity + 1))
-         : alert("Вы больше не можете увеличивать.");
+         : alert.error("Вы больше не можете увеличивать.");
    };
 
    return (

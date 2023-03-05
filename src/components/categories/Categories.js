@@ -6,8 +6,10 @@ import setContent from "utils/setContent";
 import svg from "../../resourses/svg/sprites.svg";
 import Popup from "reactjs-popup";
 import AddNewCategory from "components/addNewCategory/AddNewCategory";
+import { useAlert } from "react-alert";
 
 const Categories = ({ setReload, reload }) => {
+	const alert = useAlert();
    const [categories, setCategories] = useState([]);
    const categoriesCollectionRef = collection(db, "categories");
 
@@ -35,7 +37,7 @@ const Categories = ({ setReload, reload }) => {
          await deleteDoc(itemDoc);
          onRequest();
          setReload((reload) => !reload);
-         alert("Категория удалена");
+         alert.success("Категория удалена!");
       } catch (error) {
          console.error(error.message);
       }
@@ -52,7 +54,7 @@ const Categories = ({ setReload, reload }) => {
       });
       onRequest();
       setReload((reload) => !reload);
-      alert("Категория добавлена!");
+      alert.success("Категория добавлена!");
    };
 
    const renderItems = (arr) => {

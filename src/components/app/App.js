@@ -1,4 +1,4 @@
-import { HashRouter, Route, Routes, NavLink } from "react-router-dom";
+import { HashRouter, Route, Routes } from "react-router-dom";
 import {
    MainPage,
    CatalogPage,
@@ -10,6 +10,7 @@ import {
    ProfilePage,
    AdminPanelPage,
    OrdersPage,
+   Page404,
 } from "../pages";
 import { db } from "../../firebase";
 import Header from "../header/Header";
@@ -23,45 +24,6 @@ import {
    where,
    getCountFromServer,
 } from "firebase/firestore";
-
-// Временное решение
-const SiteMenu = () => {
-   return (
-      <div className="site-menu">
-         <ul className="site-menu__list">
-            <li className="site-menu__item">
-               <NavLink to="/">MainPage</NavLink>
-            </li>
-            <li className="site-menu__item">
-               <NavLink to="/catalog">CatalogPage</NavLink>
-            </li>
-            <li className="site-menu__item">
-               <NavLink to="/about">AboutPage</NavLink>
-            </li>
-            <li className="site-menu__item">
-               <NavLink to="/cart">CartPage</NavLink>
-            </li>
-            <li className="site-menu__item">
-               <NavLink to="/cart/proceed-to-checkout">
-                  ProceedToCheckoutPage
-               </NavLink>
-            </li>
-            <li className="site-menu__item">
-               <NavLink to="/user/login">LoginPage</NavLink>
-            </li>
-            <li className="site-menu__item">
-               <NavLink to="/user/registration">RegistrationPage</NavLink>
-            </li>
-            <li className="site-menu__item">
-               <NavLink to="/user/profile">ProfilePage</NavLink>
-            </li>
-            <li className="site-menu__item">
-               <NavLink to="/user/admin-panel">AdminPanelPage</NavLink>
-            </li>
-         </ul>
-      </div>
-   );
-};
 
 const App = () => {
    const dispatch = useDispatch();
@@ -100,7 +62,6 @@ const App = () => {
       <HashRouter>
          <div className="app">
             <Header countCart={countCart} />
-            <SiteMenu />
             <main>
                <Routes>
                   <Route path="/" element={<MainPage />} />
@@ -144,6 +105,7 @@ const App = () => {
                      element={<AdminPanelPage />}
                   />
                   <Route path="/orders" element={<OrdersPage />} />
+                  <Route path="*" element={<Page404 />} />
                </Routes>
             </main>
          </div>

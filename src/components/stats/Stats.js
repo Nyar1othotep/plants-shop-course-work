@@ -4,6 +4,7 @@ import { db } from "../../firebase";
 import { collection, getCountFromServer } from "firebase/firestore";
 import { useHttp } from "hooks/http.hook";
 import Spinner from "components/spinner/Spinner";
+import ErrorMessage from "components/errorMessage/ErrorMessage";
 
 const Stats = ({ reload }) => {
    const [totalIncome, setTotalIncome] = useState(0);
@@ -48,6 +49,8 @@ const Stats = ({ reload }) => {
       setState((state) => snapshot.data().count);
       if (snapshot) {
          setProcessOfData((processOfData) => "confirmed");
+      } else {
+         setProcessOfData((processOfData) => "error");
       }
    };
 
@@ -63,7 +66,13 @@ const Stats = ({ reload }) => {
                </div>
                <div className="item-stats__inner">
                   <div className="item-stats__value">
-                     {processOfData === "loading" ? <Spinner /> : countItems}
+                     {processOfData === "loading" ? (
+                        <Spinner />
+                     ) : processOfData === "error" ? (
+                        <ErrorMessage />
+                     ) : (
+                        countItems
+                     )}
                   </div>
                   <div className="item-stats__label">Всего товаров</div>
                </div>
@@ -79,6 +88,8 @@ const Stats = ({ reload }) => {
                   <div className="item-stats__value">
                      {processOfData === "loading" ? (
                         <Spinner />
+                     ) : processOfData === "error" ? (
+                        <ErrorMessage />
                      ) : (
                         countItemsSold
                      )}
@@ -95,7 +106,13 @@ const Stats = ({ reload }) => {
                </div>
                <div className="item-stats__inner">
                   <div className="item-stats__value">
-                     {processOfData === "loading" ? <Spinner /> : countCategory}
+                     {processOfData === "loading" ? (
+                        <Spinner />
+                     ) : processOfData === "error" ? (
+                        <ErrorMessage />
+                     ) : (
+                        countCategory
+                     )}
                   </div>
                   <div className="item-stats__label">Всего категорий</div>
                </div>
@@ -111,6 +128,8 @@ const Stats = ({ reload }) => {
                   <div className="item-stats__value">
                      {process === "loading" ? (
                         <Spinner />
+                     ) : process === "error" ? (
+                        <ErrorMessage />
                      ) : (
                         `${totalIncome.toFixed(2)}₽`
                      )}

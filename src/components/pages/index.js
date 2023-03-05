@@ -8,6 +8,7 @@ import RegistrationPage from "./RegistrationPage";
 import ProfilePage from "./ProfilePage";
 import AdminPanelPage from "./AdminPanelPage";
 import OrdersPage from "./OrdersPage";
+import Page404 from "./404";
 
 export {
    MainPage,
@@ -20,4 +21,5 @@ export {
    ProfilePage,
    AdminPanelPage,
    OrdersPage,
+   Page404,
 };

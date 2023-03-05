@@ -84,7 +84,7 @@ const ProceedToCheckoutForm = ({ handleClick }) => {
                className="proceed-to-checkout-form__btn btn btn--black"
                type="submit"
             >
-               Оплатить
+               Перейти к оплате
             </button>
          </Form>
       </Formik>

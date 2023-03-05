@@ -18,8 +18,10 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setItemId, setItemCategory } from "store/slices/itemSlice";
 import { Link } from "react-router-dom";
+import { useAlert } from "react-alert";
 
 const MyOrdersList = () => {
+   const alert = useAlert();
    let navigate = useNavigate();
    const dispatch = useDispatch();
    const [items, setItems] = useState([]);
@@ -74,7 +76,11 @@ const MyOrdersList = () => {
             await updateDoc(itemDoc, updateFields);
          });
       } catch (error) {
-         console.error(error.message);
+         let errors = (function () {
+            let index = error.message.indexOf("(");
+            return index > -1 ? error.message.slice(index) : error.message;
+         })();
+         alert.error(errors);
       }
    };
 
@@ -84,9 +90,13 @@ const MyOrdersList = () => {
          await deleteDoc(itemDoc);
          updateItems(orderArray);
          onRequest();
-         alert("Товар удален из заказов");
+         alert.success("Товар удален из заказов");
       } catch (error) {
-         console.error(error.message);
+         let errors = (function () {
+            let index = error.message.indexOf("(");
+            return index > -1 ? error.message.slice(index) : error.message;
+         })();
+         alert.error(errors);
       }
    };
 

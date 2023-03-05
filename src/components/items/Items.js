@@ -15,8 +15,10 @@ import ItemChangeForm from "components/itemChangeForm/ItemChangeForm";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setItemId, setItemCategory } from "store/slices/itemSlice";
+import { useAlert } from "react-alert";
 
-const Items = ({ reload }) => {
+const Items = ({ reload, setReload }) => {
+   const alert = useAlert();
    let navigate = useNavigate();
    const dispatch = useDispatch();
    const [items, setItems] = useState([]);
@@ -54,11 +56,14 @@ const Items = ({ reload }) => {
    const deleteItem = async (id) => {
       try {
          const itemDoc = doc(db, "items", id);
-         await deleteDoc(itemDoc);
-         onRequest();
-         alert("Товар удален");
+         await deleteDoc(itemDoc).then(() => setReload((reload) => !reload));
+         alert.success("Товар удален!");
       } catch (error) {
-         console.error(error.message);
+         let errors = (function () {
+            let index = error.message.indexOf("(");
+            return index > -1 ? error.message.slice(index) : error.message;
+         })();
+         alert.error(errors);
       }
    };
 
@@ -82,23 +87,30 @@ const Items = ({ reload }) => {
       id,
       roomTemperature
    ) => {
-      await addDoc(collection(db, "items"), {
-         description,
-         place,
-         quantity: parseInt(quantity),
-         light,
-         price,
-         "height-width": heightWith,
-         img,
-         category,
-         name,
-         "plant-type": plantType,
-         numberOfOrders: parseInt(numberOfOrders),
-         // itemID: parseInt(id),
-         "room-temperature": roomTemperature,
-      });
-      onRequest();
-      alert("Товар добавлен!");
+      try {
+         await addDoc(collection(db, "items"), {
+            description,
+            place,
+            quantity: parseInt(quantity),
+            light,
+            price,
+            "height-width": heightWith,
+            img,
+            category,
+            name,
+            "plant-type": plantType,
+            numberOfOrders: parseInt(numberOfOrders),
+            // itemID: parseInt(id),
+            "room-temperature": roomTemperature,
+         }).then(() => setReload((reload) => !reload));
+         alert.success("Товар добавлен!");
+      } catch (error) {
+         let errors = (function () {
+            let index = error.message.indexOf("(");
+            return index > -1 ? error.message.slice(index) : error.message;
+         })();
+         alert.error(errors);
+      }
    };
 
    const updateItem = async (
@@ -116,24 +128,33 @@ const Items = ({ reload }) => {
       id,
       roomTemperature
    ) => {
-      const itemDoc = doc(db, "items", id);
-      const updateFields = {
-         description,
-         place,
-         quantity: parseInt(quantity),
-         light,
-         price,
-         "height-width": heightWith,
-         img,
-         category,
-         name,
-         "plant-type": plantType,
-         numberOfOrders: parseInt(numberOfOrders),
-         "room-temperature": roomTemperature,
-      };
-      await updateDoc(itemDoc, updateFields);
-      onRequest();
-      alert("Товар изменен!");
+      try {
+         const itemDoc = doc(db, "items", id);
+         const updateFields = {
+            description,
+            place,
+            quantity: parseInt(quantity),
+            light,
+            price,
+            "height-width": heightWith,
+            img,
+            category,
+            name,
+            "plant-type": plantType,
+            numberOfOrders: parseInt(numberOfOrders),
+            "room-temperature": roomTemperature,
+         };
+         await updateDoc(itemDoc, updateFields).then(() =>
+            setReload((reload) => !reload)
+         );
+         alert.success("Товар изменен!");
+      } catch (error) {
+         let errors = (function () {
+            let index = error.message.indexOf("(");
+            return index > -1 ? error.message.slice(index) : error.message;
+         })();
+         alert.error(errors);
+      }
    };
 
    const onDetails = (itemID, itemCategory) => {
