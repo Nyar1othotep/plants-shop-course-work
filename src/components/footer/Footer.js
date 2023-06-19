@@ -13,7 +13,7 @@ const Footer = () => {
          <div className="footer__container _container">
             <div className="footer__body">
                <div className="footer__proverb">
-                  ДЕНЬГИ НЕ РАСТУТ НА ДЕРЕВЬЯХ, НО ОНИ МОГУТ ИХ ПОСАДИТЬ
+                  ДЕНЬГИ НЕ РАСТУТ НА ДЕРЕВЬЯХ, НО МЫ МОЖЕМ ЗА НИХ ЧТО-ТО ПРИОБРЕСТИ
                </div>
                <div className="footer__socials socials-footer">
                   <div className="socials-footer__title">СОЦИАЛЬНЫЕ СЕТИ</div>
@@ -110,7 +110,7 @@ const Footer = () => {
                               Copyright © 2022
                            </div>
                            <div className="item-socials-footer__text">
-                              Этот сайт был создан для курсовой работы, поэтому
+                              Этот сайт был создан для дипломного проекта, поэтому
                               некоторые изображения и текст могут быть
                               заимствованы с других сайтов.
                            </div>

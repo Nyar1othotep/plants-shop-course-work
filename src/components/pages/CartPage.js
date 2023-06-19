@@ -5,6 +5,7 @@ import { Navigate } from "react-router-dom";
 import { useState } from "react";
 import ErrorBoundary from "../errorBoundary/ErrorBoundary";
 import Helmet from "react-helmet";
+import { store } from "store";
 
 const CartPage = ({ handelClick }) => {
    const { isAuth } = useAuth();

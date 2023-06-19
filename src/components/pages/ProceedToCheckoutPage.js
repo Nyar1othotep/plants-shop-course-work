@@ -23,11 +23,12 @@ import { useAlert } from "react-alert";
 import Helmet from "react-helmet";
 import Popup from "reactjs-popup";
 import BuyForm from "components/buyForm/BuyFrom";
+import emailjs from "emailjs-com";
 
 const ProceedToCheckoutPage = ({ handelClick }) => {
    const alert = useAlert();
    const dispatch = useDispatch();
-   const { isAuth, userUID } = useAuth();
+   const { isAuth, userUID, email } = useAuth();
    const navigate = useNavigate();
    const [itemsID, setItemsID] = useState([]);
    const [isPay, setIsPay] = useState(false);
@@ -125,6 +126,16 @@ const ProceedToCheckoutPage = ({ handelClick }) => {
       setOrderData((orderData) => obj);
    };
 
+   const createOrderMessage = () => {
+      let message = "";
+      store.getState().toOrder.orderArray.forEach((item, index) => {
+         message += `${index + 1}: ${item.itemName}, в количестве ${
+            item.itemQuantity
+         } шт.\n`;
+      });
+      return message;
+   };
+
    const handleBuy = () => {
       document.body.style.overflow = "auto";
       dispatch(
@@ -138,6 +149,16 @@ const ProceedToCheckoutPage = ({ handelClick }) => {
             time: new Date().toLocaleTimeString(),
             status: "Ожидание отправки",
          })
+      );
+
+      emailjs.send(
+         "service_z07w1hi",
+         "template_qywp27h",
+         {
+            user_email: email,
+            message: createOrderMessage(),
+         },
+         "rjlDgsn09Me2NEUEh"
       );
 
       addToCart();
