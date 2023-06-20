@@ -152,13 +152,13 @@ const ProceedToCheckoutPage = ({ handelClick }) => {
       );
 
       emailjs.send(
-         "service_z07w1hi",
-         "template_qywp27h",
+         process.env.REACT_APP_SERVICE_ID,
+         process.env.REACT_APP_TEMPLATE_ID,
          {
             user_email: email,
             message: createOrderMessage(),
          },
-         "rjlDgsn09Me2NEUEh"
+         process.env.REACT_APP_PUBLIC_KEY
       );
 
       addToCart();
